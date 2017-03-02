@@ -1,0 +1,3 @@
+2014-09-25 15:02:26,996 [1] ERROR CRSGeoCoder.Program - Exception
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at CRSGeoCoder.Program.Main(String[] args) in c:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\Program.cs:line 31

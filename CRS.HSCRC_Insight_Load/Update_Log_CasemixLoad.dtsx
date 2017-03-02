@@ -1,0 +1,163 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/17/2016 9:14:56 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DANALYSIS3"
+  DTS:CreatorName="TEST\dlucas"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{02A209BD-954E-457C-825F-012E555376CD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Update_Log_CasemixLoad"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{DB07E43F-1AD1-4CBC-81A5-6B63DABC89E3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create CasemixLoad Table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{49EE4C71-5A3B-4189-B693-C4F672CEEC3B}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create CasemixLoad Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('[Log].CasemixLoad', 'U') IS NULL&#xA;&#x9;CREATE TABLE [Log].[CasemixLoad](&#xA;&#x9;&#x9;   ID INT IDENTITY(1,1) PRIMARY KEY,&#xA;&#x9;&#x9;   CasemixLoadTime DATETIME NOT NULL,&#xA;&#x9;&#x9;   MaxDischargeDate_IP DATE NOT NULL,&#xA;&#x9;&#x9;   MaxDischargeDate_OP DATE NOT NULL,&#xA;&#x9;&#x9;   MaxDischargeDate DATE NOT NULL,&#xA;&#x9;&#x9;  ) ON [PRIMARY]&#xA;&#xA;&#xA;IF NOT EXISTS&#x9;(SELECT * &#xA;&#x9;&#x9;&#x9;FROM INFORMATION_SCHEMA.COLUMNS &#xA;&#x9;&#x9;&#x9;WHERE TABLE_SCHEMA = 'Log' &#xA;&#x9;&#x9;&#x9;AND TABLE_NAME = 'CasemixLoad' &#xA;&#x9;&#x9;&#x9;AND COLUMN_NAME = 'MaxDischargeDate_Psych')&#xA;ALTER TABLE [Log].[CasemixLoad] &#xA;ADD&#x9;MaxDischargeDate_Psych DATE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Log Schema"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{750BA6E6-8B54-4260-8D4B-47C78D10C498}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Log Schema"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT name FROM sys.schemas WHERE name = N'Log')&#xA; BEGIN &#xA;  EXEC('CREATE SCHEMA Log');&#xA; END&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert maxDischargeDate Info to Log"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{589615BE-7012-447B-A1F3-7CE70C669D15}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert maxDischargeDate Info to Log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="DECLARE @MaxDischargeDate_IP DATE&#xA;DECLARE @MaxDischargeDate_OP DATE&#xA;DECLARE @MaxDischargeDate_Psych DATE&#xA;DECLARE @MaxDischargeDate DATE&#xA;&#xA;-- IP MaxDischargeDate&#xA;SET @MaxDischargeDate_IP = (SELECT EOMONTH(MAX(DischargeDT))&#xA;FROM Fact.IP_Visit)&#xA;&#xA;-- OP MaxDischargeDate&#xA;SET @MaxDischargeDate_OP = (SELECT EOMONTH(MAX(DischargeDT))&#xA;FROM Fact.OP_Visit)&#xA;&#xA;-- Psych MaxDischargeDate&#xA;SET @MaxDischargeDate_Psych = (SELECT EOMONTH(MAX(DischargeDT))&#xA;FROM Fact.Psych_Visit)&#xA;&#xA;-- Overall MaxDischargeDate &#xA;SELECT @MaxDischargeDate = MAX(v) FROM (VALUES (@MaxDischargeDate_IP),(@MaxDischargeDate_OP),(@MaxDischargeDate_Psych)) AS x(v)&#xA;&#xA;-- Add casemix load record to log&#xA;INSERT INTO Log.CasemixLoad (CasemixLoadTime, MaxDischargeDate_IP, MaxDischargeDate_OP, MaxDischargeDate_Psych, MaxDischargeDate)&#xA;SELECT GETDATE(), @MaxDischargeDate_IP, @MaxDischargeDate_OP, @MaxDischargeDate_Psych, @MaxDischargeDate" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EC950FE5-040C-435B-9183-7EEFB627E7B5}"
+      DTS:From="Package\Create Log Schema"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create CasemixLoad Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{CAA47317-45BF-43C4-BC67-9ED54D0E6CD7}"
+      DTS:From="Package\Create CasemixLoad Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Insert maxDischargeDate Info to Log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Create CasemixLoad Table"
+          TopLeft="29.1203699364431,89.1222206285927" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Create Log Schema"
+          TopLeft="43.0555549139778,6.7407406202069" />
+        <NodeLayout
+          Size="254,42"
+          Id="Package\Insert maxDischargeDate Info to Log"
+          TopLeft="5.6843418860808E-14,166.592589613685" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="129.421295758544,48.7407406202069">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.3814800083858"
+              Start="0,0"
+              End="0,32.8814800083858">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.8814800083858" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="128.893518301555,131.122220628593">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.4703689850923"
+              Start="0,0"
+              End="0,27.9703689850923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.9703689850923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

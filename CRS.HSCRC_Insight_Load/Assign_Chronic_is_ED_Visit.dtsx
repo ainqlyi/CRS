@@ -1,0 +1,181 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/18/2015 12:50:00 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:DTSID="{A90D222B-3A08-4A6B-84CA-765D645D9AFE}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5583.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Assign_Chronic_is_ED_Visit"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{DF4CEC49-D676-4830-9F6D-3B80E0095FD7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Update Chronic is_ED_Visit"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{D84A6D7B-6AB3-49B8-8400-61BACF100853}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Chronic is_ED_Visit">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Update Chronic is_ED_Visit\Assign 0 to is_ED_Visit for all records"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3E56669A-0AEB-4C37-9ECE-80F21E3229B1}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Assign 0 to is_ED_Visit for all records"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+              SQLTask:SqlStatementSource="UPDATE Fact.Chronic&#xA;SET Fact.Chronic.is_ED_Visit = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update Chronic is_ED_Visit\Assign 1 to ED Visits"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{FB05174F-019A-4E0F-ABAE-7E1885BE8FC3}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Assign 1 to ED Visits"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+              SQLTask:SqlStatementSource="UPDATE Fact.Chronic&#xA;SET Fact.Chronic.is_ED_Visit = 1&#xA;FROM Fact.Chronic I&#xA;INNER JOIN CrossRef.Chronic_RateCenter R ON I.VisitID = R.VisitID&#xA;WHERE (R.SequenceNo = 28 AND R.Charges &gt; 0)&#xA;OR (R.SequenceNo = 34 AND R.Charges &gt; 0)&#xA;OR (R.SequenceNo = 90 AND R.Charges &gt; 0)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update Chronic is_ED_Visit\Create column if not exists"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E88FEFBC-1B56-4602-B011-CB02D3CAB9B0}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create column if not exists"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+              SQLTask:SqlStatementSource="IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = 'is_ED_Visit' AND Object_ID = Object_ID('Fact.Chronic'))&#xA;ALTER TABLE Fact.Chronic&#xA;ADD is_ED_Visit bit" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update Chronic is_ED_Visit.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{FF28302B-BF16-4FCA-B812-D8FFEF6FE55B}"
+          DTS:From="Package\Update Chronic is_ED_Visit\Create column if not exists"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Update Chronic is_ED_Visit\Assign 0 to is_ED_Visit for all records" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update Chronic is_ED_Visit.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{87B835FA-E133-47DA-A1D0-00CBA281CABE}"
+          DTS:From="Package\Update Chronic is_ED_Visit\Assign 0 to is_ED_Visit for all records"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Update Chronic is_ED_Visit\Assign 1 to ED Visits" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="254,42"
+          Id="Package\Update Chronic is_ED_Visit\Assign 0 to is_ED_Visit for all records"
+          TopLeft="60,137.69411873669" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Update Chronic is_ED_Visit\Assign 1 to ED Visits"
+          TopLeft="102.857143586996,216.611766902304" />
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Update Chronic is_ED_Visit\Create column if not exists"
+          TopLeft="85.7142861521975,60" />
+        <EdgeLayout
+          Id="Package\Update Chronic is_ED_Visit.PrecedenceConstraints[Constraint]"
+          TopLeft="187.657143076099,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.0941187366896"
+              Start="0,0"
+              End="0,28.5941187366896">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5941187366896" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Update Chronic is_ED_Visit.PrecedenceConstraints[Constraint 1]"
+          TopLeft="188.628571793498,179.29411873669">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.317648165614"
+              Start="0,0"
+              End="0,29.817648165614">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.817648165614" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="319,314"
+          Size="319,357"
+          Id="Package\Update Chronic is_ED_Visit"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

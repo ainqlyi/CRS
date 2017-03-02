@@ -1,0 +1,11 @@
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\CRSGeoCoder.exe.config
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\CRSGeoCoder.exe
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\CRSGeoCoder.pdb
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\FastMember.dll
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\log4net.dll
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\FastMember.pdb
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\FastMember.xml
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\bin\Debug\log4net.xml
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\obj\Debug\CRS.GeoCoderApp.csprojResolveAssemblyReference.cache
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\obj\Debug\CRSGeoCoder.exe
+C:\Development\sshretha\sshrestha\CRS\CRS.GeoCoderApp\obj\Debug\CRSGeoCoder.pdb

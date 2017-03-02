@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreationDate="8/22/2014 3:33:39 PM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{107E115C-27CD-49A9-B0FF-83DD1BB9708E}"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Assign_LeadIPVisit_PlannedAdm_Insight"
+  DTS:DTSID="{AC43252A-6D1E-46E5-857A-6BF3445C751E}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Set Lead Visit and Planned Admission"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Lead Visit and Planned Admission"
+      DTS:DTSID="{7FC3B162-C027-493A-A1B1-FC6FF93AA082}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE [Fact].[IP_Visit]&#xA;    SET [Lead_IP_VisitID] = NULL&#xA;       ,[IsPlannedAdmission] = NULL&#xA;GO&#xA;&#xA;UPDATE v&#xA;    SET v.[Lead_IP_VisitID] = t.[Lead_IP_VisitID]&#xA;       ,v.[IsPlannedAdmission] = t.[IsPlannedAdmission]&#xA;    FROM ( SELECT v.VisitID&#xA;               ,LEAD(v.VisitID) OVER ( PARTITION BY v.EID ORDER BY v.DischargeDT, v.AdmitDt, v.AdmitHH ) [Lead_IP_VisitID]&#xA;               ,CASE WHEN v.[APR_DRGCode] IN ( '560', '540', '541', '542' ) THEN 4&#xA;                     WHEN drc.[DiagnosisRef_CCS_Category] IN ( '45', '194', '196', '254' ) THEN 2&#xA;                     WHEN prc.[ProcedureRefCCS_CCS_Category] IN ( '64', '105', '134', '135', '176' ) THEN 1&#xA;                     WHEN (&#xA;                            ( prc.[ProcedureRefCCS_CCS_Category] IN ( '3', '5', '9', '10', '12', '33', '36', '38', '40', '43', '44', '45', '47', '48', '49',&#xA;                                                                      '51', '52', '53', '55', '56', '59', '62', '66', '67', '74', '78', '79', '84', '85', '86',&#xA;                                                                      '99', '104', '106', '107', '109', '112', '113', '114', '119', '120', '124', '129', '132',&#xA;                                                                      '142', '152', '153', '154', '157', '158', '159', '166', '167', '169', '170', '172', '211',&#xA;                                                                      '224' )&#xA;                            OR p.[Type] IN ( '301', '3029', '303', '304', '3174', '346', '3818', '5503', '5504', '9426', '9427' ))&#xA;                          )&#xA;                          AND NOT (&#xA;                                    ( drc.[DiagnosisRef_CCS_Category] IN ( '1', '2', '3', '4', '5', '7', '8', '9', '54', '55', '60', '61', '63', '76', '77',&#xA;                                                                           '78', '82', '83', '84', '85', '87', '89', '90', '91', '92', '93', '100', '102', '104',&#xA;                                                                           '107', '109', '112', '116', '118', '120', '122', '123', '124', '125', '126', '127',&#xA;                                                                           '128', '129', '130', '131', '135', '137', '139', '140', '142', '145', '146', '148',&#xA;                                                                           '153', '154', '157', '159', '165', '168', '172', '197', '198', '225', '226', '227',&#xA;                                                                           '228', '229', '230', '232', '233', '234', '235', '237', '238', '239', '240', '241',&#xA;                                                                           '242', '243', '244', '245', '246', '247', '249', '250', '251', '252', '253', '259',&#xA;                                                                           '650', '651', '652', '653', '656', '658', '660', '661', '662', '663', '670' ) )&#xA;                                    OR ( dx.Diagnosis IN ( '03282', '03640', '03641', '03642', '03643', '07420', '07421', '07422', '07423', '11281', '11503',&#xA;                                                           '11504', '11513', '11514', '11593', '11594', '1303', '3910', '3911', '3912', '3918', '3919', '3920',&#xA;                                                           '3980', '39890', '39899', '4200', '42090', '42091', '42099', '4210', '4211', '4219', '4220', '42290',&#xA;                                                           '42291', '42292', '42293', '42299', '4230', '4231', '4232', '4233', '4290', '4260', '42610', '42611',&#xA;                                                           '42612', '42613', '4262', '4263', '4264', '42650', '42651', '42652', '42653', '42654', '4266', '4267',&#xA;                                                           '42681', '42682', '4269', '4272', '7850', '42789', '4279', '42769', '39891', '4280', '4281', '42820',&#xA;                                                           '42821', '42823', '42830', '42831', '42833', '42840', '42841', '42843', '4289' ) )&#xA;                                  ) THEN 3&#xA;                     ELSE 0&#xA;                END AS [IsPlannedAdmission]&#xA;            FROM [Fact].[IP_Visit] v&#xA;            LEFT JOIN [CrossRef].[IP_Diagnosis] dx ON dx.VisitID = v.VisitID&#xA;                                                      AND dx.SequenceNo = 1&#xA;            LEFT JOIN [Lookup].[DiagnosisRefCCS] drc ON dx.Diagnosis = drc.Diagnosis&#xA;            LEFT JOIN [CrossRef].[IP_Procedure] p ON p.VisitID = v.VisitID&#xA;                                                     AND p.SequenceNo = 1&#xA;            LEFT JOIN [Lookup].[ProcedureRefCCS] prc ON p.Type = prc.[ProcedureRefCCS_Type]&#xA;            WHERE v.SourceID NOT IN ( '213028', '213029', '213300', '210083', '210089', '210333' )&#xA;                AND v.EID IS NOT NULL&#xA;         ) t&#xA;    INNER JOIN [Fact].[IP_Visit] v ON v.VisitID = t.VisitID&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="255,42"
+          Id="Package\Set Lead Visit and Planned Admission"
+          TopLeft="396,72" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

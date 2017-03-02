@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+  <Reports>
+    <!-- Name: The application will search for files where the 'Name' exactly contains the one in this configuration file. 
+         Path: only use parameters {0}, {1} and {2}. This is the path where the file should be found.
+         isBaseFile: 'TRUE' or 'FALSE' depending on whether the name has sourceId in it (i.e. if the file is specific to a hospital or not).
+         ArchivePath: use parameters {0}, {1}, {2} and {3}. This is where the file will be archived.
+         isArchived: 'TRUE' or 'FALSE' depending on whether you want to archive the file on this run. 
+         The following describes each parameter:
+    {0} = environment such as DEV/TEST/STAGING/PROD; 
+    {1} = hospital system; 
+    {2} = sourceId sourceCode; 
+    {3} = filename -->
+    <Report>
+      <Name>Readmission Reduction Program Comparison</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\Readmit\</Path>
+      <isBaseFile>TRUE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\Readmit\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+    <Report>
+      <Name>Readmission Reduction Program Base Year</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\Readmit\</Path>
+      <isBaseFile>TRUE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\Readmit\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+    <Report>
+      <Name>Readmit by Discharge Service Line</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\Readmit\</Path>
+      <isBaseFile>FALSE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\Readmit\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+    <Report>
+      <Name>RY17 Readmit Trends</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\Readmit\</Path>
+      <isBaseFile>FALSE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\Readmit\Archive\{3}</ArchivePath>
+      <isArchived>TRUE</isArchived>
+    </Report>
+    <Report>
+      <Name>PAU</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\Patient Level Details for PAU\</Path>
+      <isBaseFile>FALSE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\Patient Level Details for PAU\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+    <Report>
+      <Name>MHAC Summary</Name>
+      <Path>C:\CRSPortal\CRSPortal\{0}\{1}\{2}\MHAC\</Path>
+      <isBaseFile>TRUE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\MHAC\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+    <Report>
+      <Name>MHAC Details</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\MHAC\Patient Level Details for MHAC\</Path>
+      <isBaseFile>FALSE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\MHAC\Patient Level Details for MHAC\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+    <Report>
+      <Name>Norms for Expected Readmissions</Name>
+      <Path>C:\CRSPortal\{0}\{1}\{2}\Readmit\</Path>
+      <isBaseFile>TRUE</isBaseFile>
+      <ArchivePath>C:\CRSPortal\{0}\{1}\{2}\Readmit\Archive\{3}</ArchivePath>
+      <isArchived>FALSE</isArchived>
+    </Report>
+  </Reports>

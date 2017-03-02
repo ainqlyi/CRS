@@ -1,0 +1,1107 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/17/2014 1:52:02 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:DTSID="{6F3C0B01-8BA9-43C2-883A-5F94FAE1F907}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3369.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadDataSet_OP_Stg_DW"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{DDB77B1C-F560-4830-8E99-D74F395933A7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert CrossRef Diagnosis"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{fe95bb64-2c06-4dbb-8934-3f7a46be1fe4}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert CrossRef Diagnosis"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 01, Diagnosis01, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis01 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 02, Diagnosis02, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis02 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 03, Diagnosis03, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis03 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 04, Diagnosis04, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis04 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 05, Diagnosis05, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis05 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 06, Diagnosis06, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis06 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 07, Diagnosis07, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis07 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 08, Diagnosis08, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis08 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 09, Diagnosis09, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis09 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 10, Diagnosis10, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis10 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 11, Diagnosis11, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis11 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 12, Diagnosis12, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis12 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 13, Diagnosis13, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis13 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 14, Diagnosis14, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis14 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 15, Diagnosis15, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis15 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 16, Diagnosis16, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis16 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 17, Diagnosis17, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis17 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 18, Diagnosis18, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis18 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 19, Diagnosis19, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis19 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 20, Diagnosis20, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis20 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 21, Diagnosis21, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis21 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 22, Diagnosis22, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis22 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 23, Diagnosis23, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis23 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 24, Diagnosis24, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis24 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 25, Diagnosis25, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis25 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 26, Diagnosis26, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis26 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 27, Diagnosis27, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis27 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 28, Diagnosis28, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis28 IS NOT NULL&#xA;INSERT CrossRef.Diagnosis SELECT VisitID, 29, Diagnosis29, NULL FROM ETL.Staging_Outp3 WHERE Diagnosis29 IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert CrossRef FortyFive"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{aa9b66cc-d485-48b9-8f38-de8dab7b3c51}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert CrossRef FortyFive"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 01, VisitID01 FROM ETL.Staging_Outp3 WHERE VisitID01 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 02, VisitID02 FROM ETL.Staging_Outp3 WHERE VisitID02 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 03, VisitID03 FROM ETL.Staging_Outp3 WHERE VisitID03 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 04, VisitID04 FROM ETL.Staging_Outp3 WHERE VisitID04 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 05, VisitID05 FROM ETL.Staging_Outp3 WHERE VisitID05 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 06, VisitID06 FROM ETL.Staging_Outp3 WHERE VisitID06 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 07, VisitID07 FROM ETL.Staging_Outp3 WHERE VisitID07 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 08, VisitID08 FROM ETL.Staging_Outp3 WHERE VisitID08 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 09, VisitID09 FROM ETL.Staging_Outp3 WHERE VisitID09 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 10, VisitID10 FROM ETL.Staging_Outp3 WHERE VisitID10 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 11, VisitID11 FROM ETL.Staging_Outp3 WHERE VisitID11 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 12, VisitID12 FROM ETL.Staging_Outp3 WHERE VisitID12 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 13, VisitID13 FROM ETL.Staging_Outp3 WHERE VisitID13 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 14, VisitID14 FROM ETL.Staging_Outp3 WHERE VisitID14 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 15, VisitID15 FROM ETL.Staging_Outp3 WHERE VisitID15 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 16, VisitID16 FROM ETL.Staging_Outp3 WHERE VisitID16 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 17, VisitID17 FROM ETL.Staging_Outp3 WHERE VisitID17 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 18, VisitID18 FROM ETL.Staging_Outp3 WHERE VisitID18 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 19, VisitID19 FROM ETL.Staging_Outp3 WHERE VisitID19 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 20, VisitID20 FROM ETL.Staging_Outp3 WHERE VisitID20 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 21, VisitID21 FROM ETL.Staging_Outp3 WHERE VisitID21 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 22, VisitID22 FROM ETL.Staging_Outp3 WHERE VisitID22 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 23, VisitID23 FROM ETL.Staging_Outp3 WHERE VisitID23 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 24, VisitID24 FROM ETL.Staging_Outp3 WHERE VisitID24 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 25, VisitID25 FROM ETL.Staging_Outp3 WHERE VisitID25 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 26, VisitID26 FROM ETL.Staging_Outp3 WHERE VisitID26 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 27, VisitID27 FROM ETL.Staging_Outp3 WHERE VisitID27 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 28, VisitID28 FROM ETL.Staging_Outp3 WHERE VisitID28 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 29, VisitID29 FROM ETL.Staging_Outp3 WHERE VisitID29 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 30, VisitID30 FROM ETL.Staging_Outp3 WHERE VisitID30 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 31, VisitID31 FROM ETL.Staging_Outp3 WHERE VisitID31 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 32, VisitID32 FROM ETL.Staging_Outp3 WHERE VisitID32 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 33, VisitID33 FROM ETL.Staging_Outp3 WHERE VisitID33 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 34, VisitID34 FROM ETL.Staging_Outp3 WHERE VisitID34 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 35, VisitID35 FROM ETL.Staging_Outp3 WHERE VisitID35 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 36, VisitID36 FROM ETL.Staging_Outp3 WHERE VisitID36 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 37, VisitID37 FROM ETL.Staging_Outp3 WHERE VisitID37 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 38, VisitID38 FROM ETL.Staging_Outp3 WHERE VisitID38 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 39, VisitID39 FROM ETL.Staging_Outp3 WHERE VisitID39 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 40, VisitID40 FROM ETL.Staging_Outp3 WHERE VisitID40 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 41, VisitID41 FROM ETL.Staging_Outp3 WHERE VisitID41 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 42, VisitID42 FROM ETL.Staging_Outp3 WHERE VisitID42 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 43, VisitID43 FROM ETL.Staging_Outp3 WHERE VisitID43 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 44, VisitID44 FROM ETL.Staging_Outp3 WHERE VisitID44 IS NOT NULL&#xA;INSERT CrossRef.FortyFive (VisitID, SequenceNo, VisitIDx) SELECT VisitID, 45, VisitID45 FROM ETL.Staging_Outp3 WHERE VisitID45 IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert CrossRef RateCenter"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2028dd27-80cd-4510-a194-d6ce381aa2ae}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert CrossRef RateCenter"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 01, RC_Charges01, RC_Units01 FROM ETL.Staging_Outp3 WHERE RC_Units01 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 02, RC_Charges02, RC_Units02 FROM ETL.Staging_Outp3 WHERE RC_Units02 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 03, RC_Charges03, RC_Units03 FROM ETL.Staging_Outp3 WHERE RC_Units03 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 04, RC_Charges04, RC_Units04 FROM ETL.Staging_Outp3 WHERE RC_Units04 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 05, RC_Charges05, RC_Units05 FROM ETL.Staging_Outp3 WHERE RC_Units05 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 06, RC_Charges06, RC_Units06 FROM ETL.Staging_Outp3 WHERE RC_Units06 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 07, RC_Charges07, RC_Units07 FROM ETL.Staging_Outp3 WHERE RC_Units07 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 08, RC_Charges08, RC_Units08 FROM ETL.Staging_Outp3 WHERE RC_Units08 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 09, RC_Charges09, RC_Units09 FROM ETL.Staging_Outp3 WHERE RC_Units09 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 10, RC_Charges10, RC_Units10 FROM ETL.Staging_Outp3 WHERE RC_Units10 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 11, RC_Charges11, RC_Units11 FROM ETL.Staging_Outp3 WHERE RC_Units11 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 12, RC_Charges12, RC_Units12 FROM ETL.Staging_Outp3 WHERE RC_Units12 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 13, RC_Charges13, RC_Units13 FROM ETL.Staging_Outp3 WHERE RC_Units13 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 14, RC_Charges14, RC_Units14 FROM ETL.Staging_Outp3 WHERE RC_Units14 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 15, RC_Charges15, RC_Units15 FROM ETL.Staging_Outp3 WHERE RC_Units15 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 16, RC_Charges16, RC_Units16 FROM ETL.Staging_Outp3 WHERE RC_Units16 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 17, RC_Charges17, RC_Units17 FROM ETL.Staging_Outp3 WHERE RC_Units17 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 18, RC_Charges18, RC_Units18 FROM ETL.Staging_Outp3 WHERE RC_Units18 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 19, RC_Charges19, RC_Units19 FROM ETL.Staging_Outp3 WHERE RC_Units19 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 20, RC_Charges20, RC_Units20 FROM ETL.Staging_Outp3 WHERE RC_Units20 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 21, RC_Charges21, RC_Units21 FROM ETL.Staging_Outp3 WHERE RC_Units21 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 22, RC_Charges22, RC_Units22 FROM ETL.Staging_Outp3 WHERE RC_Units22 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 23, RC_Charges23, RC_Units23 FROM ETL.Staging_Outp3 WHERE RC_Units23 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 24, RC_Charges24, RC_Units24 FROM ETL.Staging_Outp3 WHERE RC_Units24 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 25, RC_Charges25, RC_Units25 FROM ETL.Staging_Outp3 WHERE RC_Units25 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 26, RC_Charges26, RC_Units26 FROM ETL.Staging_Outp3 WHERE RC_Units26 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 27, RC_Charges27, RC_Units27 FROM ETL.Staging_Outp3 WHERE RC_Units27 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 28, RC_Charges28, RC_Units28 FROM ETL.Staging_Outp3 WHERE RC_Units28 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 29, RC_Charges29, RC_Units29 FROM ETL.Staging_Outp3 WHERE RC_Units29 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 30, RC_Charges30, RC_Units30 FROM ETL.Staging_Outp3 WHERE RC_Units30 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 31, RC_Charges31, RC_Units31 FROM ETL.Staging_Outp3 WHERE RC_Units31 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 32, RC_Charges32, RC_Units32 FROM ETL.Staging_Outp3 WHERE RC_Units32 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 33, RC_Charges33, RC_Units33 FROM ETL.Staging_Outp3 WHERE RC_Units33 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 34, RC_Charges34, RC_Units34 FROM ETL.Staging_Outp3 WHERE RC_Units34 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 35, RC_Charges35, RC_Units35 FROM ETL.Staging_Outp3 WHERE RC_Units35 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 36, RC_Charges36, RC_Units36 FROM ETL.Staging_Outp3 WHERE RC_Units36 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 37, RC_Charges37, RC_Units37 FROM ETL.Staging_Outp3 WHERE RC_Units37 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 38, RC_Charges38, RC_Units38 FROM ETL.Staging_Outp3 WHERE RC_Units38 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 39, RC_Charges39, RC_Units39 FROM ETL.Staging_Outp3 WHERE RC_Units39 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 40, RC_Charges40, RC_Units40 FROM ETL.Staging_Outp3 WHERE RC_Units40 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 41, RC_Charges41, RC_Units41 FROM ETL.Staging_Outp3 WHERE RC_Units41 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 42, RC_Charges42, RC_Units42 FROM ETL.Staging_Outp3 WHERE RC_Units42 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 43, RC_Charges43, RC_Units43 FROM ETL.Staging_Outp3 WHERE RC_Units43 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 44, RC_Charges44, RC_Units44 FROM ETL.Staging_Outp3 WHERE RC_Units44 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 45, RC_Charges45, RC_Units45 FROM ETL.Staging_Outp3 WHERE RC_Units45 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 46, RC_Charges46, RC_Units46 FROM ETL.Staging_Outp3 WHERE RC_Units46 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 47, RC_Charges47, RC_Units47 FROM ETL.Staging_Outp3 WHERE RC_Units47 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 48, RC_Charges48, RC_Units48 FROM ETL.Staging_Outp3 WHERE RC_Units48 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 49, RC_Charges49, RC_Units49 FROM ETL.Staging_Outp3 WHERE RC_Units49 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 50, RC_Charges50, RC_Units50 FROM ETL.Staging_Outp3 WHERE RC_Units50 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 51, RC_Charges51, RC_Units51 FROM ETL.Staging_Outp3 WHERE RC_Units51 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 52, RC_Charges52, RC_Units52 FROM ETL.Staging_Outp3 WHERE RC_Units52 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 53, RC_Charges53, RC_Units53 FROM ETL.Staging_Outp3 WHERE RC_Units53 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 54, RC_Charges54, RC_Units54 FROM ETL.Staging_Outp3 WHERE RC_Units54 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 55, RC_Charges55, RC_Units55 FROM ETL.Staging_Outp3 WHERE RC_Units55 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 56, RC_Charges56, RC_Units56 FROM ETL.Staging_Outp3 WHERE RC_Units56 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 57, RC_Charges57, RC_Units57 FROM ETL.Staging_Outp3 WHERE RC_Units57 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 58, RC_Charges58, RC_Units58 FROM ETL.Staging_Outp3 WHERE RC_Units58 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 59, RC_Charges59, RC_Units59 FROM ETL.Staging_Outp3 WHERE RC_Units59 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 60, RC_Charges60, RC_Units60 FROM ETL.Staging_Outp3 WHERE RC_Units60 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 61, RC_Charges61, RC_Units61 FROM ETL.Staging_Outp3 WHERE RC_Units61 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 62, RC_Charges62, RC_Units62 FROM ETL.Staging_Outp3 WHERE RC_Units62 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 63, RC_Charges63, RC_Units63 FROM ETL.Staging_Outp3 WHERE RC_Units63 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 64, RC_Charges64, RC_Units64 FROM ETL.Staging_Outp3 WHERE RC_Units64 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 65, RC_Charges65, RC_Units65 FROM ETL.Staging_Outp3 WHERE RC_Units65 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 66, RC_Charges66, RC_Units66 FROM ETL.Staging_Outp3 WHERE RC_Units66 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 67, RC_Charges67, RC_Units67 FROM ETL.Staging_Outp3 WHERE RC_Units67 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 68, RC_Charges68, RC_Units68 FROM ETL.Staging_Outp3 WHERE RC_Units68 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 69, RC_Charges69, RC_Units69 FROM ETL.Staging_Outp3 WHERE RC_Units69 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 70, RC_Charges70, RC_Units70 FROM ETL.Staging_Outp3 WHERE RC_Units70 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 71, RC_Charges71, RC_Units71 FROM ETL.Staging_Outp3 WHERE RC_Units71 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 72, RC_Charges72, RC_Units72 FROM ETL.Staging_Outp3 WHERE RC_Units72 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 73, RC_Charges73, RC_Units73 FROM ETL.Staging_Outp3 WHERE RC_Units73 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 74, RC_Charges74, RC_Units74 FROM ETL.Staging_Outp3 WHERE RC_Units74 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 75, RC_Charges75, RC_Units75 FROM ETL.Staging_Outp3 WHERE RC_Units75 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 76, RC_Charges76, RC_Units76 FROM ETL.Staging_Outp3 WHERE RC_Units76 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 77, RC_Charges77, RC_Units77 FROM ETL.Staging_Outp3 WHERE RC_Units77 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 78, RC_Charges78, RC_Units78 FROM ETL.Staging_Outp3 WHERE RC_Units78 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 79, RC_Charges79, RC_Units79 FROM ETL.Staging_Outp3 WHERE RC_Units79 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 80, RC_Charges80, RC_Units80 FROM ETL.Staging_Outp3 WHERE RC_Units80 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 81, RC_Charges81, RC_Units81 FROM ETL.Staging_Outp3 WHERE RC_Units81 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 82, RC_Charges82, RC_Units82 FROM ETL.Staging_Outp3 WHERE RC_Units82 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 83, RC_Charges83, RC_Units83 FROM ETL.Staging_Outp3 WHERE RC_Units83 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 84, RC_Charges84, RC_Units84 FROM ETL.Staging_Outp3 WHERE RC_Units84 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 85, RC_Charges85, RC_Units85 FROM ETL.Staging_Outp3 WHERE RC_Units85 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 86, RC_Charges86, RC_Units86 FROM ETL.Staging_Outp3 WHERE RC_Units86 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 87, RC_Charges87, RC_Units87 FROM ETL.Staging_Outp3 WHERE RC_Units87 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 88, RC_Charges88, RC_Units88 FROM ETL.Staging_Outp3 WHERE RC_Units88 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 89, RC_Charges89, RC_Units89 FROM ETL.Staging_Outp3 WHERE RC_Units89 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 90, RC_Charges90, RC_Units90 FROM ETL.Staging_Outp3 WHERE RC_Units90 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 91, RC_Charges91, RC_Units91 FROM ETL.Staging_Outp3 WHERE RC_Units91 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 92, RC_Charges92, RC_Units92 FROM ETL.Staging_Outp3 WHERE RC_Units92 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 93, RC_Charges93, RC_Units93 FROM ETL.Staging_Outp3 WHERE RC_Units93 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 94, RC_Charges94, RC_Units94 FROM ETL.Staging_Outp3 WHERE RC_Units94 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 95, RC_Charges95, RC_Units95 FROM ETL.Staging_Outp3 WHERE RC_Units95 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 96, RC_Charges96, RC_Units96 FROM ETL.Staging_Outp3 WHERE RC_Units96 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 97, RC_Charges97, RC_Units97 FROM ETL.Staging_Outp3 WHERE RC_Units97 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 98, RC_Charges98, RC_Units98 FROM ETL.Staging_Outp3 WHERE RC_Units98 IS NOT NULL&#xA;INSERT CrossRef.RateCenter SELECT VisitID, 99, RC_Charges99, RC_Units99 FROM ETL.Staging_Outp3 WHERE RC_Units99 IS NOT NULL&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension AccountNo"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7541c5c4-deb2-4594-857f-f4baa9465f47}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension AccountNo"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="5">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Dimension.AccountNo (Formatted, [Raw])&#xA;SELECT DISTINCT S1.AccountNo_Format, S1.AccountNo_Raw&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.AccountNo as D&#xA;ON D.Formatted = S1.AccountNo_Format AND D.[Raw] = S1.AccountNo_Raw&#xA;WHERE D.Formatted IS NULL&#xA; AND S1.AccountNo_Raw IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension MRN"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5d89d18e-0dfd-4dfa-ac13-34320d274b9d}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension MRN"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT [Lookup].Hospital (SourceID, SourceCode, Name)&#xA;SELECT DISTINCT S.SourceID, 'HSCRC_NEW', 'New HSCRC'&#xA;FROM ETL.Staging_Outp1 as S&#xA;LEFT OUTER JOIN [Lookup].Hospital as H&#xA;ON H.SourceID = S.SourceID&#xA;WHERE H.SourceID IS NULL&#xA;&#xA;INSERT Dimension.MedicalRecordNo (Formatted, [Raw])&#xA;SELECT DISTINCT S1.MRN_Format, S1.MRN_Raw&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.MedicalRecordNo as D&#xA;ON D.Formatted = S1.MRN_Format AND D.[Raw] = S1.MRN_Raw&#xA;WHERE D.Formatted IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension Patient"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{48bdfa0b-28b3-4529-b137-fa994e396485}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension Patient"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Dimension.Patient (DateOfBirth, Gender, Race, Ethnicity, MaritalStatus)&#xA;SELECT DISTINCT S1.DateOfBirth, S1.Gender, S1.Race, S1.Ethnicity, S1.MaritalStatus&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.Patient as D&#xA;ON ISNULL(D.DateOfBirth, '') = ISNULL(S1.DateOfBirth, '') AND ISNULL(D.Gender, '') = ISNULL(S1.Gender, '') &#xA; AND ISNULL(D.Race, '') = ISNULL(S1.Race, '') AND ISNULL(D.Ethnicity, '') = ISNULL(S1.Ethnicity, '') AND ISNULL(D.MaritalStatus, '') = ISNULL(S1.MaritalStatus, '')&#xA;WHERE D.DateOfBirth IS NULL AND D.Gender IS NULL AND D.Race IS NULL AND D.Ethnicity IS NULL AND D.MaritalStatus IS NULL&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension Physician"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{29ce7443-5679-4254-835e-4b5f9ffd157b}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension Physician"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Dimension.Physician (Number, GhostNumber, NPI, ValidFlag)&#xA;SELECT DISTINCT S1.PhysOper_Number, S1.PhysOper_GhostNumber, S1.PhysOper_NPINumber, S1.PhysOper_Flag&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.Physician as D&#xA;ON ISNULL(D.Number, '') = ISNULL(S1.PhysOper_Number, '') AND ISNULL(D.GhostNumber, '') = ISNULL(S1.PhysOper_GhostNumber, '')&#xA; AND ISNULL(D.NPI, '') = ISNULL(S1.PhysOper_NPINumber, '') AND ISNULL(D.ValidFlag, '') = ISNULL(S1.PhysOper_Flag, '')&#xA;WHERE D.Number IS NULL AND D.GhostNumber IS NULL AND D.NPI IS NULL&#xA; AND (S1.PhysOper_Number IS NOT NULL OR S1.PhysOper_GhostNumber IS NOT NULL OR S1.PhysOper_NPINumber IS NOT NULL)&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimensions A &amp; D Dates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{66c47c47-6e73-481e-b098-bbf0d616f0b6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimensions A &amp; D Dates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Dimension.AdmitDate (Value, [Year], [Month], [DayOfMonth], &#xA; [Quarter], WeekOfYear, [DayOfYear], [DayOfWeek] )&#xA;SELECT DISTINCT CAST(S1.AdmitDT as date), DATEPART(YEAR, S1.AdmitDT), DATEPART(MONTH, S1.AdmitDT), DATEPART(DAY, S1.AdmitDT), &#xA; DATEPART(QUARTER, S1.AdmitDT), DATEPART(WEEK, S1.AdmitDT), DATEPART(DAYOFYEAR, S1.AdmitDT), DATEPART(WEEKDAY, S1.AdmitDT)&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.AdmitDate as D&#xA;ON D.Value = CAST(S1.AdmitDT as date)&#xA;WHERE D.Value IS NULL&#xA;&#xA;INSERT Dimension.DischargeDate (Value, [Year], [Month], [DayOfMonth], &#xA; [Quarter], WeekOfYear, [DayOfYear], [DayOfWeek] )&#xA;SELECT DISTINCT CAST(S1.DischargeDT as date), DATEPART(YEAR, S1.DischargeDT), DATEPART(MONTH, S1.DischargeDT), DATEPART(DAY, S1.DischargeDT), &#xA; DATEPART(QUARTER, S1.DischargeDT), DATEPART(WEEK, S1.DischargeDT), DATEPART(DAYOFYEAR, S1.DischargeDT), DATEPART(WEEKDAY, S1.DischargeDT)&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.DischargeDate as D&#xA;ON D.Value = CAST(S1.DischargeDT as date)&#xA;WHERE D.Value IS NULL&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimensions Calculated"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c1c383c3-4257-4b13-ba4f-3668b969f5bd}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimensions Calculated"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Dimension.PatientAge (Years)&#xA;SELECT DISTINCT S1.AgeYears&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.PatientAge as D&#xA;ON D.Years = S1.AgeYears&#xA;WHERE D.Years IS NULL &#xA;AND S1.AgeYears IS NOT NULL&#xA;&#xA;INSERT Dimension.LengthOfStay ([Days])&#xA;SELECT DISTINCT S1.LengthOfStay&#xA;FROM ETL.Staging_Outp1 as S1&#xA;LEFT OUTER JOIN Dimension.LengthOfStay as D&#xA;ON D.[Days] = S1.LengthOfStay&#xA;WHERE D.[Days] IS NULL&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact Clinical"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{39af0648-9bca-421b-ba61-0c5c1eff6d96}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact Clinical"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="7">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Fact.Clinical (VisitID,&#xA; InjuryCodeER, DischargeFlag, NatureOfSurgery, AdmittingDiagnosis )&#xA;SELECT VisitID,&#xA; InjuryCodeER, DischargeFlag, NatureOfSurgery, AdmittingDiagnosis &#xA;FROM ETL.Staging_Outp2 as S2&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact Extras_Outpatient"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b278505f-3dd0-4f2b-8bd4-bd9ae7b8d886}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact Extras_Outpatient"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="6">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Fact.Extras_Outpatient (VisitID, &#xA; ConfFlag, CondCode1, CondCode2, CondCode3, CondCode4, CondCode5, &#xA; OcurrenceSpan, Accident, ReserveFlag, NumberEncs, SoftwareVersion, NumberVisits, &#xA; [2ndMSPAPGCode], [2ndMSPPrincipalWeight], MSPFlag, &#xA; OriginalCPVMax, CurrentCPVMax, CPVExclusionFlag, CPVHighAPGIndex, CPVAPGCode, [CPVE&amp;MCode], CPVCPTCode, &#xA; HighAPGWeight, PrincipalAPGWeight, TrimPoint, AmountTrimmed, APGVersionUsed, ClaimProcFlag, ClaimProcWarnings )&#xA;SELECT VisitID, &#xA; ConfFlag, ConditionCode1, ConditionCode2, ConditionCode3, ConditionCode4, ConditionCode5, &#xA; OcurrenceSpan, AccidentHour, ReserveFlag, NumberEncs, SoftwareVersion, NumberVisits, &#xA; [2ndMSPAPGCode], [2ndMSPPrincipalWeight], MSPFlag, &#xA; OriginalCPVMax, CurrentCPVMax, CPVExclusionFlag, CPVHighAPGIndex, CPVAPGCode, [CPVEnMCode], CPVCPTCode, &#xA; HighAPGWeight, PrincipalAPGWeight, TrimPoint, AmountTrimmed, APGVersionUsed, ClaimProcFlag, ClaimProcWarnings&#xA;FROM ETL.Staging_Outp2 as S2&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact Financial"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{f525684b-dae5-4ed5-8a27-c575c3326aac}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact Financial"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Fact.Financial (VisitID,&#xA; BillType,&#xA; Charges1_Room, Charges1_OperatingRoom, Charges1_Drugs, Charges1_Radiology, Charges1_Laboratory, &#xA; Charges1_Supplies, Charges1_Therapy, Charges1_Other, Charges1_Total, &#xA; Charges2_MedicalSurgical, Charges2_CoronaryCare, Charges2_Intensive, Charges2_Nursery, Charges2_Oncology, &#xA; Charges2_SkilledNursing, Charges2_Psychiatric, Charges2_OperatingRoom, Charges2_Drugs, Charges2_RadiologyDiag, &#xA; Charges2_RadiationTherapy, Charges2_NuclearMedicine, Charges2_CATScan, Charges2_MRI, Charges2_IVC, &#xA; Charges2_Laboratory, Charges2_Supplies, Charges2_Respiratory, Charges2_PhysicalTherapy, Charges2_OccupTherapy, &#xA; Charges2_SpeechAudiology, Charges2_Pulmonary, Charges2_Anesthesia, Charges2_EmergencyRoom, Charges2_OutpatientClinic, &#xA; Charges2_FreestandingClinic, Charges2_LaborDelivery, Charges2_EKG, Charges2_EEG, Charges2_Other, &#xA; Charges2_Total )&#xA;SELECT VisitID,&#xA; BillType,  &#xA; Charges1_Room, Charges1_OperatingRoom, Charges1_Drugs, Charges1_Radiology, Charges1_Laboratory, &#xA; Charges1_Supplies, Charges1_Therapy, Charges1_Other, Charges1_Total, &#xA; Charges2_MedicalSurgical, Charges2_CoronaryCare, Charges2_Intensive, Charges2_Nursery, Charges2_Oncology, &#xA; Charges2_SkilledNursing, Charges2_Psychiatric, Charges2_OperatingRoom, Charges2_Drugs, Charges2_RadiologyDiag, &#xA; Charges2_RadiationTherapy, Charges2_NuclearMedicine, Charges2_CATScan, Charges2_MRI, Charges2_IVC, &#xA; Charges2_Laboratory, Charges2_Supplies, Charges2_Respiratory, Charges2_PhysicalTherapy, Charges2_OccupTherapy, &#xA; Charges2_SpeechAudiology, Charges2_Pulmonary, Charges2_Anesthesia, Charges2_EmergencyRoom, Charges2_OutpatientClinic, &#xA; Charges2_FreestandingClinic, Charges2_LaborDelivery, Charges2_EKG, Charges2_EEG, Charges2_Other, &#xA; Charges2_Total&#xA;FROM ETL.Staging_Outp2 as S2&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact PatientExtras"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e4ae5180-4c30-4b66-bd79-207a7ad3990d}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact PatientExtras"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Fact.PatientExtras (VisitID,&#xA; CountyID, Zip, AreaCodeMetro, AreaCodePSRO, AreaCodeHSA, AreaCodeICG, &#xA; AgeDays, CountryOrigin, [Language] )&#xA;SELECT VisitID,&#xA; C.CountyID, Zip, AreaCodeMetro, AreaCodePSRO, AreaCodeHSA, AreaCodeICG, &#xA; AgeDays, CountryOrigin, [Language]&#xA;FROM ETL.Staging_Outp2 as S2&#xA;LEFT OUTER JOIN [Lookup].County as C&#xA;ON S2.County = C.Code&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact VisitHospital"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{524a3919-5770-49ee-8cd7-e7fe6658bc93}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact VisitHospital"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="5">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Fact.VisitHospital (VisitID,&#xA; TeachingHospital, &#xA; AmbulanceRunNo1, BedCapacity, HospitalSPCC, EMPI)&#xA;SELECT VisitID,&#xA; TeachingHospital, &#xA; AmbulanceRunNo1, BedCapacity, HospitalSPCC, EMPI&#xA;FROM ETL.Staging_Outp2 as S2&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact VisitMain"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Insert to VisitMain first so other tables can refer to FK"
+      DTS:DTSID="{0d31c220-c569-482f-8522-fea0e26e722c}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact VisitMain"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT Fact.VisitMain (VisitID, PatientID, HospitalID, MedicalRecordNoID, AccountNoID,&#xA; AdmitDT, AdmitDateID, AdmitTimeID, DischargeDT, DischargeDateID, DischargeTimeID, VisitTypeID,&#xA; PatientAgeID, SourceOfAdmitID, DischargeDispID, PhysOperatingID,&#xA; PayerSourcePrimaryID, PayerSourceSecondaryID, PayerExpectedPrimaryID, PayerExpectedSecondaryID, LengthOfStayID )&#xA;&#xA;SELECT S1.VisitID, PT.PatientID, HS.HospitalID, MR.MedicalRecordNoID, AC.AccountNoID, &#xA; S1.AdmitDT, AD.AdmitDateID, AT.TimeID, S1.DischargeDT, DD.DischargeDateID, DT.TimeID, VT.VisitTypeID,&#xA; AG.PatientAgeID, SA.SourceOfAdmitID, DI.DischargeDispID, P2.PhysicianID,&#xA; PS1.PayerSourceID, PS2.PayerSourceID, PE1.PayerExpectedID, PE2.PayerExpectedID, LS.LengthOfStayID&#xA;&#xA;FROM ETL.Staging_Outp1 as S1&#xA;&#xA;LEFT OUTER JOIN Dimension.Patient as PT&#xA;ON ( (S1.DateOfBirth IS NULL AND PT.DateOfBirth IS NULL) OR (S1.DateOfBirth = PT.DateOfBirth) )&#xA; AND S1.Gender = PT.Gender AND S1.Race = PT.Race AND S1.Ethnicity = PT.Ethnicity AND S1.MaritalStatus = PT.MaritalStatus&#xA;&#xA;LEFT OUTER JOIN [Lookup].Hospital as HS&#xA;ON S1.SourceID = HS.SourceID&#xA;&#xA;LEFT OUTER JOIN Dimension.MedicalRecordNo as MR&#xA;ON S1.MRN_Format = MR.Formatted AND S1.MRN_Raw = MR.[Raw]&#xA;LEFT OUTER JOIN Dimension.AccountNo as AC&#xA;ON S1.AccountNo_Format = AC.Formatted AND S1.AccountNo_Raw = AC.[Raw]&#xA;&#xA;LEFT OUTER JOIN Dimension.AdmitDate as AD&#xA;ON CAST(S1.AdmitDT as date) = AD.Value&#xA;LEFT OUTER JOIN [Lookup].[Time] as AT&#xA;ON CAST(S1.AdmitDT as time) = AT.Value&#xA;LEFT OUTER JOIN Dimension.DischargeDate as DD&#xA;ON CAST(S1.DischargeDT as date) = DD.Value&#xA;LEFT OUTER JOIN [Lookup].[Time] as DT&#xA;ON CAST(S1.DischargeDT as time) = DT.Value&#xA;&#xA;LEFT OUTER JOIN [Lookup].VisitType as VT&#xA;ON S1.AdmitTypeCode = VT.AdmitTypeCode AND VT.FileTypeID = 2&#xA;&#xA;LEFT OUTER JOIN Dimension.Physician as P2&#xA;ON ISNULL(S1.PhysOper_Number, '') = ISNULL(P2.Number, '') AND ISNULL(S1.PhysOper_GhostNumber, '') = ISNULL(P2.GhostNumber, '') &#xA; AND ISNULL(S1.PhysOper_NPINumber, '') = ISNULL(P2.NPI, '') AND ISNULL(S1.PhysOper_Flag, '') = ISNULL(P2.ValidFlag, '')&#xA; &#xA;LEFT OUTER JOIN Dimension.PatientAge as AG&#xA;ON S1.AgeYears = AG.Years&#xA;LEFT OUTER JOIN [Lookup].SourceOfAdmit as SA&#xA;ON S1.SourceOfAdmit = SA.Code AND SA.FileTypeID = 2&#xA;LEFT OUTER JOIN [Lookup].DischargeDisposition as DI&#xA;ON S1.DischargeDisposition = DI.Code AND DI.FileTypeID = 2&#xA;&#xA;LEFT OUTER JOIN [Lookup].PayerSource as PS1&#xA;ON S1.PayerSourcePrimary = PS1.Code AND PS1.FileTypeID = 2&#xA;LEFT OUTER JOIN [Lookup].PayerSource as PS2&#xA;ON S1.PayerSourceSecondary = PS2.Code AND PS2.FileTypeID = 2&#xA;LEFT OUTER JOIN [Lookup].PayerExpected as PE1&#xA;ON S1.PayerExpectedPrimary = PE1.Code &#xA;LEFT OUTER JOIN [Lookup].PayerExpected as PE2&#xA;ON S1.PayerExpectedSecondary = PE2.Code &#xA;&#xA;LEFT OUTER JOIN Dimension.LengthOfStay as LS&#xA;ON S1.LengthOfStay = LS.[Days]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Recreate FF Index"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{f15b3a1e-38fb-46d9-8ed3-42080d6c96a0}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Recreate FF Index"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;CREATE INDEX IX_XRF_VisitID ON CrossRef.FortyFive (VisitID)&#xA;&#xA;CREATE INDEX IX_XRF_SeqNo ON CrossRef.FortyFive (SequenceNo)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Remove FF Index"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{f9c5815c-c4d7-45f3-9a10-879e7436073e}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Remove FF Index"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;IF EXISTS (SELECT name FROM sysindexes WHERE name = 'IX_XRF_VisitID') &#xA; DROP INDEX IX_XRF_VisitID ON CrossRef.FortyFive&#xA;&#xA;IF EXISTS (SELECT name FROM sysindexes WHERE name = 'IX_XRF_SeqNo') &#xA; DROP INDEX IX_XRF_SeqNo ON CrossRef.FortyFive&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update CrossRef FortyFive"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ef50cbdd-1686-4b51-9e6f-ae1bcd9db869}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update CrossRef FortyFive"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;UPDATE FF SET Lines = Lines01, VisitDate = VisitDate01, ServiceDate = ServiceDate01, Type = VisitType01, LineUnassigned = LineUnassigned01, DiagnosisCode = DiagnosisCode01, APGCode = APGCode01, APGType = APGType01, APGCategory = APGCategory01, ProcHSCPCS = ProcHCPCS01, SigSame = SigSame01, SigClin = SigClin01, LineCharges = LineCharges01, RateCenter = RateCenter01, Revenue = Revenue01, MultiDisc = MultiDisc01, RepeatDisc = RepeatDisc01, BilatDisc = BilatDisc01, TermDisc = TermDisc01, VisitWarnings = VisitWarnings01, PackageDiem = PackageDiem01, PackageFlag = PackageFlag01 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 01&#xA;UPDATE FF SET Lines = Lines02, VisitDate = VisitDate02, ServiceDate = ServiceDate02, Type = VisitType02, LineUnassigned = LineUnassigned02, DiagnosisCode = DiagnosisCode02, APGCode = APGCode02, APGType = APGType02, APGCategory = APGCategory02, ProcHSCPCS = ProcHCPCS02, SigSame = SigSame02, SigClin = SigClin02, LineCharges = LineCharges02, RateCenter = RateCenter02, Revenue = Revenue02, MultiDisc = MultiDisc02, RepeatDisc = RepeatDisc02, BilatDisc = BilatDisc02, TermDisc = TermDisc02, VisitWarnings = VisitWarnings02, PackageDiem = PackageDiem02, PackageFlag = PackageFlag02 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 02&#xA;UPDATE FF SET Lines = Lines03, VisitDate = VisitDate03, ServiceDate = ServiceDate03, Type = VisitType03, LineUnassigned = LineUnassigned03, DiagnosisCode = DiagnosisCode03, APGCode = APGCode03, APGType = APGType03, APGCategory = APGCategory03, ProcHSCPCS = ProcHCPCS03, SigSame = SigSame03, SigClin = SigClin03, LineCharges = LineCharges03, RateCenter = RateCenter03, Revenue = Revenue03, MultiDisc = MultiDisc03, RepeatDisc = RepeatDisc03, BilatDisc = BilatDisc03, TermDisc = TermDisc03, VisitWarnings = VisitWarnings03, PackageDiem = PackageDiem03, PackageFlag = PackageFlag03 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 03&#xA;UPDATE FF SET Lines = Lines04, VisitDate = VisitDate04, ServiceDate = ServiceDate04, Type = VisitType04, LineUnassigned = LineUnassigned04, DiagnosisCode = DiagnosisCode04, APGCode = APGCode04, APGType = APGType04, APGCategory = APGCategory04, ProcHSCPCS = ProcHCPCS04, SigSame = SigSame04, SigClin = SigClin04, LineCharges = LineCharges04, RateCenter = RateCenter04, Revenue = Revenue04, MultiDisc = MultiDisc04, RepeatDisc = RepeatDisc04, BilatDisc = BilatDisc04, TermDisc = TermDisc04, VisitWarnings = VisitWarnings04, PackageDiem = PackageDiem04, PackageFlag = PackageFlag04 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 04&#xA;UPDATE FF SET Lines = Lines05, VisitDate = VisitDate05, ServiceDate = ServiceDate05, Type = VisitType05, LineUnassigned = LineUnassigned05, DiagnosisCode = DiagnosisCode05, APGCode = APGCode05, APGType = APGType05, APGCategory = APGCategory05, ProcHSCPCS = ProcHCPCS05, SigSame = SigSame05, SigClin = SigClin05, LineCharges = LineCharges05, RateCenter = RateCenter05, Revenue = Revenue05, MultiDisc = MultiDisc05, RepeatDisc = RepeatDisc05, BilatDisc = BilatDisc05, TermDisc = TermDisc05, VisitWarnings = VisitWarnings05, PackageDiem = PackageDiem05, PackageFlag = PackageFlag05 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 05&#xA;UPDATE FF SET Lines = Lines06, VisitDate = VisitDate06, ServiceDate = ServiceDate06, Type = VisitType06, LineUnassigned = LineUnassigned06, DiagnosisCode = DiagnosisCode06, APGCode = APGCode06, APGType = APGType06, APGCategory = APGCategory06, ProcHSCPCS = ProcHCPCS06, SigSame = SigSame06, SigClin = SigClin06, LineCharges = LineCharges06, RateCenter = RateCenter06, Revenue = Revenue06, MultiDisc = MultiDisc06, RepeatDisc = RepeatDisc06, BilatDisc = BilatDisc06, TermDisc = TermDisc06, VisitWarnings = VisitWarnings06, PackageDiem = PackageDiem06, PackageFlag = PackageFlag06 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 06&#xA;UPDATE FF SET Lines = Lines07, VisitDate = VisitDate07, ServiceDate = ServiceDate07, Type = VisitType07, LineUnassigned = LineUnassigned07, DiagnosisCode = DiagnosisCode07, APGCode = APGCode07, APGType = APGType07, APGCategory = APGCategory07, ProcHSCPCS = ProcHCPCS07, SigSame = SigSame07, SigClin = SigClin07, LineCharges = LineCharges07, RateCenter = RateCenter07, Revenue = Revenue07, MultiDisc = MultiDisc07, RepeatDisc = RepeatDisc07, BilatDisc = BilatDisc07, TermDisc = TermDisc07, VisitWarnings = VisitWarnings07, PackageDiem = PackageDiem07, PackageFlag = PackageFlag07 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 07&#xA;UPDATE FF SET Lines = Lines08, VisitDate = VisitDate08, ServiceDate = ServiceDate08, Type = VisitType08, LineUnassigned = LineUnassigned08, DiagnosisCode = DiagnosisCode08, APGCode = APGCode08, APGType = APGType08, APGCategory = APGCategory08, ProcHSCPCS = ProcHCPCS08, SigSame = SigSame08, SigClin = SigClin08, LineCharges = LineCharges08, RateCenter = RateCenter08, Revenue = Revenue08, MultiDisc = MultiDisc08, RepeatDisc = RepeatDisc08, BilatDisc = BilatDisc08, TermDisc = TermDisc08, VisitWarnings = VisitWarnings08, PackageDiem = PackageDiem08, PackageFlag = PackageFlag08 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 08&#xA;UPDATE FF SET Lines = Lines09, VisitDate = VisitDate09, ServiceDate = ServiceDate09, Type = VisitType09, LineUnassigned = LineUnassigned09, DiagnosisCode = DiagnosisCode09, APGCode = APGCode09, APGType = APGType09, APGCategory = APGCategory09, ProcHSCPCS = ProcHCPCS09, SigSame = SigSame09, SigClin = SigClin09, LineCharges = LineCharges09, RateCenter = RateCenter09, Revenue = Revenue09, MultiDisc = MultiDisc09, RepeatDisc = RepeatDisc09, BilatDisc = BilatDisc09, TermDisc = TermDisc09, VisitWarnings = VisitWarnings09, PackageDiem = PackageDiem09, PackageFlag = PackageFlag09 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 09&#xA;UPDATE FF SET Lines = Lines10, VisitDate = VisitDate10, ServiceDate = ServiceDate10, Type = VisitType10, LineUnassigned = LineUnassigned10, DiagnosisCode = DiagnosisCode10, APGCode = APGCode10, APGType = APGType10, APGCategory = APGCategory10, ProcHSCPCS = ProcHCPCS10, SigSame = SigSame10, SigClin = SigClin10, LineCharges = LineCharges10, RateCenter = RateCenter10, Revenue = Revenue10, MultiDisc = MultiDisc10, RepeatDisc = RepeatDisc10, BilatDisc = BilatDisc10, TermDisc = TermDisc10, VisitWarnings = VisitWarnings10, PackageDiem = PackageDiem10, PackageFlag = PackageFlag10 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 10&#xA;UPDATE FF SET Lines = Lines11, VisitDate = VisitDate11, ServiceDate = ServiceDate11, Type = VisitType11, LineUnassigned = LineUnassigned11, DiagnosisCode = DiagnosisCode11, APGCode = APGCode11, APGType = APGType11, APGCategory = APGCategory11, ProcHSCPCS = ProcHCPCS11, SigSame = SigSame11, SigClin = SigClin11, LineCharges = LineCharges11, RateCenter = RateCenter11, Revenue = Revenue11, MultiDisc = MultiDisc11, RepeatDisc = RepeatDisc11, BilatDisc = BilatDisc11, TermDisc = TermDisc11, VisitWarnings = VisitWarnings11, PackageDiem = PackageDiem11, PackageFlag = PackageFlag11 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 11&#xA;UPDATE FF SET Lines = Lines12, VisitDate = VisitDate12, ServiceDate = ServiceDate12, Type = VisitType12, LineUnassigned = LineUnassigned12, DiagnosisCode = DiagnosisCode12, APGCode = APGCode12, APGType = APGType12, APGCategory = APGCategory12, ProcHSCPCS = ProcHCPCS12, SigSame = SigSame12, SigClin = SigClin12, LineCharges = LineCharges12, RateCenter = RateCenter12, Revenue = Revenue12, MultiDisc = MultiDisc12, RepeatDisc = RepeatDisc12, BilatDisc = BilatDisc12, TermDisc = TermDisc12, VisitWarnings = VisitWarnings12, PackageDiem = PackageDiem12, PackageFlag = PackageFlag12 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 12&#xA;UPDATE FF SET Lines = Lines13, VisitDate = VisitDate13, ServiceDate = ServiceDate13, Type = VisitType13, LineUnassigned = LineUnassigned13, DiagnosisCode = DiagnosisCode13, APGCode = APGCode13, APGType = APGType13, APGCategory = APGCategory13, ProcHSCPCS = ProcHCPCS13, SigSame = SigSame13, SigClin = SigClin13, LineCharges = LineCharges13, RateCenter = RateCenter13, Revenue = Revenue13, MultiDisc = MultiDisc13, RepeatDisc = RepeatDisc13, BilatDisc = BilatDisc13, TermDisc = TermDisc13, VisitWarnings = VisitWarnings13, PackageDiem = PackageDiem13, PackageFlag = PackageFlag13 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 13&#xA;UPDATE FF SET Lines = Lines14, VisitDate = VisitDate14, ServiceDate = ServiceDate14, Type = VisitType14, LineUnassigned = LineUnassigned14, DiagnosisCode = DiagnosisCode14, APGCode = APGCode14, APGType = APGType14, APGCategory = APGCategory14, ProcHSCPCS = ProcHCPCS14, SigSame = SigSame14, SigClin = SigClin14, LineCharges = LineCharges14, RateCenter = RateCenter14, Revenue = Revenue14, MultiDisc = MultiDisc14, RepeatDisc = RepeatDisc14, BilatDisc = BilatDisc14, TermDisc = TermDisc14, VisitWarnings = VisitWarnings14, PackageDiem = PackageDiem14, PackageFlag = PackageFlag14 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 14&#xA;UPDATE FF SET Lines = Lines15, VisitDate = VisitDate15, ServiceDate = ServiceDate15, Type = VisitType15, LineUnassigned = LineUnassigned15, DiagnosisCode = DiagnosisCode15, APGCode = APGCode15, APGType = APGType15, APGCategory = APGCategory15, ProcHSCPCS = ProcHCPCS15, SigSame = SigSame15, SigClin = SigClin15, LineCharges = LineCharges15, RateCenter = RateCenter15, Revenue = Revenue15, MultiDisc = MultiDisc15, RepeatDisc = RepeatDisc15, BilatDisc = BilatDisc15, TermDisc = TermDisc15, VisitWarnings = VisitWarnings15, PackageDiem = PackageDiem15, PackageFlag = PackageFlag15 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 15&#xA;UPDATE FF SET Lines = Lines16, VisitDate = VisitDate16, ServiceDate = ServiceDate16, Type = VisitType16, LineUnassigned = LineUnassigned16, DiagnosisCode = DiagnosisCode16, APGCode = APGCode16, APGType = APGType16, APGCategory = APGCategory16, ProcHSCPCS = ProcHCPCS16, SigSame = SigSame16, SigClin = SigClin16, LineCharges = LineCharges16, RateCenter = RateCenter16, Revenue = Revenue16, MultiDisc = MultiDisc16, RepeatDisc = RepeatDisc16, BilatDisc = BilatDisc16, TermDisc = TermDisc16, VisitWarnings = VisitWarnings16, PackageDiem = PackageDiem16, PackageFlag = PackageFlag16 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 16&#xA;UPDATE FF SET Lines = Lines17, VisitDate = VisitDate17, ServiceDate = ServiceDate17, Type = VisitType17, LineUnassigned = LineUnassigned17, DiagnosisCode = DiagnosisCode17, APGCode = APGCode17, APGType = APGType17, APGCategory = APGCategory17, ProcHSCPCS = ProcHCPCS17, SigSame = SigSame17, SigClin = SigClin17, LineCharges = LineCharges17, RateCenter = RateCenter17, Revenue = Revenue17, MultiDisc = MultiDisc17, RepeatDisc = RepeatDisc17, BilatDisc = BilatDisc17, TermDisc = TermDisc17, VisitWarnings = VisitWarnings17, PackageDiem = PackageDiem17, PackageFlag = PackageFlag17 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 17&#xA;UPDATE FF SET Lines = Lines18, VisitDate = VisitDate18, ServiceDate = ServiceDate18, Type = VisitType18, LineUnassigned = LineUnassigned18, DiagnosisCode = DiagnosisCode18, APGCode = APGCode18, APGType = APGType18, APGCategory = APGCategory18, ProcHSCPCS = ProcHCPCS18, SigSame = SigSame18, SigClin = SigClin18, LineCharges = LineCharges18, RateCenter = RateCenter18, Revenue = Revenue18, MultiDisc = MultiDisc18, RepeatDisc = RepeatDisc18, BilatDisc = BilatDisc18, TermDisc = TermDisc18, VisitWarnings = VisitWarnings18, PackageDiem = PackageDiem18, PackageFlag = PackageFlag18 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 18&#xA;UPDATE FF SET Lines = Lines19, VisitDate = VisitDate19, ServiceDate = ServiceDate19, Type = VisitType19, LineUnassigned = LineUnassigned19, DiagnosisCode = DiagnosisCode19, APGCode = APGCode19, APGType = APGType19, APGCategory = APGCategory19, ProcHSCPCS = ProcHCPCS19, SigSame = SigSame19, SigClin = SigClin19, LineCharges = LineCharges19, RateCenter = RateCenter19, Revenue = Revenue19, MultiDisc = MultiDisc19, RepeatDisc = RepeatDisc19, BilatDisc = BilatDisc19, TermDisc = TermDisc19, VisitWarnings = VisitWarnings19, PackageDiem = PackageDiem19, PackageFlag = PackageFlag19 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 19&#xA;UPDATE FF SET Lines = Lines20, VisitDate = VisitDate20, ServiceDate = ServiceDate20, Type = VisitType20, LineUnassigned = LineUnassigned20, DiagnosisCode = DiagnosisCode20, APGCode = APGCode20, APGType = APGType20, APGCategory = APGCategory20, ProcHSCPCS = ProcHCPCS20, SigSame = SigSame20, SigClin = SigClin20, LineCharges = LineCharges20, RateCenter = RateCenter20, Revenue = Revenue20, MultiDisc = MultiDisc20, RepeatDisc = RepeatDisc20, BilatDisc = BilatDisc20, TermDisc = TermDisc20, VisitWarnings = VisitWarnings20, PackageDiem = PackageDiem20, PackageFlag = PackageFlag20 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 20&#xA;UPDATE FF SET Lines = Lines21, VisitDate = VisitDate21, ServiceDate = ServiceDate21, Type = VisitType21, LineUnassigned = LineUnassigned21, DiagnosisCode = DiagnosisCode21, APGCode = APGCode21, APGType = APGType21, APGCategory = APGCategory21, ProcHSCPCS = ProcHCPCS21, SigSame = SigSame21, SigClin = SigClin21, LineCharges = LineCharges21, RateCenter = RateCenter21, Revenue = Revenue21, MultiDisc = MultiDisc21, RepeatDisc = RepeatDisc21, BilatDisc = BilatDisc21, TermDisc = TermDisc21, VisitWarnings = VisitWarnings21, PackageDiem = PackageDiem21, PackageFlag = PackageFlag21 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 21&#xA;UPDATE FF SET Lines = Lines22, VisitDate = VisitDate22, ServiceDate = ServiceDate22, Type = VisitType22, LineUnassigned = LineUnassigned22, DiagnosisCode = DiagnosisCode22, APGCode = APGCode22, APGType = APGType22, APGCategory = APGCategory22, ProcHSCPCS = ProcHCPCS22, SigSame = SigSame22, SigClin = SigClin22, LineCharges = LineCharges22, RateCenter = RateCenter22, Revenue = Revenue22, MultiDisc = MultiDisc22, RepeatDisc = RepeatDisc22, BilatDisc = BilatDisc22, TermDisc = TermDisc22, VisitWarnings = VisitWarnings22, PackageDiem = PackageDiem22, PackageFlag = PackageFlag22 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 22&#xA;UPDATE FF SET Lines = Lines23, VisitDate = VisitDate23, ServiceDate = ServiceDate23, Type = VisitType23, LineUnassigned = LineUnassigned23, DiagnosisCode = DiagnosisCode23, APGCode = APGCode23, APGType = APGType23, APGCategory = APGCategory23, ProcHSCPCS = ProcHCPCS23, SigSame = SigSame23, SigClin = SigClin23, LineCharges = LineCharges23, RateCenter = RateCenter23, Revenue = Revenue23, MultiDisc = MultiDisc23, RepeatDisc = RepeatDisc23, BilatDisc = BilatDisc23, TermDisc = TermDisc23, VisitWarnings = VisitWarnings23, PackageDiem = PackageDiem23, PackageFlag = PackageFlag23 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 23&#xA;UPDATE FF SET Lines = Lines24, VisitDate = VisitDate24, ServiceDate = ServiceDate24, Type = VisitType24, LineUnassigned = LineUnassigned24, DiagnosisCode = DiagnosisCode24, APGCode = APGCode24, APGType = APGType24, APGCategory = APGCategory24, ProcHSCPCS = ProcHCPCS24, SigSame = SigSame24, SigClin = SigClin24, LineCharges = LineCharges24, RateCenter = RateCenter24, Revenue = Revenue24, MultiDisc = MultiDisc24, RepeatDisc = RepeatDisc24, BilatDisc = BilatDisc24, TermDisc = TermDisc24, VisitWarnings = VisitWarnings24, PackageDiem = PackageDiem24, PackageFlag = PackageFlag24 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 24&#xA;UPDATE FF SET Lines = Lines25, VisitDate = VisitDate25, ServiceDate = ServiceDate25, Type = VisitType25, LineUnassigned = LineUnassigned25, DiagnosisCode = DiagnosisCode25, APGCode = APGCode25, APGType = APGType25, APGCategory = APGCategory25, ProcHSCPCS = ProcHCPCS25, SigSame = SigSame25, SigClin = SigClin25, LineCharges = LineCharges25, RateCenter = RateCenter25, Revenue = Revenue25, MultiDisc = MultiDisc25, RepeatDisc = RepeatDisc25, BilatDisc = BilatDisc25, TermDisc = TermDisc25, VisitWarnings = VisitWarnings25, PackageDiem = PackageDiem25, PackageFlag = PackageFlag25 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 25&#xA;UPDATE FF SET Lines = Lines26, VisitDate = VisitDate26, ServiceDate = ServiceDate26, Type = VisitType26, LineUnassigned = LineUnassigned26, DiagnosisCode = DiagnosisCode26, APGCode = APGCode26, APGType = APGType26, APGCategory = APGCategory26, ProcHSCPCS = ProcHCPCS26, SigSame = SigSame26, SigClin = SigClin26, LineCharges = LineCharges26, RateCenter = RateCenter26, Revenue = Revenue26, MultiDisc = MultiDisc26, RepeatDisc = RepeatDisc26, BilatDisc = BilatDisc26, TermDisc = TermDisc26, VisitWarnings = VisitWarnings26, PackageDiem = PackageDiem26, PackageFlag = PackageFlag26 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 26&#xA;UPDATE FF SET Lines = Lines27, VisitDate = VisitDate27, ServiceDate = ServiceDate27, Type = VisitType27, LineUnassigned = LineUnassigned27, DiagnosisCode = DiagnosisCode27, APGCode = APGCode27, APGType = APGType27, APGCategory = APGCategory27, ProcHSCPCS = ProcHCPCS27, SigSame = SigSame27, SigClin = SigClin27, LineCharges = LineCharges27, RateCenter = RateCenter27, Revenue = Revenue27, MultiDisc = MultiDisc27, RepeatDisc = RepeatDisc27, BilatDisc = BilatDisc27, TermDisc = TermDisc27, VisitWarnings = VisitWarnings27, PackageDiem = PackageDiem27, PackageFlag = PackageFlag27 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 27&#xA;UPDATE FF SET Lines = Lines28, VisitDate = VisitDate28, ServiceDate = ServiceDate28, Type = VisitType28, LineUnassigned = LineUnassigned28, DiagnosisCode = DiagnosisCode28, APGCode = APGCode28, APGType = APGType28, APGCategory = APGCategory28, ProcHSCPCS = ProcHCPCS28, SigSame = SigSame28, SigClin = SigClin28, LineCharges = LineCharges28, RateCenter = RateCenter28, Revenue = Revenue28, MultiDisc = MultiDisc28, RepeatDisc = RepeatDisc28, BilatDisc = BilatDisc28, TermDisc = TermDisc28, VisitWarnings = VisitWarnings28, PackageDiem = PackageDiem28, PackageFlag = PackageFlag28 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 28&#xA;UPDATE FF SET Lines = Lines29, VisitDate = VisitDate29, ServiceDate = ServiceDate29, Type = VisitType29, LineUnassigned = LineUnassigned29, DiagnosisCode = DiagnosisCode29, APGCode = APGCode29, APGType = APGType29, APGCategory = APGCategory29, ProcHSCPCS = ProcHCPCS29, SigSame = SigSame29, SigClin = SigClin29, LineCharges = LineCharges29, RateCenter = RateCenter29, Revenue = Revenue29, MultiDisc = MultiDisc29, RepeatDisc = RepeatDisc29, BilatDisc = BilatDisc29, TermDisc = TermDisc29, VisitWarnings = VisitWarnings29, PackageDiem = PackageDiem29, PackageFlag = PackageFlag29 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 29&#xA;UPDATE FF SET Lines = Lines30, VisitDate = VisitDate30, ServiceDate = ServiceDate30, Type = VisitType30, LineUnassigned = LineUnassigned30, DiagnosisCode = DiagnosisCode30, APGCode = APGCode30, APGType = APGType30, APGCategory = APGCategory30, ProcHSCPCS = ProcHCPCS30, SigSame = SigSame30, SigClin = SigClin30, LineCharges = LineCharges30, RateCenter = RateCenter30, Revenue = Revenue30, MultiDisc = MultiDisc30, RepeatDisc = RepeatDisc30, BilatDisc = BilatDisc30, TermDisc = TermDisc30, VisitWarnings = VisitWarnings30, PackageDiem = PackageDiem30, PackageFlag = PackageFlag30 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 30&#xA;UPDATE FF SET Lines = Lines31, VisitDate = VisitDate31, ServiceDate = ServiceDate31, Type = VisitType31, LineUnassigned = LineUnassigned31, DiagnosisCode = DiagnosisCode31, APGCode = APGCode31, APGType = APGType31, APGCategory = APGCategory31, ProcHSCPCS = ProcHCPCS31, SigSame = SigSame31, SigClin = SigClin31, LineCharges = LineCharges31, RateCenter = RateCenter31, Revenue = Revenue31, MultiDisc = MultiDisc31, RepeatDisc = RepeatDisc31, BilatDisc = BilatDisc31, TermDisc = TermDisc31, VisitWarnings = VisitWarnings31, PackageDiem = PackageDiem31, PackageFlag = PackageFlag31 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 31&#xA;UPDATE FF SET Lines = Lines32, VisitDate = VisitDate32, ServiceDate = ServiceDate32, Type = VisitType32, LineUnassigned = LineUnassigned32, DiagnosisCode = DiagnosisCode32, APGCode = APGCode32, APGType = APGType32, APGCategory = APGCategory32, ProcHSCPCS = ProcHCPCS32, SigSame = SigSame32, SigClin = SigClin32, LineCharges = LineCharges32, RateCenter = RateCenter32, Revenue = Revenue32, MultiDisc = MultiDisc32, RepeatDisc = RepeatDisc32, BilatDisc = BilatDisc32, TermDisc = TermDisc32, VisitWarnings = VisitWarnings32, PackageDiem = PackageDiem32, PackageFlag = PackageFlag32 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 32&#xA;UPDATE FF SET Lines = Lines33, VisitDate = VisitDate33, ServiceDate = ServiceDate33, Type = VisitType33, LineUnassigned = LineUnassigned33, DiagnosisCode = DiagnosisCode33, APGCode = APGCode33, APGType = APGType33, APGCategory = APGCategory33, ProcHSCPCS = ProcHCPCS33, SigSame = SigSame33, SigClin = SigClin33, LineCharges = LineCharges33, RateCenter = RateCenter33, Revenue = Revenue33, MultiDisc = MultiDisc33, RepeatDisc = RepeatDisc33, BilatDisc = BilatDisc33, TermDisc = TermDisc33, VisitWarnings = VisitWarnings33, PackageDiem = PackageDiem33, PackageFlag = PackageFlag33 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 33&#xA;UPDATE FF SET Lines = Lines34, VisitDate = VisitDate34, ServiceDate = ServiceDate34, Type = VisitType34, LineUnassigned = LineUnassigned34, DiagnosisCode = DiagnosisCode34, APGCode = APGCode34, APGType = APGType34, APGCategory = APGCategory34, ProcHSCPCS = ProcHCPCS34, SigSame = SigSame34, SigClin = SigClin34, LineCharges = LineCharges34, RateCenter = RateCenter34, Revenue = Revenue34, MultiDisc = MultiDisc34, RepeatDisc = RepeatDisc34, BilatDisc = BilatDisc34, TermDisc = TermDisc34, VisitWarnings = VisitWarnings34, PackageDiem = PackageDiem34, PackageFlag = PackageFlag34 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 34&#xA;UPDATE FF SET Lines = Lines35, VisitDate = VisitDate35, ServiceDate = ServiceDate35, Type = VisitType35, LineUnassigned = LineUnassigned35, DiagnosisCode = DiagnosisCode35, APGCode = APGCode35, APGType = APGType35, APGCategory = APGCategory35, ProcHSCPCS = ProcHCPCS35, SigSame = SigSame35, SigClin = SigClin35, LineCharges = LineCharges35, RateCenter = RateCenter35, Revenue = Revenue35, MultiDisc = MultiDisc35, RepeatDisc = RepeatDisc35, BilatDisc = BilatDisc35, TermDisc = TermDisc35, VisitWarnings = VisitWarnings35, PackageDiem = PackageDiem35, PackageFlag = PackageFlag35 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 35&#xA;UPDATE FF SET Lines = Lines36, VisitDate = VisitDate36, ServiceDate = ServiceDate36, Type = VisitType36, LineUnassigned = LineUnassigned36, DiagnosisCode = DiagnosisCode36, APGCode = APGCode36, APGType = APGType36, APGCategory = APGCategory36, ProcHSCPCS = ProcHCPCS36, SigSame = SigSame36, SigClin = SigClin36, LineCharges = LineCharges36, RateCenter = RateCenter36, Revenue = Revenue36, MultiDisc = MultiDisc36, RepeatDisc = RepeatDisc36, BilatDisc = BilatDisc36, TermDisc = TermDisc36, VisitWarnings = VisitWarnings36, PackageDiem = PackageDiem36, PackageFlag = PackageFlag36 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 36&#xA;UPDATE FF SET Lines = Lines37, VisitDate = VisitDate37, ServiceDate = ServiceDate37, Type = VisitType37, LineUnassigned = LineUnassigned37, DiagnosisCode = DiagnosisCode37, APGCode = APGCode37, APGType = APGType37, APGCategory = APGCategory37, ProcHSCPCS = ProcHCPCS37, SigSame = SigSame37, SigClin = SigClin37, LineCharges = LineCharges37, RateCenter = RateCenter37, Revenue = Revenue37, MultiDisc = MultiDisc37, RepeatDisc = RepeatDisc37, BilatDisc = BilatDisc37, TermDisc = TermDisc37, VisitWarnings = VisitWarnings37, PackageDiem = PackageDiem37, PackageFlag = PackageFlag37 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 37&#xA;UPDATE FF SET Lines = Lines38, VisitDate = VisitDate38, ServiceDate = ServiceDate38, Type = VisitType38, LineUnassigned = LineUnassigned38, DiagnosisCode = DiagnosisCode38, APGCode = APGCode38, APGType = APGType38, APGCategory = APGCategory38, ProcHSCPCS = ProcHCPCS38, SigSame = SigSame38, SigClin = SigClin38, LineCharges = LineCharges38, RateCenter = RateCenter38, Revenue = Revenue38, MultiDisc = MultiDisc38, RepeatDisc = RepeatDisc38, BilatDisc = BilatDisc38, TermDisc = TermDisc38, VisitWarnings = VisitWarnings38, PackageDiem = PackageDiem38, PackageFlag = PackageFlag38 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 38&#xA;UPDATE FF SET Lines = Lines39, VisitDate = VisitDate39, ServiceDate = ServiceDate39, Type = VisitType39, LineUnassigned = LineUnassigned39, DiagnosisCode = DiagnosisCode39, APGCode = APGCode39, APGType = APGType39, APGCategory = APGCategory39, ProcHSCPCS = ProcHCPCS39, SigSame = SigSame39, SigClin = SigClin39, LineCharges = LineCharges39, RateCenter = RateCenter39, Revenue = Revenue39, MultiDisc = MultiDisc39, RepeatDisc = RepeatDisc39, BilatDisc = BilatDisc39, TermDisc = TermDisc39, VisitWarnings = VisitWarnings39, PackageDiem = PackageDiem39, PackageFlag = PackageFlag39 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 39&#xA;UPDATE FF SET Lines = Lines40, VisitDate = VisitDate40, ServiceDate = ServiceDate40, Type = VisitType40, LineUnassigned = LineUnassigned40, DiagnosisCode = DiagnosisCode40, APGCode = APGCode40, APGType = APGType40, APGCategory = APGCategory40, ProcHSCPCS = ProcHCPCS40, SigSame = SigSame40, SigClin = SigClin40, LineCharges = LineCharges40, RateCenter = RateCenter40, Revenue = Revenue40, MultiDisc = MultiDisc40, RepeatDisc = RepeatDisc40, BilatDisc = BilatDisc40, TermDisc = TermDisc40, VisitWarnings = VisitWarnings40, PackageDiem = PackageDiem40, PackageFlag = PackageFlag40 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 40&#xA;UPDATE FF SET Lines = Lines41, VisitDate = VisitDate41, ServiceDate = ServiceDate41, Type = VisitType41, LineUnassigned = LineUnassigned41, DiagnosisCode = DiagnosisCode41, APGCode = APGCode41, APGType = APGType41, APGCategory = APGCategory41, ProcHSCPCS = ProcHCPCS41, SigSame = SigSame41, SigClin = SigClin41, LineCharges = LineCharges41, RateCenter = RateCenter41, Revenue = Revenue41, MultiDisc = MultiDisc41, RepeatDisc = RepeatDisc41, BilatDisc = BilatDisc41, TermDisc = TermDisc41, VisitWarnings = VisitWarnings41, PackageDiem = PackageDiem41, PackageFlag = PackageFlag41 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 41&#xA;UPDATE FF SET Lines = Lines42, VisitDate = VisitDate42, ServiceDate = ServiceDate42, Type = VisitType42, LineUnassigned = LineUnassigned42, DiagnosisCode = DiagnosisCode42, APGCode = APGCode42, APGType = APGType42, APGCategory = APGCategory42, ProcHSCPCS = ProcHCPCS42, SigSame = SigSame42, SigClin = SigClin42, LineCharges = LineCharges42, RateCenter = RateCenter42, Revenue = Revenue42, MultiDisc = MultiDisc42, RepeatDisc = RepeatDisc42, BilatDisc = BilatDisc42, TermDisc = TermDisc42, VisitWarnings = VisitWarnings42, PackageDiem = PackageDiem42, PackageFlag = PackageFlag42 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 42&#xA;UPDATE FF SET Lines = Lines43, VisitDate = VisitDate43, ServiceDate = ServiceDate43, Type = VisitType43, LineUnassigned = LineUnassigned43, DiagnosisCode = DiagnosisCode43, APGCode = APGCode43, APGType = APGType43, APGCategory = APGCategory43, ProcHSCPCS = ProcHCPCS43, SigSame = SigSame43, SigClin = SigClin43, LineCharges = LineCharges43, RateCenter = RateCenter43, Revenue = Revenue43, MultiDisc = MultiDisc43, RepeatDisc = RepeatDisc43, BilatDisc = BilatDisc43, TermDisc = TermDisc43, VisitWarnings = VisitWarnings43, PackageDiem = PackageDiem43, PackageFlag = PackageFlag43 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 43&#xA;UPDATE FF SET Lines = Lines44, VisitDate = VisitDate44, ServiceDate = ServiceDate44, Type = VisitType44, LineUnassigned = LineUnassigned44, DiagnosisCode = DiagnosisCode44, APGCode = APGCode44, APGType = APGType44, APGCategory = APGCategory44, ProcHSCPCS = ProcHCPCS44, SigSame = SigSame44, SigClin = SigClin44, LineCharges = LineCharges44, RateCenter = RateCenter44, Revenue = Revenue44, MultiDisc = MultiDisc44, RepeatDisc = RepeatDisc44, BilatDisc = BilatDisc44, TermDisc = TermDisc44, VisitWarnings = VisitWarnings44, PackageDiem = PackageDiem44, PackageFlag = PackageFlag44 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 44&#xA;UPDATE FF SET Lines = Lines45, VisitDate = VisitDate45, ServiceDate = ServiceDate45, Type = VisitType45, LineUnassigned = LineUnassigned45, DiagnosisCode = DiagnosisCode45, APGCode = APGCode45, APGType = APGType45, APGCategory = APGCategory45, ProcHSCPCS = ProcHCPCS45, SigSame = SigSame45, SigClin = SigClin45, LineCharges = LineCharges45, RateCenter = RateCenter45, Revenue = Revenue45, MultiDisc = MultiDisc45, RepeatDisc = RepeatDisc45, BilatDisc = BilatDisc45, TermDisc = TermDisc45, VisitWarnings = VisitWarnings45, PackageDiem = PackageDiem45, PackageFlag = PackageFlag45 FROM CrossRef.FortyFive as FF JOIN ETL.Staging_Outp4 as OP ON FF.VisitID = OP.VisitID WHERE FF.SequenceNo = 45&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8971366e-72a8-4eb0-833b-35b830124e71}"
+      DTS:From="Package\Remove FF Index"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert CrossRef FortyFive" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{e1492a7d-a833-4df4-b549-17e9ea6cbded}"
+      DTS:From="Package\Insert Dimension MRN"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Insert Fact VisitMain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{4f62968e-494a-44c6-977d-783d4f7e8948}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Remove FF Index" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{b13a2ef2-688a-4c8b-a3f1-72ba16a79810}"
+      DTS:From="Package\Insert CrossRef FortyFive"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Recreate FF Index" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{9706a403-cf3a-4e9b-8839-c99ff6673387}"
+      DTS:From="Package\Recreate FF Index"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\Update CrossRef FortyFive" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{52a07a69-bfc3-4326-bdad-3cfabcd6c968}"
+      DTS:From="Package\Insert Dimension AccountNo"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Insert Fact VisitMain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 21]"
+      DTS:CreationName=""
+      DTS:DTSID="{2485fdba-3154-43e1-942d-485ba4e5b71f}"
+      DTS:From="Package\Insert Dimensions A &amp; D Dates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 21"
+      DTS:To="Package\Insert Fact VisitMain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 22]"
+      DTS:CreationName=""
+      DTS:DTSID="{38acb0c6-83a5-484d-9802-8f2bdbbe9081}"
+      DTS:From="Package\Insert Dimension Patient"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 22"
+      DTS:To="Package\Insert Fact VisitMain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 23]"
+      DTS:CreationName=""
+      DTS:DTSID="{1235112e-65e0-4b48-850d-601bf2387680}"
+      DTS:From="Package\Insert Dimensions Calculated"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 23"
+      DTS:To="Package\Insert Fact VisitMain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 24]"
+      DTS:CreationName=""
+      DTS:DTSID="{66a22f17-cf36-448b-98b1-7a064a576335}"
+      DTS:From="Package\Insert Dimension Physician"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 24"
+      DTS:To="Package\Insert Fact VisitMain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{d602ac57-1cee-4d07-8a93-844ce2709318}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Insert Fact Extras_Outpatient" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{a842dd17-c796-4a42-b202-851ddd412fb6}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Insert CrossRef RateCenter" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{0c892648-deac-457d-a842-32423cdd980b}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Insert Fact VisitHospital" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{3ce2b73d-c99e-4ec6-9887-394d19bbba41}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Insert CrossRef Diagnosis" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{f00af248-ba0a-4dd2-a3a2-c3cc376fadda}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Insert Fact Financial" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{76bc2866-3b59-44ef-82b2-97ac0fc50eae}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Insert Fact Clinical" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{4be31e32-c75c-4e17-9c42-e7f8fb2cbc2c}"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Insert Fact PatientExtras" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Insert CrossRef Diagnosis"
+          TopLeft="735.881780101942,366.305671912112" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Insert CrossRef FortyFive"
+          TopLeft="985.796189140337,209.226349222104" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Insert CrossRef RateCenter"
+          TopLeft="736.449292211124,305.076956138136" />
+        <NodeLayout
+          Size="213,42"
+          Id="Package\Insert Dimension AccountNo"
+          TopLeft="60.7908457549865,121.244293770419" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Insert Dimension MRN"
+          TopLeft="62.1413016207737,60" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Insert Dimension Patient"
+          TopLeft="60.8115759199311,242.258339563099" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Insert Dimension Physician"
+          TopLeft="60,364.804116617772" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Insert Dimensions A &amp; D Dates"
+          TopLeft="60.29271905896,182.135802376404" />
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Insert Dimensions Calculated"
+          TopLeft="60.0325975231355,302.609153925313" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Insert Fact Clinical"
+          TopLeft="408.478420231702,182.183069283814" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Insert Fact Extras_Outpatient"
+          TopLeft="406.449492799704,364.835908002745" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Insert Fact Financial"
+          TopLeft="409.052470483812,243.759247093687" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Insert Fact PatientExtras"
+          TopLeft="407.350849645003,118.901787221045" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Insert Fact VisitHospital"
+          TopLeft="407.793134377888,303.836564554343" />
+        <NodeLayout
+          Size="469,42"
+          Id="Package\Insert Fact VisitMain"
+          TopLeft="304.605556423885,446.897497742728" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Recreate FF Index"
+          TopLeft="986.728871657417,276.640059159837" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Remove FF Index"
+          TopLeft="737.5443578513,230.146516871919" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Update CrossRef FortyFive"
+          TopLeft="987.453042280213,344.745094422446" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="898.5443578513,251.146516871919">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.251831289037,-20.920167649815"
+              Start="0,0"
+              End="79.751831289037,-20.920167649815">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="39.6259156445185,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.6259156445185,0"
+                    Point2="43.6259156445185,0"
+                    Point3="43.6259156445185,-4" />
+                  <mssgle:LineSegment
+                    End="43.6259156445185,-16.920167649815" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43.6259156445185,-16.920167649815"
+                    Point2="43.6259156445185,-20.920167649815"
+                    Point3="47.6259156445185,-20.920167649815" />
+                  <mssgle:LineSegment
+                    End="79.751831289037,-20.920167649815" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="154.141301620774,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="194.197588136445,344.897497742728"
+              Start="0,0"
+              End="194.197588136445,337.397497742728">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,6.40285955430124" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,6.40285955430124"
+                    Point2="0,10.4028595543012"
+                    Point3="4,10.4028595543012" />
+                  <mssgle:LineSegment
+                    End="190.197588136445,10.4028595543012" />
+                  <mssgle:CubicBezierSegment
+                    Point1="190.197588136445,10.4028595543012"
+                    Point2="194.197588136445,10.4028595543012"
+                    Point3="194.197588136445,14.4028595543012" />
+                  <mssgle:LineSegment
+                    End="194.197588136445,337.397497742728" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="703.748413566742,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114.295944284557,-174.750980870809"
+              Start="0,0"
+              End="114.295944284557,-167.250980870809">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-157.1094717887" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-157.1094717887"
+                    Point2="0,-161.1094717887"
+                    Point3="4,-161.1094717887" />
+                  <mssgle:LineSegment
+                    End="110.295944284557,-161.1094717887" />
+                  <mssgle:CubicBezierSegment
+                    Point1="110.295944284557,-161.1094717887"
+                    Point2="114.295944284557,-161.1094717887"
+                    Point3="114.295944284557,-165.1094717887" />
+                  <mssgle:LineSegment
+                    End="114.295944284557,-167.250980870809" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="1029.51253039888,251.226349222104">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.4137099377331"
+              Start="0,0"
+              End="0,17.9137099377331">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.9137099377331" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="1029.59095696882,318.640059159837">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.1050352626091"
+              Start="0,0"
+              End="0,18.6050352626091">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.6050352626091" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="167.290845754986,163.244293770419">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="180.248044002232,283.653203972309"
+              Start="0,0"
+              End="180.248044002232,276.153203972309">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.03581019507459" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.03581019507459"
+                    Point2="0,11.0358101950746"
+                    Point3="4,11.0358101950746" />
+                  <mssgle:LineSegment
+                    End="176.248044002232,11.0358101950746" />
+                  <mssgle:CubicBezierSegment
+                    Point1="176.248044002232,11.0358101950746"
+                    Point2="180.248044002232,11.0358101950746"
+                    Point3="180.248044002232,15.0358101950746" />
+                  <mssgle:LineSegment
+                    End="180.248044002232,276.153203972309" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 21]"
+          TopLeft="172.79271905896,224.135802376404">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.212837364925,222.761695366324"
+              Start="0,0"
+              End="175.212837364925,215.261695366324">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,5.52238723907061" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,5.52238723907061"
+                    Point2="0,9.52238723907061"
+                    Point3="4,9.52238723907061" />
+                  <mssgle:LineSegment
+                    End="171.212837364925,9.52238723907061" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171.212837364925,9.52238723907061"
+                    Point2="175.212837364925,9.52238723907061"
+                    Point3="175.212837364925,13.5223872390706" />
+                  <mssgle:LineSegment
+                    End="175.212837364925,215.261695366324" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 22]"
+          TopLeft="158.311575919931,284.258339563099">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="189.760647170621,162.639158179629"
+              Start="0,0"
+              End="189.760647170621,155.139158179629">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,6.14373572549056" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,6.14373572549056"
+                    Point2="0,10.1437357254906"
+                    Point3="4,10.1437357254906" />
+                  <mssgle:LineSegment
+                    End="185.760647170621,10.1437357254906" />
+                  <mssgle:CubicBezierSegment
+                    Point1="185.760647170621,10.1437357254906"
+                    Point2="189.760647170621,10.1437357254906"
+                    Point3="189.760647170621,14.1437357254906" />
+                  <mssgle:LineSegment
+                    End="189.760647170621,155.139158179629" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 23]"
+          TopLeft="168.032597523136,344.609153925313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="179.239625567416,102.288343817415"
+              Start="0,0"
+              End="179.239625567416,94.788343817415">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.16434328563656" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.16434328563656"
+                    Point2="0,12.1643432856366"
+                    Point3="4,12.1643432856366" />
+                  <mssgle:LineSegment
+                    End="175.239625567416,12.1643432856366" />
+                  <mssgle:CubicBezierSegment
+                    Point1="175.239625567416,12.1643432856366"
+                    Point2="179.239625567416,12.1643432856366"
+                    Point3="179.239625567416,16.1643432856366" />
+                  <mssgle:LineSegment
+                    End="179.239625567416,94.788343817415" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 24]"
+          TopLeft="163,406.804116617772">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="184.805556423885,40.093381124956"
+              Start="0,0"
+              End="184.805556423885,32.593381124956">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4302929355977" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4302929355977"
+                    Point2="0,17.4302929355977"
+                    Point3="4,17.4302929355977" />
+                  <mssgle:LineSegment
+                    End="180.805556423885,17.4302929355977" />
+                  <mssgle:CubicBezierSegment
+                    Point1="180.805556423885,17.4302929355977"
+                    Point2="184.805556423885,17.4302929355977"
+                    Point3="184.805556423885,21.4302929355977" />
+                  <mssgle:LineSegment
+                    End="184.805556423885,32.593381124956" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="659.672223090552,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-144.222730290848,-40.061589739983"
+              Start="0,0"
+              End="-144.222730290848,-32.561589739983">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.0694027234027" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-21.0694027234027"
+                    Point2="0,-25.0694027234027"
+                    Point3="-4,-25.0694027234027" />
+                  <mssgle:LineSegment
+                    End="-140.222730290848,-25.0694027234027" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-140.222730290848,-25.0694027234027"
+                    Point2="-144.222730290848,-25.0694027234027"
+                    Point3="-144.222730290848,-29.0694027234027" />
+                  <mssgle:LineSegment
+                    End="-144.222730290848,-32.561589739983" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="703.872223090552,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="136.077069120572,-99.8205416045921"
+              Start="0,0"
+              End="136.077069120572,-92.3205416045921">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-84.8776778942658" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-84.8776778942658"
+                    Point2="0,-88.8776778942658"
+                    Point3="4,-88.8776778942658" />
+                  <mssgle:LineSegment
+                    End="132.077069120572,-88.8776778942658" />
+                  <mssgle:CubicBezierSegment
+                    Point1="132.077069120572,-88.8776778942658"
+                    Point2="136.077069120572,-88.8776778942658"
+                    Point3="136.077069120572,-92.8776778942658" />
+                  <mssgle:LineSegment
+                    End="136.077069120572,-92.3205416045921" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="659.205556423885,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-156.412422045997,-101.060933188385"
+              Start="0,0"
+              End="-156.412422045997,-93.560933188385">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-83.0221797415269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-83.0221797415269"
+                    Point2="0,-87.0221797415269"
+                    Point3="-4,-87.0221797415269" />
+                  <mssgle:LineSegment
+                    End="-152.412422045997,-87.0221797415269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-152.412422045997,-87.0221797415269"
+                    Point2="-156.412422045997,-87.0221797415269"
+                    Point3="-156.412422045997,-91.0221797415269" />
+                  <mssgle:LineSegment
+                    End="-156.412422045997,-93.560933188385" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="703.676984995314,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.704795106628,-38.5918258306156"
+              Start="0,0"
+              End="131.704795106628,-31.0918258306156">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-19.2505194616916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-19.2505194616916"
+                    Point2="0,-23.2505194616916"
+                    Point3="4,-23.2505194616916" />
+                  <mssgle:LineSegment
+                    End="127.704795106628,-23.2505194616916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.704795106628,-23.2505194616916"
+                    Point2="131.704795106628,-23.2505194616916"
+                    Point3="131.704795106628,-27.2505194616916" />
+                  <mssgle:LineSegment
+                    End="131.704795106628,-31.0918258306156" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="660.472223090552,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-163.91975260674,-161.138250649041"
+              Start="0,0"
+              End="-163.91975260674,-153.638250649041">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-144.83987506553" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-144.83987506553"
+                    Point2="0,-148.83987506553"
+                    Point3="-4,-148.83987506553" />
+                  <mssgle:LineSegment
+                    End="-159.91975260674,-148.83987506553" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-159.91975260674,-148.83987506553"
+                    Point2="-163.91975260674,-148.83987506553"
+                    Point3="-163.91975260674,-152.83987506553" />
+                  <mssgle:LineSegment
+                    End="-163.91975260674,-153.638250649041" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="659.738889757218,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-163.760469525516,-222.714428458914"
+              Start="0,0"
+              End="-163.760469525516,-215.214428458914">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-204.585028487685" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-204.585028487685"
+                    Point2="0,-208.585028487685"
+                    Point3="-4,-208.585028487685" />
+                  <mssgle:LineSegment
+                    End="-159.760469525516,-208.585028487685" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-159.760469525516,-208.585028487685"
+                    Point2="-163.760469525516,-208.585028487685"
+                    Point3="-163.760469525516,-212.585028487685" />
+                  <mssgle:LineSegment
+                    End="-163.760469525516,-215.214428458914" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="659.938889757218,446.897497742728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-155.088040112215,-285.995710521683"
+              Start="0,0"
+              End="-155.088040112215,-278.495710521683">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-268.981700872721" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-268.981700872721"
+                    Point2="0,-272.981700872721"
+                    Point3="-4,-272.981700872721" />
+                  <mssgle:LineSegment
+                    End="-151.088040112215,-272.981700872721" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-151.088040112215,-272.981700872721"
+                    Point2="-155.088040112215,-272.981700872721"
+                    Point3="-155.088040112215,-276.981700872721" />
+                  <mssgle:LineSegment
+                    End="-155.088040112215,-278.495710521683" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

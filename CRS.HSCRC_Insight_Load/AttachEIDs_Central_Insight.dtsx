@@ -1,0 +1,189 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/21/2014 4:25:30 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{C814A28C-3DE9-49C2-814A-84FA7BD139F5}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="AttachEIDs_Central_Insight"
+  DTS:PackageType="5"
+  DTS:VersionBuild="102"
+  DTS:VersionGUID="{1EB17623-41A5-4D1C-B09F-1E9E492331B3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E4F6254B-009B-4065-85AC-9F9158CC71CD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DateVal">
+      <DTS:VariableValue
+        DTS:DataType="8">7/1/2015</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Update Chronic EID's"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{31e641bb-fa8b-493a-b948-803e8255bd51}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Chronic EID's"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = e.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = e.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.Chronic v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;LEFT JOIN Lookup.Hospital h &#xA;&#x9;ON v.SourceID = h.SourceID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;LEFT JOIN EnterpriseID.EID AS e &#xA;&#x9;ON e.SourceCode = h.SourceCode&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;AND e.MRN = v.Fmt_MedicalRecordNo&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?);&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#xA;WITH CasemixMRNwith2OrMoreEID AS &#xA;(&#xA;SELECT &#xA;&#x9;RowID&#xA;&#x9;,EID&#xA;&#x9;,SourceCode&#xA;&#x9;,CasemixMRN&#xA;&#x9;,DateOfBirth&#xA;&#x9;,AuditDT&#xA;&#x9;,GUID_HSCRC&#xA;FROM &#xA;&#x9;EnterpriseID.RawMRNEID&#xA;WHERE &#xA;&#x9;EIDCtPerCasemixMRN &gt; 1&#xA;)&#xA;&#xA;,CasemixMRNwith2ormoreEIDjoinVisit AS &#xA;(&#xA;SELECT &#xA;&#x9;v.VisitID&#xA;&#x9;,a.RowID&#xA;&#x9;,ROW_NUMBER() OVER(PARTITION BY v.VisitID ORDER BY a.AuditDT DESC, a.RowID DESC) AS RN&#xA;FROM &#xA;&#x9;Fact.Chronic AS v &#xA;&#x9;left join Lookup.Hospital h&#xA;&#x9;on v.SourceID = h.SourceID&#xA;&#x9;INNER JOIN CasemixMRNwith2ormoreEID a &#xA;&#x9;ON a.CasemixMRN = v.Fmt_MedicalRecordNo &#xA;&#x9;AND a.SourceCode = h.SourceCode&#xA;&#x9;AND a.DateOfBirth = v.DateOfBirth&#xA;)&#xA;&#xA;UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = a.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = a.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.Chronic v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN CasemixMRNwith2ormoreEIDjoinVisit b &#xA;&#x9;ON v.VisitID = b.VisitID&#x9;&#xA;&#x9;AND b.RN = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN CasemixMRNwith2ormoreEID a &#xA;&#x9;ON a.RowID = b.RowID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?);&#x9;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update IP EID's"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{dfa869a8-6512-4153-97dc-bacf2a496e19}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update IP EID's"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = e.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = e.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.IP_Visit v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;LEFT JOIN Lookup.Hospital h &#xA;&#x9;ON v.SourceID = h.SourceID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;LEFT JOIN EnterpriseID.EID AS e &#xA;&#x9;ON e.SourceCode = h.SourceCode&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;AND e.MRN = v.Fmt_MedicalRecordNo&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?);&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#xA;WITH CasemixMRNwith2OrMoreEID AS &#xA;(&#xA;SELECT &#xA;&#x9;RowID&#xA;&#x9;,EID&#xA;&#x9;,SourceCode&#xA;&#x9;,CasemixMRN&#xA;&#x9;,DateOfBirth&#xA;&#x9;,AuditDT&#xA;&#x9;,GUID_HSCRC&#xA;FROM &#xA;&#x9;EnterpriseID.RawMRNEID&#xA;WHERE &#xA;&#x9;EIDCtPerCasemixMRN &gt; 1&#xA;)&#xA;&#xA;,CasemixMRNwith2ormoreEIDjoinVisit AS &#xA;(&#xA;SELECT &#xA;&#x9;v.VisitID&#xA;&#x9;,a.RowID&#xA;&#x9;,ROW_NUMBER() OVER(PARTITION BY v.VisitID ORDER BY a.AuditDT DESC, a.RowID DESC) AS RN&#xA;FROM &#xA;&#x9;Fact.IP_Visit AS v &#xA;&#x9;left join Lookup.Hospital h&#xA;&#x9;on v.SourceID = h.SourceID&#xA;&#x9;INNER JOIN CasemixMRNwith2ormoreEID a &#xA;&#x9;ON a.CasemixMRN = v.Fmt_MedicalRecordNo &#xA;&#x9;AND a.SourceCode = h.SourceCode&#xA;&#x9;AND a.DateOfBirth = v.DateOfBirth&#xA;)&#xA;&#xA;UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = a.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = a.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.IP_Visit v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN CasemixMRNwith2ormoreEIDjoinVisit b &#xA;&#x9;ON v.VisitID = b.VisitID&#x9;&#xA;&#x9;AND b.RN = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN CasemixMRNwith2ormoreEID a &#xA;&#x9;ON a.RowID = b.RowID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update OP EIDs"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1f5f555c-f4f6-44bb-bcdd-3ea95e5401ad}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update OP EIDs"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = e.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = e.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.OP_Visit v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;LEFT JOIN Lookup.Hospital h &#xA;&#x9;ON v.SourceID = h.SourceID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;LEFT JOIN EnterpriseID.EID AS e &#xA;&#x9;ON e.SourceCode = h.SourceCode&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;AND e.MRN = v.Fmt_MedicalRecordNo&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?);&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#xA;WITH CasemixMRNwith2OrMoreEID AS &#xA;(&#xA;SELECT &#xA;&#x9;RowID&#xA;&#x9;,EID&#xA;&#x9;,SourceCode&#xA;&#x9;,CasemixMRN&#xA;&#x9;,DateOfBirth&#xA;&#x9;,AuditDT&#xA;&#x9;,GUID_HSCRC&#xA;FROM &#xA;&#x9;EnterpriseID.RawMRNEID&#xA;WHERE &#xA;&#x9;EIDCtPerCasemixMRN &gt; 1&#xA;)&#xA;&#xA;,CasemixMRNwith2ormoreEIDjoinVisit AS &#xA;(&#xA;SELECT &#xA;&#x9;v.VisitID&#xA;&#x9;,a.RowID&#xA;&#x9;,ROW_NUMBER() OVER(PARTITION BY v.VisitID ORDER BY a.AuditDT DESC, a.RowID DESC) AS RN&#xA;FROM &#xA;&#x9;Fact.OP_Visit AS v &#xA;&#x9;left join Lookup.Hospital h&#xA;&#x9;on v.SourceID = h.SourceID&#xA;&#x9;INNER JOIN CasemixMRNwith2ormoreEID a &#xA;&#x9;ON a.CasemixMRN = v.Fmt_MedicalRecordNo &#xA;&#x9;AND a.SourceCode = h.SourceCode&#xA;&#x9;AND a.DateOfBirth = v.DateOfBirth&#xA;)&#xA;&#xA;UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = a.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = a.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.OP_Visit v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN CasemixMRNwith2ormoreEIDjoinVisit b &#xA;&#x9;ON v.VisitID = b.VisitID&#x9;&#xA;&#x9;AND b.RN = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN CasemixMRNwith2ormoreEID a &#xA;&#x9;ON a.RowID = b.RowID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?);&#x9;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Psych EID's"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c436d688-b288-4a6c-b97b-c4062776deb4}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Psych EID's"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE  &#xA;&#x9;v       &#xA;SET&#xA;&#x9;v.EID = e.EID       &#xA;&#x9;,v.EID_HSCRC = e.GUID_HSCRC       &#xA;&#x9;,v.EIDProcessNum = 1       &#xA;FROM &#xA;&#x9;Fact.Psych_Visit V       &#xA;&#x9;LEFT JOIN Lookup.Hospital h &#xA;&#x9;ON v.SourceID = h.SourceID       &#xA;&#x9;LEFT JOIN EnterpriseID.EID AS e &#xA;&#x9;ON e.SourceCode = h.SourceCode       &#xA;&#x9;AND e.MRN = v.fmt_MedicalRecordNo&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?); &#xA;&#x9;&#x9;&#x9;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#xA;WITH a AS &#xA;(&#xA;SELECT &#xA;&#x9;RowID&#xA;&#x9;,EID&#xA;&#x9;,SourceCode&#xA;&#x9;,CasemixMRN&#xA;&#x9;,DateOfBirth&#xA;&#x9;,AuditDT&#xA;&#x9;,GUID_HSCRC&#xA;FROM &#xA;&#x9;EnterpriseID.RawMRNEID&#xA;WHERE &#xA;&#x9;EIDCtPerCasemixMRN &gt; 1&#xA;)&#xA;&#xA;,b AS &#xA;(&#xA;SELECT &#xA;&#x9;v.VisitID&#xA;&#x9;,a.RowID&#xA;&#x9;,ROW_NUMBER() OVER(PARTITION BY v.VisitID ORDER BY a.AuditDT DESC, a.RowID DESC) AS RN&#xA;FROM &#xA;&#x9;Fact.Psych_Visit AS v &#xA;&#x9;left join Lookup.Hospital h&#xA;&#x9;on v.SourceID = h.SourceID&#xA;&#x9;INNER JOIN a &#xA;&#x9;ON a.CasemixMRN = v.Fmt_MedicalRecordNo &#xA;&#x9;AND a.SourceCode = h.SourceCode&#xA;&#x9;AND a.DateOfBirth = v.DateOfBirth&#xA;)&#xA;&#xA;UPDATE &#xA;&#x9;v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;SET &#xA;&#x9;v.EID = a.EID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EID_HSCRC = a.GUID_HSCRC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;,v.EIDProcessNum = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;FROM &#xA;&#x9;Fact.Psych_Visit v&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN b &#xA;&#x9;ON v.VisitID = b.VisitID&#xA;&#x9;AND b.RN = 1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;JOIN a &#xA;&#x9;ON a.RowID = b.RowID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;&#x9;v.DischargeDT &gt;= TRY_Convert(date,?)&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DateVal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Update Chronic EID's"
+          TopLeft="280,41" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Update IP EID's"
+          TopLeft="71,39" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Update OP EIDs"
+          TopLeft="67,123" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Update Psych EID's"
+          TopLeft="272.247846815624,124" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

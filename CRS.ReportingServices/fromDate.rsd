@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>HSCRC_Insight</DataSourceReference>
+      <CommandText>SELECT        CAST(DATEADD(yy, DATEDIFF(yy, 0, DATEADD(year, 0, toDate)), 0) AS date) AS [fromDate]
+FROM            (SELECT        MAX(DischargeDT) AS toDate
+                          FROM            Fact.IP_Visit AS I) AS t</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="fromDate">
+        <DataField>fromDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

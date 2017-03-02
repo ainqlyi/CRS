@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="HSCRC_Reports"
+  DTS:DTSID="{D0B3A9D6-7F3C-427C-B288-9C53318B824B}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=192.168.210.94;User ID=CRSReports;Initial Catalog=HSCRC_Reports;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5fp37wO55kyQ0LrzLZ/3IAAAAAACAAAAAAADZgAAwAAAABAAAAAphcbYvCP3EIrB7BkEUkhmAAAAAASAAACgAAAAEAAAABrs0DL6rOns8LcHxWDKl2B4AAAAMxX+vy3Si7YOo6VNtFsY2v9gJ0sbzEgeSDl79brR6SSfNKhzvhjDvv/WAk/LK5HqFnMReqsWoPA2nAEwNz0VWc5wCaD66+XHBUIWnqGEVOtZKUOmMxWQjGdl1iZGzJkekgGeACu4CTxJ2qbUY4hrCwWX1pXz5y++FAAAAI4LH5LVuhLDB86bvt0mnTy3TfNB</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,1924 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/22/2016 9:19:33 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DANALYSIS5"
+  DTS:CreatorName="TEST\lyi"
+  DTS:DTSID="{F1AD4288-1DBE-483A-9C77-686D140D57FD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load_HSCRC_SAS_Readm_RY17"
+  DTS:PackageType="5"
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{4C46CD39-1919-4418-855D-ABD8AC59E42B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ECFF0D67-2B46-4A13-B742-38EB55BD9C78}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\HSCSC SAS Readm RY17"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="HSCSC SAS Readm RY17"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Fact].[Readmissions_HSCRC_RY17]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">ROWS_PER_BATCH = 100000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Connections[OleDbConnection]"
+                  connectionManagerID="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Fmt_SourceID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Fmt_SourceID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Fmt_SourceID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Fmt_SourceID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[MedicalRecordNo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="MedicalRecordNo"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[MedicalRecordNo]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[MedicalRecordNo]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[AccountNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="AccountNumber"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[AccountNumber]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AccountNumber]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[AdmitDT]"
+                      cachedDataType="dbDate"
+                      cachedName="AdmitDT"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[AdmitDT]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AdmitDT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[DischargeDT]"
+                      cachedDataType="dbDate"
+                      cachedName="DischargeDT"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[DischargeDT]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[DischargeDT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[ExpectedPayerCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="ExpectedPayerCode"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[ExpectedPayerCode]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[ExpectedPayerCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Charges2_Total]"
+                      cachedDataType="numeric"
+                      cachedName="Charges2_Total"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Charges2_Total]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Charges2_Total]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[APR_DRGCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="APR_DRGCode"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_DRGCode]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_DRGCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[APR_Severity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="APR_Severity"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_Severity]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_Severity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[APR_DRG_Value]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="90"
+                      cachedName="APR_DRG_Value"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_DRG_Value]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_DRG_Value]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[APR_ServiceLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="APR_ServiceLine"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_ServiceLine]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_ServiceLine]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[AgeYears]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="AgeYears"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[AgeYears]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AgeYears]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Zip]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Zip"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[County]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="County"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[County]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsEligibleDischarge]"
+                      cachedDataType="bool"
+                      cachedName="IsEligibleDischarge"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsEligibleDischarge]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsEligibleDischarge]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Index Visit Flag Ineligible Transfer]"
+                      cachedDataType="bool"
+                      cachedName="Index Visit Flag Ineligible Transfer"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit Flag Ineligible Transfer]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Transfer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Index Visit Flag Ineligible Died]"
+                      cachedDataType="bool"
+                      cachedName="Index Visit Flag Ineligible Died"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit Flag Ineligible Died]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Died]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Index Visit Flag Ineligible Other]"
+                      cachedDataType="bool"
+                      cachedName="Index Visit Flag Ineligible Other"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit Flag Ineligible Other]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Other]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_IsPlannedAdmt]"
+                      cachedDataType="bool"
+                      cachedName="Lead_IsPlannedAdmt"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_IsPlannedAdmt]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_IsPlannedAdmt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsAdjustedReadmissions]"
+                      cachedDataType="bool"
+                      cachedName="IsAdjustedReadmissions"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsAdjustedReadmissions]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsAdjustedReadmissions]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[ReadmitDiff]"
+                      cachedDataType="i4"
+                      cachedName="ReadmitDiff"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[ReadmitDiff]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[ReadmitDiff]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_Charges2_Total]"
+                      cachedDataType="numeric"
+                      cachedName="Lead_Charges2_Total"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_Charges2_Total]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_Charges2_Total]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_APR_DRG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Lead_APR_DRG"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_DRG]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_DRG]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_APR_Severity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Lead_APR_Severity"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_Severity]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_Severity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Index Visit EID (HSCRC)]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="Index Visit EID (HSCRC)"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit EID (HSCRC)]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit EID (HSCRC)]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[SourceID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="SourceID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[SourceID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[SourceID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsPlannedAdmission]"
+                      cachedDataType="bool"
+                      cachedName="IsPlannedAdmission"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsPlannedAdmission]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsPlannedAdmission]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Readmit Visit Date Admit]"
+                      cachedDataType="dbDate"
+                      cachedName="Readmit Visit Date Admit"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit Date Admit]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Date Admit]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Readmit Visit Date Discharge]"
+                      cachedDataType="dbDate"
+                      cachedName="Readmit Visit Date Discharge"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit Date Discharge]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Date Discharge]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_Fmt_SourceID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Lead_Fmt_SourceID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_Fmt_SourceID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_Fmt_SourceID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_SourceID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Lead_SourceID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_SourceID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_SourceID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Readmit Visit MRN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Readmit Visit MRN"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit MRN]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit MRN]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Readmit Visit Account Num]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="Readmit Visit Account Num"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit Account Num]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Account Num]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Norms]"
+                      cachedDataType="r8"
+                      cachedName="Norms"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Norms]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Norms]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsNoEID]"
+                      cachedDataType="bool"
+                      cachedName="IsNoEID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsNoEID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNoEID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsNeonate]"
+                      cachedDataType="bool"
+                      cachedName="IsNeonate"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsNeonate]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNeonate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsDupRec]"
+                      cachedDataType="bool"
+                      cachedName="IsDupRec"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsDupRec]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsDupRec]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsNegDays]"
+                      cachedDataType="bool"
+                      cachedName="IsNegDays"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsNegDays]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNegDays]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[EID]"
+                      cachedDataType="i8"
+                      cachedName="EID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[EID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[EID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[IsOptOutEID]"
+                      cachedDataType="bool"
+                      cachedName="IsOptOutEID"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsOptOutEID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsOptOutEID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_APR_DRG_Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="90"
+                      cachedName="Lead_APR_DRG_Description"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_DRG_Description]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_DRG_Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].Columns[Lead_APR_Service_Line]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Lead_APR_Service_Line"
+                      externalMetadataColumnId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_Service_Line]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_Service_Line]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Fmt_SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[MedicalRecordNo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="MedicalRecordNo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[AccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="AccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[AdmitDT]"
+                      dataType="dbDate"
+                      name="AdmitDT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[DischargeDT]"
+                      dataType="dbDate"
+                      name="DischargeDT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[ExpectedPayerCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ExpectedPayerCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Charges2_Total]"
+                      dataType="numeric"
+                      name="Charges2_Total"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_DRGCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="APR_DRGCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="APR_Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_DRG_Value]"
+                      codePage="1252"
+                      dataType="str"
+                      length="90"
+                      name="APR_DRG_Value" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[APR_ServiceLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="APR_ServiceLine" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[AgeYears]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="AgeYears" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsEligibleDischarge]"
+                      dataType="bool"
+                      name="IsEligibleDischarge" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit Flag Ineligible Transfer]"
+                      dataType="bool"
+                      name="Index Visit Flag Ineligible Transfer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit Flag Ineligible Died]"
+                      dataType="bool"
+                      name="Index Visit Flag Ineligible Died" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit Flag Ineligible Other]"
+                      dataType="bool"
+                      name="Index Visit Flag Ineligible Other" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_IsPlannedAdmt]"
+                      dataType="bool"
+                      name="Lead_IsPlannedAdmt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsAdjustedReadmissions]"
+                      dataType="bool"
+                      name="IsAdjustedReadmissions" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[ReadmitDiff]"
+                      dataType="i4"
+                      name="ReadmitDiff" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_Charges2_Total]"
+                      dataType="numeric"
+                      name="Lead_Charges2_Total"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_DRG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Lead_APR_DRG" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Lead_APR_Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_DRG_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="90"
+                      name="Lead_APR_DRG_Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_APR_Service_Line]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Lead_APR_Service_Line" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsOptOutEID]"
+                      dataType="bool"
+                      name="IsOptOutEID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Index Visit EID (HSCRC)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="Index Visit EID (HSCRC)" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsPlannedAdmission]"
+                      dataType="bool"
+                      name="IsPlannedAdmission" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit Date Admit]"
+                      dataType="dbDate"
+                      name="Readmit Visit Date Admit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit Date Discharge]"
+                      dataType="dbDate"
+                      name="Readmit Visit Date Discharge" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Lead_Fmt_SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Lead_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Lead_SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Readmit Visit MRN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Readmit Visit Account Num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Readmit Visit Account Num" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[Norms]"
+                      dataType="r8"
+                      name="Norms" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[EID]"
+                      dataType="i8"
+                      name="EID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsNoEID]"
+                      dataType="bool"
+                      name="IsNoEID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsNeonate]"
+                      dataType="bool"
+                      name="IsNeonate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsDupRec]"
+                      dataType="bool"
+                      name="IsDupRec" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input].ExternalColumns[IsNegDays]"
+                      dataType="bool"
+                      name="IsNegDays" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\HSCSC SAS Readm RY17.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\HSCSC SAS Readm RY17.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\HSCSC SAS Readm RY17.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Staged SAS Readmission RY17"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staged SAS Readmission RY17"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH opte AS
+(
+	SELECT DISTINCT e.EID
+	FROM Central.EnterpriseID.EID AS e
+	WHERE e.SourceCode = 'OPTOUT'
+)
+SELECT 
+	em.EID 
+	,TRY_CAST(r.[HOSPID] AS VARCHAR(6)) AS [Fmt_SourceID]
+	,TRY_CAST(r.[HOSPID_O] AS VARCHAR(6)) AS [SourceID]
+	,TRY_CAST(r.[MRNUM] AS VARCHAR(11)) AS [MedicalRecordNo]
+	,TRY_CAST(r.[PATACCT] AS VARCHAR(18)) AS [AccountNumber]
+	,TRY_CAST(r.[ADMTDATE] AS DATE) AS [AdmitDT]
+	,TRY_CAST(r.[DISCDATE] AS DATE) AS [DischargeDT]
+	,TRY_CAST(r.[PAYER1] AS VARCHAR(2)) AS [ExpectedPayerCode]
+	,TRY_CAST(r.[TOT_CHG] AS NUMERIC(9,2)) AS [Charges2_Total]	
+	,RIGHT('000'+TRY_CAST(r.[APR_DRG] AS VARCHAR(3)),3) AS [APR_DRGCode]
+	,TRY_CAST(r.[SEVERITY] AS VARCHAR(1)) AS [APR_Severity]
+	,a.APR_DRG_Value 
+	,a.APR_ServiceLine 
+	,TRY_CAST(r.[AGE_YRS] AS VARCHAR(3)) AS [AgeYears]
+	,TRY_CAST(r.[SEX] AS VARCHAR(1)) AS [Gender]
+	,TRY_CAST(r.[ZIPCODE] AS VARCHAR(5)) AS [Zip]
+	,TRY_CAST(r.[COUNTY] AS VARCHAR(2)) AS [County]
+	,TRY_CAST(r.[DEN] AS BIT) AS [IsEligibleDischarge]
+	,IIF(TRY_CAST(r.[PLAN_ADMT] AS BIT) IS NULL,0,CAST(r.[PLAN_ADMT] AS BIT)) AS [IsPlannedAdmission]
+	,IIF(TRY_CAST(r.[READM30_NOPLAN] AS BIT) IS NULL,0,CAST(r.[READM30_NOPLAN] AS BIT)) AS [IsAdjustedReadmissions]
+	,IIF(TRY_CAST(r.[TRANSFER] AS BIT) IS NULL,0,CAST(r.[TRANSFER] AS BIT)) AS [Index Visit Flag Ineligible Transfer]
+	,IIF(TRY_CAST(r.[DIED] AS BIT) IS NULL,0,CAST(r.[DIED] AS BIT)) AS [Index Visit Flag Ineligible Died]
+	,IIF(TRY_CAST(r.[OTH_EXCL] AS BIT) IS NULL,0,CAST(r.[OTH_EXCL] AS BIT)) AS [Index Visit Flag Ineligible Other]
+	,CAST(IIF(opte.EID IS NULL, 0, 1) AS BIT) AS [IsOptOutEID]
+	,IIF(TRY_CAST(r.[NO_EID] AS BIT) IS NULL,0,CAST(r.[NO_EID] AS BIT)) AS [IsNoEID]
+	,IIF(TRY_CAST(r.[NEONATE] AS BIT) IS NULL,0,CAST(r.[NEONATE] AS BIT)) AS [IsNeonate] 
+	,IIF(TRY_CAST(r.[DUPDREC] AS BIT) IS NULL,0,CAST(r.[DUPDREC] AS BIT)) AS [IsDupRec]
+	,IIF(TRY_CAST(r.[NEGDAYS] AS BIT) IS NULL,0,CAST(r.[NEGDAYS] AS BIT)) AS [IsNegDays]
+	,r.[NORM_DRG_READM] AS [Norms]
+	,r.[CRISP_EID] AS [Index Visit EID (HSCRC)]
+	,TRY_CAST(r.[DAYS] AS INT) AS [ReadmitDiff]
+	,TRY_CAST(r.[NEXTHSP_ID] AS VARCHAR(6)) AS [Lead_Fmt_SourceID]
+	,TRY_CAST(r.[NEXTHSP_O_ID] AS VARCHAR(6)) AS [Lead_SourceID]
+	,TRY_CAST(r.[NEXTMRNUM] AS VARCHAR(11)) AS [Readmit Visit MRN]
+	,TRY_CAST(r.[NEXTPATACCT] AS VARCHAR(18)) AS [Readmit Visit Account Num]
+	,TRY_CAST(r.[NEXTADATE] AS DATE) AS [Readmit Visit Date Admit]
+	,TRY_CAST(r.[NEXTDDATE] AS DATE) AS [Readmit Visit Date Discharge]
+	,TRY_CAST(r.[NEXT_TOT_CHARGE] AS NUMERIC(9,2)) AS [Lead_Charges2_Total]
+	,RIGHT('000'+TRY_CAST(r.[NEXTDRG] AS VARCHAR(3)),3) AS [Lead_APR_DRG]
+	,TRY_CAST(r.[NEXTSEV] AS VARCHAR(1)) AS [Lead_APR_Severity]
+	,al.APR_DRG_Value AS Lead_APR_DRG_Description
+	,al.APR_ServiceLine AS Lead_APR_Service_Line
+	,TRY_CAST(r.[NEXT_PLAN_ADMT] AS BIT) AS [Lead_IsPlannedAdmt]
+FROM 
+	[Fact].[Ip_readms_0520_fy2012t15_Norms] as r
+	join HSCRC_Insight.Lookup.APR as a
+		ON RIGHT('000'+TRY_CAST(r.[APR_DRG] AS VARCHAR(3)),3) = a.APR_Code
+	LEFT JOIN HSCRC_Insight.Lookup.APR as al
+		ON RIGHT('000'+TRY_CAST(r.[NEXTDRG] AS VARCHAR(3)),3) = al.APR_Code
+	LEFT JOIN Central.EnterpriseID.EIDMaskLookup as em
+		ON r.CRISP_EID = em.GUID_HSCRC
+	LEFT JOIN opte
+		ON em.EID = opte.EID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Staged SAS Readmission RY17.Connections[OleDbConnection]"
+                  connectionManagerID="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Stg_HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Fmt_SourceID]"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Fmt_SourceID]"
+                      name="Fmt_SourceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[MedicalRecordNo]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[MedicalRecordNo]"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[MedicalRecordNo]"
+                      name="MedicalRecordNo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[AccountNumber]"
+                      length="18"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AccountNumber]"
+                      name="AccountNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AdmitDT]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[AdmitDT]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AdmitDT]"
+                      name="AdmitDT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[DischargeDT]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[DischargeDT]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[DischargeDT]"
+                      name="DischargeDT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[ExpectedPayerCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[ExpectedPayerCode]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[ExpectedPayerCode]"
+                      name="ExpectedPayerCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Charges2_Total]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Charges2_Total]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Charges2_Total]"
+                      name="Charges2_Total"
+                      precision="9"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_DRGCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_DRGCode]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_DRGCode]"
+                      name="APR_DRGCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_Severity]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_Severity]"
+                      name="APR_Severity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_DRG_Value]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_DRG_Value]"
+                      length="90"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_DRG_Value]"
+                      name="APR_DRG_Value"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_ServiceLine]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_ServiceLine]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[APR_ServiceLine]"
+                      name="APR_ServiceLine"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AgeYears]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[AgeYears]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[AgeYears]"
+                      name="AgeYears"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Zip]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      length="5"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Zip]"
+                      name="Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[County]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[County]"
+                      name="County"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsEligibleDischarge]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsEligibleDischarge]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsEligibleDischarge]"
+                      name="IsEligibleDischarge"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Transfer]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit Flag Ineligible Transfer]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Transfer]"
+                      name="Index Visit Flag Ineligible Transfer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Died]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit Flag Ineligible Died]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Died]"
+                      name="Index Visit Flag Ineligible Died"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Other]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit Flag Ineligible Other]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit Flag Ineligible Other]"
+                      name="Index Visit Flag Ineligible Other"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_IsPlannedAdmt]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_IsPlannedAdmt]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_IsPlannedAdmt]"
+                      name="Lead_IsPlannedAdmt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsAdjustedReadmissions]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsAdjustedReadmissions]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsAdjustedReadmissions]"
+                      name="IsAdjustedReadmissions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[ReadmitDiff]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[ReadmitDiff]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[ReadmitDiff]"
+                      name="ReadmitDiff"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_Charges2_Total]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_Charges2_Total]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_Charges2_Total]"
+                      name="Lead_Charges2_Total"
+                      precision="9"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_DRG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_DRG]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_DRG]"
+                      name="Lead_APR_DRG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_Severity]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_Severity]"
+                      name="Lead_APR_Severity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit EID (HSCRC)]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit EID (HSCRC)]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Index Visit EID (HSCRC)]"
+                      name="Index Visit EID (HSCRC)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[SourceID]"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[SourceID]"
+                      name="SourceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsPlannedAdmission]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsPlannedAdmission]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsPlannedAdmission]"
+                      name="IsPlannedAdmission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Date Admit]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit Date Admit]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Date Admit]"
+                      name="Readmit Visit Date Admit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Date Discharge]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit Date Discharge]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Date Discharge]"
+                      name="Readmit Visit Date Discharge"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_Fmt_SourceID]"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_Fmt_SourceID]"
+                      name="Lead_Fmt_SourceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_SourceID]"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_SourceID]"
+                      name="Lead_SourceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit MRN]"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit MRN]"
+                      name="Readmit Visit MRN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Account Num]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit Account Num]"
+                      length="18"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Readmit Visit Account Num]"
+                      name="Readmit Visit Account Num"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Norms]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Norms]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Norms]"
+                      name="Norms"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNoEID]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsNoEID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNoEID]"
+                      name="IsNoEID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNeonate]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsNeonate]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNeonate]"
+                      name="IsNeonate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsDupRec]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsDupRec]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsDupRec]"
+                      name="IsDupRec"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNegDays]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsNegDays]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsNegDays]"
+                      name="IsNegDays"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[EID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[EID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[EID]"
+                      name="EID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsOptOutEID]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsOptOutEID]"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[IsOptOutEID]"
+                      name="IsOptOutEID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_DRG_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_DRG_Description]"
+                      length="90"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_DRG_Description]"
+                      name="Lead_APR_DRG_Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_Service_Line]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_Service_Line]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].Columns[Lead_APR_Service_Line]"
+                      name="Lead_APR_Service_Line"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Fmt_SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[MedicalRecordNo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="MedicalRecordNo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[AccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="AccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[AdmitDT]"
+                      dataType="dbDate"
+                      name="AdmitDT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[DischargeDT]"
+                      dataType="dbDate"
+                      name="DischargeDT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[ExpectedPayerCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ExpectedPayerCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Charges2_Total]"
+                      dataType="numeric"
+                      name="Charges2_Total"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_DRGCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="APR_DRGCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="APR_Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_DRG_Value]"
+                      codePage="1252"
+                      dataType="str"
+                      length="90"
+                      name="APR_DRG_Value" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[APR_ServiceLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="APR_ServiceLine" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[AgeYears]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="AgeYears" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsEligibleDischarge]"
+                      dataType="bool"
+                      name="IsEligibleDischarge" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit Flag Ineligible Transfer]"
+                      dataType="i4"
+                      name="Index Visit Flag Ineligible Transfer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit Flag Ineligible Died]"
+                      dataType="i4"
+                      name="Index Visit Flag Ineligible Died" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit Flag Ineligible Other]"
+                      dataType="i4"
+                      name="Index Visit Flag Ineligible Other" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_IsPlannedAdmt]"
+                      dataType="bool"
+                      name="Lead_IsPlannedAdmt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsAdjustedReadmissions]"
+                      dataType="i4"
+                      name="IsAdjustedReadmissions" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[ReadmitDiff]"
+                      dataType="i4"
+                      name="ReadmitDiff" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_Charges2_Total]"
+                      dataType="numeric"
+                      name="Lead_Charges2_Total"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_DRG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Lead_APR_DRG" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Lead_APR_Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Index Visit EID (HSCRC)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="Index Visit EID (HSCRC)" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsPlannedAdmission]"
+                      dataType="i4"
+                      name="IsPlannedAdmission" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit Date Admit]"
+                      dataType="dbDate"
+                      name="Readmit Visit Date Admit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit Date Discharge]"
+                      dataType="dbDate"
+                      name="Readmit Visit Date Discharge" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Lead_Fmt_SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Lead_SourceID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Readmit Visit MRN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Readmit Visit Account Num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Readmit Visit Account Num" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Norms]"
+                      dataType="r8"
+                      name="Norms" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsNoEID]"
+                      dataType="i4"
+                      name="IsNoEID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsNeonate]"
+                      dataType="i4"
+                      name="IsNeonate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsDupRec]"
+                      dataType="i4"
+                      name="IsDupRec" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsNegDays]"
+                      dataType="i4"
+                      name="IsNegDays" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[EID]"
+                      dataType="i8"
+                      name="EID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[IsOptOutEID]"
+                      dataType="bool"
+                      name="IsOptOutEID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_DRG_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="90"
+                      name="Lead_APR_DRG_Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output].ExternalColumns[Lead_APR_Service_Line]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Lead_APR_Service_Line" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[EID]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[EID]"
+                      name="EID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Fmt_SourceID]"
+                      name="Fmt_SourceID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[MedicalRecordNo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[MedicalRecordNo]"
+                      name="MedicalRecordNo" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[AccountNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[AccountNumber]"
+                      name="AccountNumber" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[AdmitDT]"
+                      dataType="dbDate"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[AdmitDT]"
+                      name="AdmitDT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[DischargeDT]"
+                      dataType="dbDate"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[DischargeDT]"
+                      name="DischargeDT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ExpectedPayerCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ExpectedPayerCode]"
+                      name="ExpectedPayerCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Charges2_Total]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Charges2_Total]"
+                      name="Charges2_Total"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_DRGCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_DRGCode]"
+                      name="APR_DRGCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_Severity]"
+                      name="APR_Severity" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_DRG_Value]"
+                      codePage="1252"
+                      dataType="str"
+                      length="90"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_DRG_Value]"
+                      name="APR_DRG_Value" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_ServiceLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[APR_ServiceLine]"
+                      name="APR_ServiceLine" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[AgeYears]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[AgeYears]"
+                      name="AgeYears" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[County]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsEligibleDischarge]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsEligibleDischarge]"
+                      name="IsEligibleDischarge" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit Flag Ineligible Transfer]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit Flag Ineligible Transfer]"
+                      name="Index Visit Flag Ineligible Transfer" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit Flag Ineligible Died]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit Flag Ineligible Died]"
+                      name="Index Visit Flag Ineligible Died" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit Flag Ineligible Other]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit Flag Ineligible Other]"
+                      name="Index Visit Flag Ineligible Other" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_IsPlannedAdmt]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_IsPlannedAdmt]"
+                      name="Lead_IsPlannedAdmt" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsAdjustedReadmissions]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsAdjustedReadmissions]"
+                      name="IsAdjustedReadmissions" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ReadmitDiff]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ReadmitDiff]"
+                      name="ReadmitDiff" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsOptOutEID]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsOptOutEID]"
+                      name="IsOptOutEID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_Charges2_Total]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_Charges2_Total]"
+                      name="Lead_Charges2_Total"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsNoEID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsNoEID]"
+                      name="IsNoEID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsNeonate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsNeonate]"
+                      name="IsNeonate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsDupRec]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsDupRec]"
+                      name="IsDupRec" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsNegDays]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsNegDays]"
+                      name="IsNegDays" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_DRG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_DRG]"
+                      name="Lead_APR_DRG" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_Severity]"
+                      name="Lead_APR_Severity" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit EID (HSCRC)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Index Visit EID (HSCRC)]"
+                      name="Index Visit EID (HSCRC)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[SourceID]"
+                      name="SourceID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsPlannedAdmission]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[IsPlannedAdmission]"
+                      name="IsPlannedAdmission" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit Date Admit]"
+                      dataType="dbDate"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit Date Admit]"
+                      name="Readmit Visit Date Admit" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit Date Discharge]"
+                      dataType="dbDate"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit Date Discharge]"
+                      name="Readmit Visit Date Discharge" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_Fmt_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_Fmt_SourceID]"
+                      name="Lead_Fmt_SourceID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_SourceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_SourceID]"
+                      name="Lead_SourceID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit MRN]"
+                      name="Readmit Visit MRN" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit Account Num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Readmit Visit Account Num]"
+                      name="Readmit Visit Account Num" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_DRG_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="90"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_DRG_Description]"
+                      name="Lead_APR_DRG_Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_Service_Line]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Lead_APR_Service_Line]"
+                      name="Lead_APR_Service_Line" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Norms]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[Norms]"
+                      name="Norms" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\HSCSC SAS Readm RY17.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\Staged SAS Readmission RY17.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Enable NCCSIX"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1155AB78-98B9-4917-A826-9FDA61C65D1F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Enable NCCSIX"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="ALTER INDEX [NCCSIX_ReadmRY17] ON [Fact].[Readmissions_HSCRC_RY17] REBUILD" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Setup"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{14F37DAD-3B55-442C-84E0-F3E9A9BCFB70}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Setup"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('[Fact].[Readmissions_HSCRC_RY17]') IS NOT NULL&#xA;&#xA;&#x9;BEGIN&#xA;&#xA;&#x9;&#x9;DROP INDEX [NCCSIX_ReadmRY17] ON [Fact].[Readmissions_HSCRC_RY17] &#xA;&#xA;&#x9;&#x9;TRUNCATE TABLE [Fact].[Readmissions_HSCRC_RY17]&#xA;&#xA;&#x9;END&#xA;&#xA;ELSE&#xA;&#xA;&#x9;BEGIN&#xA;&#xA;&#x9;&#x9;CREATE TABLE [Fact].[Readmissions_HSCRC_RY17] (&#xA;&#x9;&#x9;&#x9;[Fmt_SourceID] varchar(6),&#xA;&#x9;&#x9;&#x9;[MedicalRecordNo] varchar(11),&#xA;&#x9;&#x9;&#x9;[AccountNumber] varchar(18),&#xA;&#x9;&#x9;&#x9;[AdmitDT] date,&#xA;&#x9;&#x9;&#x9;[DischargeDT] date,&#xA;&#x9;&#x9;&#x9;[ExpectedPayerCode] varchar(2),&#xA;&#x9;&#x9;&#x9;[Charges2_Total] numeric(9, 2),&#xA;&#x9;&#x9;&#x9;[APR_DRGCode] varchar(3),&#xA;&#x9;&#x9;&#x9;[APR_Severity] varchar(1),&#xA;&#x9;&#x9;&#x9;[APR_DRG_Value] varchar(90),&#xA;&#x9;&#x9;&#x9;[APR_ServiceLine] varchar(50),&#xA;&#x9;&#x9;&#x9;[AgeYears] varchar(3),&#xA;&#x9;&#x9;&#x9;[Gender] varchar(1),&#xA;&#x9;&#x9;&#x9;[Zip] varchar(5),&#xA;&#x9;&#x9;&#x9;[County] varchar(2),&#xA;&#x9;&#x9;&#x9;[IsEligibleDischarge] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[Index Visit Flag Ineligible Transfer] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[Index Visit Flag Ineligible Died] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[Index Visit Flag Ineligible Other] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[Lead_IsPlannedAdmt] BIT NULL,&#xA;&#x9;&#x9;&#x9;[IsAdjustedReadmissions] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[ReadmitDiff] int,&#xA;&#x9;&#x9;&#x9;[Lead_Charges2_Total] numeric(9, 2),&#xA;&#x9;&#x9;&#x9;[Lead_APR_DRG] varchar(3),&#xA;&#x9;&#x9;&#x9;[Lead_APR_Severity] varchar(1),&#xA;&#x9;&#x9;&#x9;[Lead_APR_DRG_Description] varchar(90),&#xA;&#x9;&#x9;&#x9;[Lead_APR_Service_Line] varchar(50),&#xA;&#x9;&#x9;&#x9;[IsOptOutEID] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[Index Visit EID (HSCRC)] varchar(40),&#xA;&#x9;&#x9;&#x9;[SourceID] varchar(6),&#xA;&#x9;&#x9;&#x9;[IsPlannedAdmission] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[Readmit Visit Date Admit] date,&#xA;&#x9;&#x9;&#x9;[Readmit Visit Date Discharge] date,&#xA;&#x9;&#x9;&#x9;[Lead_Fmt_SourceID] varchar(6),&#xA;&#x9;&#x9;&#x9;[Lead_SourceID] varchar(6),&#xA;&#x9;&#x9;&#x9;[Readmit Visit MRN] varchar(11),&#xA;&#x9;&#x9;&#x9;[Readmit Visit Account Num] varchar(18),&#xA;&#x9;&#x9;&#x9;[Norms] float,&#xA;&#x9;&#x9;&#x9;[EID] bigint,&#xA;&#x9;&#x9;&#x9;[IsNoEID] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[IsNeonate] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[IsDupRec] BIT NOT NULL,&#xA;&#x9;&#x9;&#x9;[IsNegDays] BIT NOT NULL&#xA;&#x9;&#x9;)&#xA;&#xA;&#x9;END&#xA;&#xA;&#x9;&#x9;CREATE NONCLUSTERED COLUMNSTORE INDEX [NCCSIX_ReadmRY17] ON [Fact].[Readmissions_HSCRC_RY17]&#xA;&#x9;&#x9;(&#xA;&#x9;&#x9;&#x9;[Fmt_SourceID],&#xA;&#x9;&#x9;&#x9;[MedicalRecordNo],&#xA;&#x9;&#x9;&#x9;[AccountNumber],&#xA;&#x9;&#x9;&#x9;[AdmitDT],&#xA;&#x9;&#x9;&#x9;[DischargeDT],&#xA;&#x9;&#x9;&#x9;[ExpectedPayerCode],&#xA;&#x9;&#x9;&#x9;[Charges2_Total],&#xA;&#x9;&#x9;&#x9;[APR_DRGCode],&#xA;&#x9;&#x9;&#x9;[APR_Severity],&#xA;&#x9;&#x9;&#x9;[APR_DRG_Value],&#xA;&#x9;&#x9;&#x9;[APR_ServiceLine],&#xA;&#x9;&#x9;&#x9;[AgeYears],&#xA;&#x9;&#x9;&#x9;[Gender],&#xA;&#x9;&#x9;&#x9;[Zip],&#xA;&#x9;&#x9;&#x9;[County],&#xA;&#x9;&#x9;&#x9;[IsEligibleDischarge],&#xA;&#x9;&#x9;&#x9;[Index Visit Flag Ineligible Transfer],&#xA;&#x9;&#x9;&#x9;[Index Visit Flag Ineligible Died],&#xA;&#x9;&#x9;&#x9;[Index Visit Flag Ineligible Other],&#xA;&#x9;&#x9;&#x9;[Lead_IsPlannedAdmt],&#xA;&#x9;&#x9;&#x9;[IsAdjustedReadmissions],&#xA;&#x9;&#x9;&#x9;[ReadmitDiff],&#xA;&#x9;&#x9;&#x9;[Lead_Charges2_Total],&#xA;&#x9;&#x9;&#x9;[Lead_APR_DRG],&#xA;&#x9;&#x9;&#x9;[Lead_APR_Severity],&#xA;&#x9;&#x9;&#x9;[Lead_APR_DRG_Description],&#xA;&#x9;&#x9;&#x9;[Lead_APR_Service_Line],&#xA;&#x9;&#x9;&#x9;[IsOptOutEID],&#xA;&#x9;&#x9;&#x9;[Index Visit EID (HSCRC)],&#xA;&#x9;&#x9;&#x9;[SourceID],&#xA;&#x9;&#x9;&#x9;[IsPlannedAdmission],&#xA;&#x9;&#x9;&#x9;[Readmit Visit Date Admit],&#xA;&#x9;&#x9;&#x9;[Readmit Visit Date Discharge],&#xA;&#x9;&#x9;&#x9;[Lead_Fmt_SourceID],&#xA;&#x9;&#x9;&#x9;[Lead_SourceID],&#xA;&#x9;&#x9;&#x9;[Readmit Visit MRN],&#xA;&#x9;&#x9;&#x9;[Readmit Visit Account Num],&#xA;&#x9;&#x9;&#x9;[Norms],&#xA;&#x9;&#x9;&#x9;[EID],&#xA;&#x9;&#x9;&#x9;[IsNoEID],&#xA;&#x9;&#x9;&#x9;[IsNeonate],&#xA;&#x9;&#x9;&#x9;[IsDupRec],&#xA;&#x9;&#x9;&#x9;[IsNegDays]&#xA;&#x9;&#x9;)WITH (DROP_EXISTING = OFF) ON [PRIMARY]&#xA;&#xA;&#x9;&#x9;ALTER INDEX [NCCSIX_ReadmRY17] ON [Fact].[Readmissions_HSCRC_RY17] DISABLE&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FED00624-353D-45E6-887A-863B8091EDEB}"
+      DTS:From="Package\Setup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{06E7D1EF-AE16-4F27-9E1D-8B9E83CDCEC6}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Enable NCCSIX" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="91,125" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Enable NCCSIX"
+          TopLeft="87,213" />
+        <NodeLayout
+          Size="106,42"
+          Id="Package\Setup"
+          TopLeft="112,25" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="165.75,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="167.5,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Data Flow Task\HSCSC SAS Readm RY17"
+          TopLeft="216,218" />
+        <NodeLayout
+          Size="223,42"
+          Id="Package\Data Flow Task\Staged SAS Readmission RY17"
+          TopLeft="205,88" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="315.25,130">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88"
+              Start="0,0"
+              End="0,80.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\HSCSC SAS Readm RY17">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Staged SAS Readmission RY17">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

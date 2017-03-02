@@ -1,0 +1,996 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/25/2017 10:53:33 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DANALYSIS5"
+  DTS:CreatorName="TEST\lyi"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{64EE1BFF-DD04-492A-8CF6-DC179CDD2769}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load_BCHD_Demographics"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{2FB5D87A-F6B2-4B7D-84AB-040F57EE14C4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{BFCDEA7F-10A1-41A1-AC42-6A50DBE9A241}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[$Package::BCHDDemographicsFilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=c:\temp\BCHD Baltimore City Count and Percent of Population 65+ by Census Tract.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{82E99BF3-489E-4103-B940-BF69C725FE6A}"
+      DTS:ObjectName="BCHDDemographicsFilePath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">c:\temp\BCHD Baltimore City Count and Percent of Population 65+ by Census Tract.xlsx</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cleanup Stg"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{801BE351-389A-4A4F-8F9C-8F111EC95383}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cleanup Stg"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}"
+          SQLTask:SqlStatementSource="delete&#xA;from &#xA;[BCHD].[Demographics]&#xA;where &#xA;isnumeric([Census Tract]) = 0&#xA;&#xA;update [BCHD].[Demographics]&#xA;set [Census Tract] = '24510' + [Census Tract]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load DW"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9E571278-2764-4808-BD8F-8C2970558848}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load DW"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load DW\DW"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Fact].[BCHDDemographics]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DW\DW.Connections[OleDbConnection]"
+                  connectionManagerID="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DW\DW.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DW\DW.Inputs[OLE DB Destination Input].Columns[Census Tract]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Census Tract"
+                      externalMetadataColumnId="Package\Load DW\DW.Inputs[OLE DB Destination Input].ExternalColumns[CensusTractID]"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[Census Tract]" />
+                    <inputColumn
+                      refId="Package\Load DW\DW.Inputs[OLE DB Destination Input].Columns[Estimated Population, 65+ yrs]"
+                      cachedDataType="r8"
+                      cachedName="Estimated Population, 65+ yrs"
+                      externalMetadataColumnId="Package\Load DW\DW.Inputs[OLE DB Destination Input].ExternalColumns[EstPop65AndOlder]"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[Estimated Population, 65+ yrs]" />
+                    <inputColumn
+                      refId="Package\Load DW\DW.Inputs[OLE DB Destination Input].Columns[% of Overall Total Population]"
+                      cachedDataType="r8"
+                      cachedName="% of Overall Total Population"
+                      externalMetadataColumnId="Package\Load DW\DW.Inputs[OLE DB Destination Input].ExternalColumns[PctOfTotalPop]"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[% of Overall Total Population]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DW\DW.Inputs[OLE DB Destination Input].ExternalColumns[CensusTractID]"
+                      dataType="wstr"
+                      length="11"
+                      name="CensusTractID" />
+                    <externalMetadataColumn
+                      refId="Package\Load DW\DW.Inputs[OLE DB Destination Input].ExternalColumns[EstPop65AndOlder]"
+                      dataType="i4"
+                      name="EstPop65AndOlder" />
+                    <externalMetadataColumn
+                      refId="Package\Load DW\DW.Inputs[OLE DB Destination Input].ExternalColumns[PctOfTotalPop]"
+                      dataType="numeric"
+                      name="PctOfTotalPop"
+                      precision="18" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DW\DW.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load DW\DW.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DW\DW.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DW\DW.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DW\DW.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DW\DW.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DW\Stg"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Stg"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[BCHD].[Demographics]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [Census Tract]
+      ,[Estimated Population, 65+ yrs]
+      ,ISNULL([% of Overall Total Population],0) as [% of Overall Total Population]
+  FROM [Stg_HSCRC_Insight].[BCHD].[Demographics]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DW\Stg.Connections[OleDbConnection]"
+                  connectionManagerID="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Stg_HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load DW\Stg.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[Census Tract]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DW\Stg.Outputs[OLE DB Source Output].ExternalColumns[Census Tract]"
+                      length="255"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[Census Tract]"
+                      name="Census Tract"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DW\Stg.Outputs[OLE DB Source Output].ExternalColumns[Estimated Population, 65+ yrs]"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[Estimated Population, 65+ yrs]"
+                      name="Estimated Population, 65+ yrs"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[% of Overall Total Population]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DW\Stg.Outputs[OLE DB Source Output].ExternalColumns[% of Overall Total Population]"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Output].Columns[% of Overall Total Population]"
+                      name="% of Overall Total Population"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Output].ExternalColumns[Census Tract]"
+                      dataType="wstr"
+                      length="255"
+                      name="Census Tract" />
+                    <externalMetadataColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Output].ExternalColumns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      name="Estimated Population, 65+ yrs" />
+                    <externalMetadataColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Output].ExternalColumns[% of Overall Total Population]"
+                      dataType="r8"
+                      name="% of Overall Total Population" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[Census Tract]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[Census Tract]"
+                      name="Census Tract" />
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[Estimated Population, 65+ yrs]"
+                      name="Estimated Population, 65+ yrs" />
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[% of Overall Total Population]"
+                      dataType="r8"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[% of Overall Total Population]"
+                      name="% of Overall Total Population" />
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DW\Stg.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load DW.Paths[OLE DB Source Output]"
+              endId="Package\Load DW\DW.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load DW\Stg.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Staging"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5DCA9DDB-F84C-4C80-BDDE-598C51880BD4}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Staging\BCHD Excel"
+              componentClassID="{8C084929-27D1-479F-9641-ABB7CDADF1AC}"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="BCHD Excel"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">ACS_15_5YR_DP05$A5:C</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging\BCHD Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[Census Tract]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].ExternalColumns[Census Tract]"
+                      length="255"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[Census Tract]"
+                      name="Census Tract"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].ExternalColumns[Estimated Population, 65+ yrs]"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[Estimated Population, 65+ yrs]"
+                      name="Estimated Population, 65+ yrs"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[% of Overall Total Population]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].ExternalColumns[% of Overall Total Population]"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[% of Overall Total Population]"
+                      name="% of Overall Total Population"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].ExternalColumns[Census Tract]"
+                      dataType="wstr"
+                      length="255"
+                      name="Census Tract" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].ExternalColumns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      name="Estimated Population, 65+ yrs" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].ExternalColumns[% of Overall Total Population]"
+                      dataType="r8"
+                      name="% of Overall Total Population" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[Census Tract]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[Census Tract]"
+                      name="Census Tract" />
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[Estimated Population, 65+ yrs]"
+                      name="Estimated Population, 65+ yrs" />
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[% of Overall Total Population]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[% of Overall Total Population]"
+                      name="% of Overall Total Population" />
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Staging\Stg Table"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stg Table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[BCHD].[Demographics]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging\Stg Table.Connections[OleDbConnection]"
+                  connectionManagerID="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Stg_HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].Columns[Census Tract]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Census Tract"
+                      externalMetadataColumnId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].ExternalColumns[Census Tract]"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[Census Tract]" />
+                    <inputColumn
+                      refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].Columns[Estimated Population, 65+ yrs]"
+                      cachedDataType="r8"
+                      cachedName="Estimated Population, 65+ yrs"
+                      externalMetadataColumnId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].ExternalColumns[Estimated Population, 65+ yrs]"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[Estimated Population, 65+ yrs]" />
+                    <inputColumn
+                      refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].Columns[% of Overall Total Population]"
+                      cachedDataType="r8"
+                      cachedName="% of Overall Total Population"
+                      externalMetadataColumnId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].ExternalColumns[% of Overall Total Population]"
+                      lineageId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output].Columns[% of Overall Total Population]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].ExternalColumns[Census Tract]"
+                      dataType="wstr"
+                      length="255"
+                      name="Census Tract" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].ExternalColumns[Estimated Population, 65+ yrs]"
+                      dataType="r8"
+                      name="Estimated Population, 65+ yrs" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input].ExternalColumns[% of Overall Total Population]"
+                      dataType="r8"
+                      name="% of Overall Total Population" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Staging\Stg Table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging\Stg Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging\Stg Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging\Stg Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging\Stg Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Staging.Paths[Excel Source Output]"
+              endId="Package\Load Staging\Stg Table.Inputs[OLE DB Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Load Staging\BCHD Excel.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Setup DW"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E2D04C74-36B2-4BBB-A896-C80EEF5CC3D0}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Setup DW"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="if OBJECT_ID('Fact.BCHDDemographics') is not null&#xA;truncate table Fact.BCHDDemographics&#xA;else&#xA;CREATE TABLE Fact.BCHDDemographics (&#xA;    CensusTractID nvarchar(11) not null,&#xA;    EstPop65AndOlder int not null,&#xA;    PctOfTotalPop decimal(18,7) not null&#xA;);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Setup Staging"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8799354A-46A2-4894-9721-8666F3E17695}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Setup Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}"
+          SQLTask:SqlStatementSource="if not exists (select * from sys.schemas where name = 'BCHD')&#xA;begin &#xA;exec('create schema BCHD')&#xA;end&#xA;&#xA;if OBJECT_ID('BCHD.Demographics') is not null&#xA;truncate table  BCHD.Demographics&#xA;else&#xA;CREATE TABLE BCHD.Demographics (&#xA;    [Census Tract] nvarchar(255),&#xA;    [Estimated Population, 65+ yrs] float,&#xA;    [% of Overall Total Population] float&#xA;);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9838BE0B-E521-44A1-8294-A33EDF8C0E1F}"
+      DTS:From="Package\Setup Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B7F9B52F-4042-4C3C-A3E6-A8F914485B87}"
+      DTS:From="Package\Load Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Cleanup Stg" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{4BECD15C-F653-45EB-AA46-0B5202469A33}"
+      DTS:From="Package\Setup DW"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load DW" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4CFEC997-329D-403E-ABF2-06C4F6F5A471}"
+      DTS:From="Package\Cleanup Stg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Setup DW" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Cleanup Stg"
+          TopLeft="196,261" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Load DW"
+          TopLeft="209,462" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Load Staging"
+          TopLeft="193,158" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Setup DW"
+          TopLeft="202,358" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Setup Staging"
+          TopLeft="192,58" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="263.75,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="263.5,200">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="267.5,400">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62"
+              Start="0,0"
+              End="0,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="264.5,303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load DW">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="94,42"
+          Id="Package\Load DW\Stg"
+          TopLeft="133,70" />
+        <NodeLayout
+          Size="96,42"
+          Id="Package\Load DW\DW"
+          TopLeft="135,211" />
+        <EdgeLayout
+          Id="Package\Load DW.Paths[OLE DB Source Output]"
+          TopLeft="181.5,112">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,99"
+              Start="0,0"
+              End="0,91.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,91.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DW\DW">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DW\Stg">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Load Staging\Stg Table"
+          TopLeft="157,159" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Load Staging\BCHD Excel"
+          TopLeft="151,41" />
+        <EdgeLayout
+          Id="Package\Load Staging.Paths[Excel Source Output]"
+          TopLeft="218.5,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76"
+              Start="0,0"
+              End="0,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging\BCHD Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging\Stg Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

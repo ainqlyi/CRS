@@ -1,0 +1,162 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/27/2015 10:45:10 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:DTSID="{4C697016-4224-41AC-8C6D-A0894B866AB2}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Assign_IsOptOutEID"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{E9AAF9D1-212F-4841-A96B-26D9FDFFB19A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Add column if not exists"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{12B9E906-6A09-4B23-B307-2B76292E0A96}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Add column if not exists"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="IF NOT Exists(SELECT * FROM sys.columns WHERE Name = 'IsOptOutEID' AND Object_ID = Object_ID('Fact.IP_Visit'))&#xA;BEGIN&#xA;ALTER TABLE Fact.IP_Visit&#xA;ADD IsOptOutEID bit&#xA;END&#xA;&#xA;IF NOT Exists(SELECT * FROM sys.columns WHERE Name = 'IsOptOutEID' AND Object_ID = Object_ID('Fact.OP_Visit'))&#xA;BEGIN&#xA;ALTER TABLE Fact.OP_Visit&#xA;ADD IsOptOutEID bit&#xA;END&#xA;&#xA;IF NOT Exists(SELECT * FROM sys.columns WHERE Name = 'IsOptOutEID' AND Object_ID = Object_ID('Fact.Chronic'))&#xA;BEGIN&#xA;ALTER TABLE Fact.Chronic&#xA;ADD IsOptOutEID bit&#xA;END&#xA;&#xA;IF NOT Exists(SELECT * FROM sys.columns WHERE Name = 'IsOptOutEID' AND Object_ID = Object_ID('Fact.Psych_Visit'))&#xA;BEGIN&#xA;ALTER TABLE Fact.Psych_Visit&#xA;ADD IsOptOutEID bit&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update IsOptOutEID to 0"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B9D45815-CB97-4CF9-A0D4-03571FAE5B89}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update IsOptOutEID to 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE I&#xA;SET I.IsOptOutEID = 0&#xA;FROM Fact.IP_Visit I&#xA;GO&#xA;&#xA;UPDATE O&#xA;SET O.IsOptOutEID = 0&#xA;FROM Fact.OP_Visit O&#xA;GO&#xA;&#xA;UPDATE C&#xA;SET C.IsOptOutEID = 0&#xA;FROM Fact.Chronic C&#xA;GO&#xA;&#xA;UPDATE C&#xA;SET C.IsOptOutEID = 0&#xA;FROM Fact.Psych_Visit C&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update IsOptOutEID to 1"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DC023520-C353-40B3-A8BA-3D6AE671DD95}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update IsOptOutEID to 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE I&#xA;SET I.IsOptOutEID = 1&#xA;FROM Fact.IP_Visit I&#xA;WHERE I.EID IN (SELECT EID FROM EnterpriseID.EID WHERE SourceCode = 'OPTOUT')&#xA;GO&#xA;&#xA;UPDATE O&#xA;SET O.IsOptOutEID = 1&#xA;FROM Fact.OP_Visit O&#xA;WHERE O.EID IN (SELECT EID FROM EnterpriseID.EID WHERE SourceCode = 'OPTOUT')&#xA;GO&#xA;&#xA;UPDATE I&#xA;SET I.IsOptOutEID = 1&#xA;FROM Fact.Chronic I&#xA;WHERE I.EID IN (SELECT EID FROM EnterpriseID.EID WHERE SourceCode = 'OPTOUT')&#xA;GO&#xA;&#xA;UPDATE I&#xA;SET I.IsOptOutEID = 1&#xA;FROM Fact.Psych_Visit I&#xA;WHERE I.EID IN (SELECT EID FROM EnterpriseID.EID WHERE SourceCode = 'OPTOUT')&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B993F6B3-DCBF-4AC1-A483-598774FC6B1F}"
+      DTS:From="Package\Update IsOptOutEID to 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Update IsOptOutEID to 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{910C8DAA-90A9-4CB0-9EEF-5FE3713D77E8}"
+      DTS:From="Package\Add column if not exists"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update IsOptOutEID to 0" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Add column if not exists"
+          TopLeft="37.1428577753962,80.7529423090001" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Update IsOptOutEID to 0"
+          TopLeft="32.5714291261166,167.011767048159" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Update IsOptOutEID to 1"
+          TopLeft="35.7142862203169,261.035297498076" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="132.357143450756,122.752942309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.2588247391589"
+              Start="0,0"
+              End="0,36.7588247391589">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.7588247391589" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="133.142857673217,209.011767048159">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.023530449917"
+              Start="0,0"
+              End="0,44.523530449917">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.523530449917" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

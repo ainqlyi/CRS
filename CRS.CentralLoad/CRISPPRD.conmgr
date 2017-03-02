@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CRISPPRD"
+  DTS:DTSID="{446E212F-47BA-400A-88C8-0E4F337D6EF7}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=192.168.200.91;User ID=crsUser;Initial Catalog=CRISPPRD;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiAGs9+EiSEet/cMwMdxkJAAAAAACAAAAAAADZgAAwAAAABAAAAD/58u/M0GMs13l36rx81hAAAAAAASAAACgAAAAEAAAAMcAPyJ/4ekIcB+NsDnoGsl4AAAAShz208R4gWoehUeRF1j+78xAc8a0zHBljDHkynX2Q8C8oGd4cfyTdwmZJQTsPjlhQjBWCf4ejBsesJouZwQVsDpZEWFlpBggvPhe+1jXmz7ELyuKWL13lKmef/aGUGKh0wXrPDJTsCzen2JHp1Z9P9es0zbtSaSBFAAAAMCLrwz6AIlt2CfLBuYu4+zL3l7r</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

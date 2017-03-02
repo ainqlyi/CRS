@@ -1,0 +1,14 @@
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\AutomationConfig.xml
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\CRS.ReportExtractor.exe.config
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\CRS.ReportExtractor.exe.manifest
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\CRS.ReportExtractor.application
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\CRS.ReportExtractor.exe
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\CRS.ReportExtractor.pdb
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\log4net.dll
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\log4net.xml
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\obj\Debug\CRS.ReportExtractor.csprojResolveAssemblyReference.cache
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\obj\Debug\CRS.ReportExtractor.exe.manifest
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\obj\Debug\CRS.ReportExtractor.application
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\obj\Debug\CRS.ReportExtractor.exe
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\obj\Debug\CRS.ReportExtractor.pdb
+C:\Development\sshretha\sshrestha\CRS\CRS.ReportExtractor\bin\Debug\GenericParsing.dll

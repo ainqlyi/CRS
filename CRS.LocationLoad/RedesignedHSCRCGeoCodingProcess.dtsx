@@ -1,0 +1,172 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreationDate="10/17/2014 1:06:18 PM"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{D0AB512E-8A5A-403A-80B8-FDFA22FE95C1}"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RedesignedHSCRCGeoCodingProcess"
+  DTS:DTSID="{6343ACE6-0117-41AD-88AD-56A30AD9D85D}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Add spatial index to temp table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="3"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Add spatial index to temp table"
+      DTS:DTSID="{0d412986-5887-4976-8641-b7ea8362388b}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"if exists(
+           SELECT 1
+           FROM sys.indexes 
+           WHERE name = 'SpatialIndex-TempGeoCoder'
+          )
+begin
+	DROP INDEX [SpatialIndex-TempGeoCoder] ON " + @[$Project::TempTable] +" 
+end
+
+
+
+CREATE SPATIAL INDEX [SpatialIndex-TempGeoCoder] ON "+ @[$Project::TempTable] +" 
+(
+	[Geography]
+)USING  GEOGRAPHY_GRID 
+WITH (GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), 
+CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A2D0BE93-929F-45B7-8954-6ACA67AC7DE8}"
+          SQLTask:SqlStatementSource="if exists(&#xA;           SELECT 1&#xA;           FROM sys.indexes &#xA;           WHERE name = 'SpatialIndex-TempGeoCoder'&#xA;          )&#xA;begin&#xA;&#x9;DROP INDEX [SpatialIndex-TempGeoCoder] ON dbo.Temp_GeoCodedAddress &#xA;end&#xA;&#xA;&#xA;&#xA;CREATE SPATIAL INDEX [SpatialIndex-TempGeoCoder] ON dbo.Temp_GeoCodedAddress &#xA;(&#xA;&#x9;[Geography]&#xA;)USING  GEOGRAPHY_GRID &#xA;WITH (GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), &#xA;CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Temporary Tables to store GeoCoded Address"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Create Temporary Tables to store GeoCoded Address"
+      DTS:DTSID="{d8967e0d-2f6c-4607-b1db-53c70bf98ef9}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"IF OBJECT_ID('"+@[$Project::TempTable]+"', 'U') IS NOT NULL
+DROP TABLE "+@[$Project::TempTable]+"
+GO
+
+CREATE TABLE "+@[$Project::TempTable]+"(
+	[ID] [int] NOT NULL,
+	[Address] [varchar](150) NULL,
+	[City] [varchar](150) NULL,
+	[State] [varchar](50) NULL,
+	[Zip] [varchar](50) NULL,
+	[Longitude] [varchar](20) NULL,
+	[Latitude] [varchar](20) NULL,
+	[Geography] [geography] NULL,
+ CONSTRAINT [PK_Temp_GeoCoded] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A2D0BE93-929F-45B7-8954-6ACA67AC7DE8}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.Temp_GeoCodedAddress', 'U') IS NOT NULL&#xA;DROP TABLE dbo.Temp_GeoCodedAddress&#xA;GO&#xA;&#xA;CREATE TABLE dbo.Temp_GeoCodedAddress(&#xA;&#x9;[ID] [int] NOT NULL,&#xA;&#x9;[Address] [varchar](150) NULL,&#xA;&#x9;[City] [varchar](150) NULL,&#xA;&#x9;[State] [varchar](50) NULL,&#xA;&#x9;[Zip] [varchar](50) NULL,&#xA;&#x9;[Longitude] [varchar](20) NULL,&#xA;&#x9;[Latitude] [varchar](20) NULL,&#xA;&#x9;[Geography] [geography] NULL,&#xA; CONSTRAINT [PK_Temp_GeoCoded] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[ID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Geocode Addresses"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Geocode Addresses"
+      DTS:DTSID="{c80c8c8a-334d-44b2-b790-927f05fadc6d}"
+      DTS:Description="Execute Process Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">"\"" + @[$Package::HSCRC_ConnectionString]  + "\" \"" + @[$Package::Query]  + "\" \"" + @[$Package::CountQuery] + "\" \"" +  @[$Project::TempTable] + "\" " + @[$Project::MaxThread] + " " +  @[$Project::MaxBatch]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[$Project::GeoCoderLocation]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Ai Development\CRSGeoCoder\CRSGeoCoder\bin\Release\CRSGeoCoder.exe" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Geography in temp table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Update Geography in temp table"
+      DTS:DTSID="{cb56ac5f-197e-44c7-be37-c8b51ae8d364}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"update "+  @[$Project::TempTable] +"
+set [Geography] = geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326)"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A2D0BE93-929F-45B7-8954-6ACA67AC7DE8}"
+          SQLTask:SqlStatementSource="update dbo.Temp_GeoCodedAddress&#xA;set [Geography] = geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="329.6,41.6"
+          Id="Package\Create Temporary Tables to store GeoCoded Address"
+          TopLeft="60,60" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Geocode Addresses"
+          TopLeft="183.431058530675,136.486100697937" />
+        <NodeLayout
+          Size="232,41.6"
+          Id="Package\Update Geography in temp table"
+          TopLeft="276.445149866468,212.29548174006" />
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Add spatial index to temp table"
+          TopLeft="373.099958900103,277.013509314301" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

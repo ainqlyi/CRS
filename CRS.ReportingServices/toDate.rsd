@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>HSCRC_Insight</DataSourceReference>
+      <CommandText>SELECT        CONVERT(date, DATEADD(MONTH, DATEDIFF(MONTH, - 1, toDate) - 1, - 1)) AS toDate
+FROM            (SELECT        MAX(DischargeDT) AS toDate
+                          FROM            Fact.IP_Visit AS I) AS t</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="toDate">
+        <DataField>toDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="HSCRC_Insight">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=192.168.210.94;Initial Catalog=HSCRC_Insight</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>adafccc0-c023-4db2-a36a-0d38da75b9c7</DataSourceID>
+</RptDataSource>

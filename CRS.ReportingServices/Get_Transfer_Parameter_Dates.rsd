@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>HSCRC_Insight</DataSourceReference>
+      <CommandText> SELECT DATEADD(YEAR, DATEDIFF(YEAR, 0, DATEADD(YEAR, -1, [To_date])), 0) [from_date], [to_date]
+ FROM (
+ SELECT MAX(T.DISCDATE) [To_date]
+ FROM Fact.TransferDetails T ) t</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="from_date">
+        <DataField>from_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="to_date">
+        <DataField>to_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -1,0 +1,24 @@
+2014-10-27 14:51:33,360 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 14:54:21,979 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 14:54:27,952 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 14:54:29,349 [9] INFO CRS.ReportExtractor.Program - Exiting application
+2014-10-27 15:28:28,438 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 15:28:33,595 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 15:28:34,756 [9] INFO CRS.ReportExtractor.Program - Exiting application
+2014-10-27 15:33:14,289 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 15:33:14,300 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 15:33:14,300 [9] INFO CRS.ReportExtractor.Program - Exiting application
+2014-10-27 15:36:08,584 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 15:36:10,753 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 15:36:10,753 [9] INFO CRS.ReportExtractor.Program - Exiting application
+2014-10-27 15:47:37,600 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 15:47:37,612 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 15:47:37,612 [9] INFO CRS.ReportExtractor.Program - Exiting application
+2014-10-27 15:49:23,081 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 15:49:23,092 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 15:49:23,092 [9] INFO CRS.ReportExtractor.Program - Exiting application
+2014-10-27 15:49:49,928 [11] INFO CRS.ReportExtractor.Program - Starting report execution process: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-210023-dinha245mqy1oz55p5ikbd45
+2014-10-27 15:49:49,928 [12] INFO CRS.ReportExtractor.Program - Starting report execution process: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-210023-ll0ff0b435j4voqqanz1yj45
+2014-10-27 15:50:10,472 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-10-27 15:56:55,851 [9] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-10-27 15:56:55,852 [9] INFO CRS.ReportExtractor.Program - Exiting application

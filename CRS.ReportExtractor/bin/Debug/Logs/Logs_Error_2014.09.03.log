@@ -1,0 +1,3 @@
+2014-09-03 16:26:44,409 [7] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/IP Readmission Trends and Locations-EXCEL-targetHospital
+2014-09-03 16:26:44,423 [7] INFO CRS.ReportExtractor.Program - Starting execution: /HSCRC_Reports/Inpatient Readmissions by Clinical Service Line-EXCEL-sourceid
+2014-09-03 16:26:44,423 [7] INFO CRS.ReportExtractor.Program - Exiting application

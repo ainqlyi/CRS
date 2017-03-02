@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<Reports>
+		<Report>
+			<ReportPath>/HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations</ReportPath>
+      <!--TPDC1 IP = TPDC1 or 192.168.210.20; CRS Portal IP = 192.168.200.20-->>
+			<FileName>\\192.168.200.20\crispdev\CRS\REPORTS STANDARD\WebsiteStatic\STAGING\{0}\{1}\Readmit Trends {5} CY{2} to CY{3}.xls</FileName>
+			<ExportFormat>EXCEL</ExportFormat>
+			<HospitalListName>targetHospital</HospitalListName>
+			<ExportReport>false</ExportReport>
+		</Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/Casemix_MRNs_without_EIDs</ReportPath>
+      <!--Note that in 192.168.200.20, Casemix folder is called Patient Level Details. In 192.168.210.20, Patient Level Details folder is called Casemix -->
+      <FileName>\\192.168.200.20\crispdev\CRS\Reports Standard\WebsiteStatic\PROD\{0}\{1}\Patient Level Details\MRNs Without EIDs for {5} CY{2} to CY{3} as of 2015-03-12.csv</FileName>
+      <ExportFormat>CSV</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] MHAC_Details</ReportPath>
+      <FileName>C:\CRSPortal\CRSPortal\TEST\{0}\{1}\MHAC\Patient Level Details for MHAC\MHAC Details {5} CY{2} to CY{3} created {4}.csv</FileName>
+      <ExportFormat>CSV</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>true</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/PAU Casemix</ReportPath>
+      <FileName>\\192.168.200.20\crispdev\CRS\Reports Standard\WebsiteStatic\TEST\{0}\{1}\Patient Level Details\PAU Details {5} CY{2} to CY{3}.csv</FileName>
+      <ExportFormat>CSV</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+      </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[2015][Hospital Reports] IP Readmission Trends and Locations</ReportPath>
+      <FileName>\\192.168.200.21\CRSPortal\PROD\{0}\{1}\Readmit\RY17 Readmit Trends {5} CY{2} to CY{3} created {4}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[2015][Hospital Reports] IP Readmissions by Clinical Service Line</ReportPath>
+      <FileName>\\192.168.200.21\CRSPortal\PROD\{0}\{1}\Readmit\RY17 Readmit by Discharge Service Line {5} CY{2} to CY{3} created {4}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+	<Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] IP Discharge Details</ReportPath>
+      <FileName>\\192.168.200.21\CRSPortal\PROD\{0}\{1}\Readmit\Patient Level Details for Readmit\Discharge Details IP {5} CY{2} to CY{3} created {4}.csv</FileName>
+      <ExportFormat>CSV</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] IP Top Utilizers</ReportPath>
+      <FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\Casemix\IP Top Utilizers on {2} for {3} {4}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] OBV Readmission Trend Report</ReportPath>
+      <FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\OBV Revisit Trends and Locations from {2} to {3} run on {4} for {5} {6}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] ER Readmission Trend Report</ReportPath>
+      <FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\ER Revisit Trends and Locations from {2} to {3} run on {4} for {5} {6}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+	<Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] Transfer Trends Receiving</ReportPath>
+      <FileName>\\192.168.200.21\CRSPortal\STAGING\{0}\{1}\Transfer\Transfer Trends Receiving {5} CY{2} to CY{3} FINAL created {4}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+	<Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] Transfer Trends Sending</ReportPath>
+      <FileName>\\192.168.200.21\CRSPortal\STAGING\{0}\{1}\Transfer\Transfer Trends Sending {5} CY{2} to CY{3} FINAL created {4}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+	</Reports>
+</Root>

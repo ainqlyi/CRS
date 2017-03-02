@@ -1,0 +1,111 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/10/2016 9:23:08 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DANALYSIS4"
+  DTS:CreatorName="TEST\rnaik"
+  DTS:DTSID="{D2046432-7F30-456E-8434-5513D79A9286}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Assign_IsPlannedAdmissionRY18"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{934ABD88-0E87-4120-B8E2-AEDD82F394A8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Assign ICD-10 PlannedAdmission for RY18"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{57D68471-9EDC-4A80-925B-21DB94746717}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Assign ICD-10 PlannedAdmission for RY18"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE [Fact].[IP_Visit]&#x9;&#xA;    SET [IsPlannedAdmission2] = NULL&#x9;&#xA; FROM Fact.IP_Visit&#x9;&#xA; WHERE ICDVersion = 10&#x9;&#xA;GO&#x9;&#xA;&#x9;&#xA;UPDATE v&#x9;&#xA;    SET v.[IsPlannedAdmission2] = t.[IsPlannedAdmission2]&#x9;&#xA;    FROM ( SELECT v.VisitID&#x9;&#xA;               ,CASE WHEN v.[APR_DRGCode] IN ( '560', '540', '541', '542' ) THEN 4&#x9;&#xA;                     WHEN drc.[DiagnosisRef_CCS_Category] IN ( '45', '194', '196', '254' ) THEN 2&#x9;&#xA;                     WHEN prc.[ProcedureRefCCS_CCS_Category] IN ( '64', '105', '134', '135', '176' ) THEN 1&#x9;&#xA;                     WHEN (&#x9;&#xA;                            ( prc.[ProcedureRefCCS_CCS_Category] IN ( '3', '5', '9', '10', '12', '33', '36', '38', '40', '43', '44', '45', '47', '48', '49',&#x9;&#xA;                                                                      '51', '52', '53', '55', '56', '59', '62', '66', '67', '74', '78', '79', '84', '85', '86',&#x9;&#xA;                                                                      '99', '104', '106', '107', '109', '112', '113', '114', '119', '120', '124', '129', '132',&#x9;&#xA;                                                                      '142', '152', '153', '154', '157', '158', '159', '166', '167', '169', '170', '172' /*,'211','224' Removed in v3.0*/ )&#x9;&#xA;                            OR p.[Type] IN ('0CBS0ZZ', '0CBS3ZZ', '0CBS4ZZ', '0CBS7ZZ', '0CBS8ZZ', &#x9;&#xA;           '0B110F4', '0B110Z4', '0B113F4', '0B113Z4', '0B114F4', '0B114Z4', '0CTS0ZZ', '0CTS4ZZ', '0CTS7ZZ', '0CTS8ZZ',&#x9;&#xA;           '07T10ZZ', '07T14ZZ', '07T20ZZ', '07T24ZZ', '0B110F4', '0B110Z4', '0B113F4', '0B113Z4', '0B114F4', '0B114Z4', '0CTS0ZZ', '0CTS4ZZ', '0CTS7ZZ', '0CTS8ZZ', '0GTG0ZZ', '0GTG4ZZ', '0GTH0ZZ', '0GTH4ZZ', '0GTK0ZZ', '0GTK4ZZ',&#x9;&#xA;           '0BW10FZ', '0BW13FZ', '0BW14FZ', '0WB6XZ2', '0WQ6XZ2',&#x9;&#xA;           '0B5N0ZZ', '0B5N3ZZ', '0B5N4ZZ', '0B5P0ZZ', '0B5P3ZZ', '0B5P4ZZ',&#x9;&#xA;           '04CK0ZZ', '04CK3ZZ', '04CK4ZZ', '04CL0ZZ', '04CL3ZZ', '04CL4ZZ', '04CM0ZZ', '04CM3ZZ', '04CM4ZZ', '04CN0ZZ', '04CN3ZZ', '04CN4ZZ', '04CP0ZZ', '04CP3ZZ', '04CP4ZZ', '04CQ0ZZ', '04CQ3ZZ', '04CQ4ZZ', '04CR0ZZ', '04CR3ZZ', '04CR4ZZ', '04CS0ZZ', '04CS3ZZ', '04CS4ZZ', '04CT0ZZ', '04CT3ZZ', '04CT4ZZ', '04CU0ZZ', '04CU3ZZ', '04CU4ZZ', '04CV0ZZ', '04CV3ZZ', '04CV4ZZ', '04CW0ZZ', '04CW3ZZ', '04CW4ZZ', '04CY0ZZ', '04CY3ZZ', '04CY4ZZ',&#x9;&#xA;           '0T9030Z', '0T9040Z', '0T9130Z', '0T9140Z', '0TC03ZZ', '0TC04ZZ', '0TC13ZZ', '0TC14ZZ',&#x9;&#xA;           '0TF33ZZ', '0TF34ZZ', '0TF43ZZ', '0TF44ZZ',&#x9;&#xA;           'GZB4ZZZ',&#x9;&#xA;           'GZB0ZZZ', 'GZB1ZZZ', 'GZB2ZZZ', 'GZB3ZZZ', 'GZB4ZZZ'))&#x9;&#xA;                          )&#x9;&#xA;                          AND NOT (&#x9;&#xA;                                    ( drc.[DiagnosisRef_CCS_Category] IN ( '1', '2', '3', '4', '5', '7', '8', '9', '54', '55', '60', '61', '63', '76', '77',&#x9;&#xA;                                                                           '78', '82', '83', '84', '85', '87', '89', '90', '91', '92', '93', '100', '102', '104',&#x9;&#xA;                                                                           '107', '109', '112', '116', '118', '120', '122', '123', '124', '125', '126', '127',&#x9;&#xA;                                                                           '128', '129', '130', '131', '135', '137', '139', '140', '142', '145', '146', '148',&#x9;&#xA;                                                                           '153', '154', '157', '159', '165', '168', '172', '197', '198', '225', '226', '227',&#x9;&#xA;                                                                           '228', '229', '230', '232', '233', '234', '235', '237', '238', '239', '240', '241',&#x9;&#xA;                                                                           '242', '243', '244', '245', '246', '247', '249', '250', '251', '252', '253', '259',&#x9;&#xA;                                                                           '650', '651', '652', '653', '656', '658', '660', '661', '662', '663', '670', '99' /*added CCS99 in v3.0*/  ) )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '97'&#x9;&#xA;                                         AND dx.Diagnosis IN ( 'A3681', 'A3950', 'A3953', 'A3951', 'A3952', 'B3320', 'B3323', 'B3321', 'B3322', 'B376', 'B394', 'I32',&#x9;&#xA;                                                               'B394', 'I39', 'B395', 'I32', 'B395', 'I39', 'B399', 'I32', 'B399', 'I39', 'B5881', 'I010', 'I011', 'I012', 'I018', 'I019',&#x9;&#xA;                                                               'I020', 'I090', 'I099', 'I0989', 'A1884', 'I32', 'M3212', 'I301', 'I309', 'I300', 'I308', 'I309', 'I330', 'I39', 'I339',&#x9;&#xA;                                                               'A1884', 'I41', 'I409', 'I400', 'I401', 'I408', 'I408', 'I312', 'I310', 'I311', 'I314', 'I514')&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '105'&#x9;&#xA;                                         AND dx.Diagnosis IN ( 'I442', 'I4430', 'I440', 'I441', 'I441', 'I444', 'I445', 'I4460', 'I4469', 'I447', 'I450', 'I4510', 'I4430', 'I4439', 'I454', 'I452', 'I452',&#x9;&#xA;                                                               'I452', 'I453', 'I455', 'I456', 'I456', 'I4581', 'I459' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '149'&#x9;&#xA;                                         AND dx.Diagnosis IN ( 'K8000', 'K8012', 'K8001', 'K8013', 'K8042', 'K8046', 'K8043', 'K8047', 'K8062', 'K8063', 'K8066',&#x9;&#xA;                                                               'K8067', 'K810', 'K812', 'K8030', 'K8031', 'K8032', 'K8033', 'K8034', 'K8035', 'K8036', 'K8037', 'K830' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '106'&#x9;&#xA;                                         AND dx.Diagnosis IN ( 'I479', 'I498', 'R000', 'R001', 'I499', 'I493', 'I4949' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '152'&#x9;&#xA;                                         AND dx.Diagnosis IN ( 'B252', 'K850', 'K851', 'K852', 'K853', 'K858', 'K859' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '108'&#x9;&#xA;                                         AND dx.Diagnosis IN ( 'I0981', 'I5020', 'I5021', 'I5022', 'I5023', 'I5030', 'I5031', 'I5032', 'I5033', 'I5040', 'I5041', 'I5042', 'I5043', 'I509', 'I501', 'I5020', 'I5021', 'I5023', 'I5030', 'I5031', 'I5033', 'I5040', 'I5041',&#x9;&#xA;                                                               'I5043', 'I509' )&#x9;&#xA;                                       )&#x9;&#xA;                                  ) THEN 3&#x9;&#xA;                     ELSE 0&#x9;&#xA;                END AS [IsPlannedAdmission2]&#x9;&#xA;            FROM [Fact].[IP_Visit] v&#x9;&#xA;            LEFT JOIN [CrossRef].[IP_Diagnosis] dx ON dx.VisitID = v.VisitID&#x9;&#xA;                                                      AND dx.SequenceNo = 1&#x9;&#xA;            LEFT JOIN [Lookup].[DiagnosisRefCCS] drc ON dx.Diagnosis = drc.Diagnosis AND drc.ICDVersion = 10&#x9;&#xA;            LEFT JOIN [CrossRef].[IP_Procedure] p ON p.VisitID = v.VisitID&#x9;&#xA;                                                     AND p.SequenceNo = 1&#x9;&#xA;            LEFT JOIN [Lookup].[ProcedureRefCCS] prc ON p.Type = prc.[ProcedureRefCCS_Type] AND prc.ICDVersion = 10&#x9;&#xA;            WHERE v.ICDVersion = 10 &#xA;         ) t&#x9;&#xA;    INNER JOIN [Fact].[IP_Visit] v ON v.VisitID = t.VisitID&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Assign ICD-9 Planned Admission for RY18"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C2630BD9-E3A3-4C05-A98C-36E41D12CF11}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Assign ICD-9 Planned Admission for RY18"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE [Fact].[IP_Visit]&#x9;&#xA;    SET [IsPlannedAdmission2] = NULL&#x9;&#xA; FROM Fact.IP_Visit&#x9;&#xA; WHERE ICDVersion = 9&#x9;&#xA;GO&#x9;&#xA;&#x9;&#xA;UPDATE v&#x9;&#xA;    SET v.[IsPlannedAdmission2] = t.[IsPlannedAdmission2]&#x9;&#xA;    FROM ( SELECT v.VisitID&#x9;&#xA;                    ,CASE WHEN v.[APR_DRGCode] IN ( '560', '540', '541', '542' ) THEN 4&#x9;&#xA;                     WHEN drc.[DiagnosisRef_CCS_Category] IN ( '45', '194', '196', '254' ) THEN 2&#x9;&#xA;                     WHEN prc.[ProcedureRefCCS_CCS_Category] IN ( '64', '105', '134', '135', '176' ) THEN 1&#x9;&#xA;                     WHEN (&#x9;&#xA;                            ( prc.[ProcedureRefCCS_CCS_Category] IN ( '3', '5', '9', '10', '12', '33', '36', '38', '40', '43', '44', '45', '47', '48', '49',&#x9;&#xA;                                                                      '51', '52', '53', '55', '56', '59', '62', '66', '67', '74', '78', '79', '84', '85', '86',&#x9;&#xA;                                                                      '99', '104', '106', '107', '109', '112', '113', '114', '119', '120', '124', '129', '132',&#x9;&#xA;                                                                      '142', '152', '153', '154', '157', '158', '159', '166', '167', '169', '170', '172' /*,'211','224' Removed in v3.0*/ )&#x9;&#xA;                            OR p.[Type] IN ( '301', '3029', '303', '304', '3174', '346', '3818', '5503', '5504', '9426', '9427' ))&#x9;&#xA;                          )&#x9;&#xA;                          AND NOT (&#x9;&#xA;                                    ( drc.[DiagnosisRef_CCS_Category] IN ( '1', '2', '3', '4', '5', '7', '8', '9', '54', '55', '60', '61', '63', '76', '77',&#x9;&#xA;                                                                           '78', '82', '83', '84', '85', '87', '89', '90', '91', '92', '93', '100', '102', '104',&#x9;&#xA;                                                                           '107', '109', '112', '116', '118', '120', '122', '123', '124', '125', '126', '127',&#x9;&#xA;                                                                           '128', '129', '130', '131', '135', '137', '139', '140', '142', '145', '146', '148',&#x9;&#xA;                                                                           '153', '154', '157', '159', '165', '168', '172', '197', '198', '225', '226', '227',&#x9;&#xA;                                                                           '228', '229', '230', '232', '233', '234', '235', '237', '238', '239', '240', '241',&#x9;&#xA;                                                                           '242', '243', '244', '245', '246', '247', '249', '250', '251', '252', '253', '259',&#x9;&#xA;                                                                           '650', '651', '652', '653', '656', '658', '660', '661', '662', '663', '670', '99' /*added CCS99 in v3.0*/  ) )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '97'&#x9;&#xA;                                         AND dx.Diagnosis IN ( '03282', '03640', '03641', '03642', '03643', '07420', '07421', '07422', '07423', '11281', '11503',&#x9;&#xA;                                                               '11504', '11513', '11514', '11593', '11594', '1303', '3910', '3911', '3912', '3918', '3919',&#x9;&#xA;                                                               '3920', '3980', '39890', '39899', '4200', '42090', '42091', '42099', '4210', '4211', '4219',&#x9;&#xA;                                                               '4220', '42290', '42291', '42292', '42293', '42299', '4230', '4231', '4232', '4233', '4290' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '105'&#x9;&#xA;                                         AND dx.Diagnosis IN ( '4260', '42610', '42611', '42612', '42613', '4262', '4263', '4264', '42650', '42651', '42652',&#x9;&#xA;                                                               '42653', '42654', '4266', '4267', '42681', '42682', '4269' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '149'&#x9;&#xA;                                         AND dx.Diagnosis IN ( '5740', '57400', '57401', '5743', '57430', '57431', '5746', '57460', '57461', '5748', '57480',&#x9;&#xA;                                                               '57481', '5750', '57512', '5761' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '106'&#x9;&#xA;                                         AND dx.Diagnosis IN ( '4272', '7850', '42789', '4279', '42769' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '152'&#x9;&#xA;                                         AND dx.Diagnosis IN ( '5770' )&#x9;&#xA;                                       )&#x9;&#xA;                                    OR (&#x9;&#xA;                                         drc.[DiagnosisRef_CCS_Category] = '108'&#x9;&#xA;                                         AND dx.Diagnosis IN ( '39891', '4280', '4281', '42820', '42821', '42823', '42830', '42831', '42833', '42840', '42841',&#x9;&#xA;                                                               '42843', '4289' )&#x9;&#xA;                                       )&#x9;&#xA;                                  ) THEN 3&#x9;&#xA;                     ELSE 0&#x9;&#xA;                END AS [IsPlannedAdmission2]&#x9;&#xA;            FROM [Fact].[IP_Visit] v&#x9;&#xA;            LEFT JOIN [CrossRef].[IP_Diagnosis] dx ON dx.VisitID = v.VisitID&#x9;&#xA;                                                      AND dx.SequenceNo = 1&#x9;&#xA;            LEFT JOIN [Lookup].[DiagnosisRefCCS] drc ON dx.Diagnosis = drc.Diagnosis&#x9;&#xA;            LEFT JOIN [CrossRef].[IP_Procedure] p ON p.VisitID = v.VisitID&#x9;&#xA;                                                     AND p.SequenceNo = 1&#x9;&#xA;            LEFT JOIN [Lookup].[ProcedureRefCCS] prc ON p.Type = prc.[ProcedureRefCCS_Type]&#x9;&#xA;            WHERE v.ICDVersion = 9 &#xA;         ) t&#x9;&#xA;    INNER JOIN [Fact].[IP_Visit] v ON v.VisitID = t.VisitID&#x9;&#xA;GO&#x9;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{72D034FA-555B-46A8-8368-C589C8E31E5F}"
+      DTS:From="Package\Assign ICD-9 Planned Admission for RY18"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Assign ICD-10 PlannedAdmission for RY18" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="278,42"
+          Id="Package\Assign ICD-10 PlannedAdmission for RY18"
+          TopLeft="60,135.917649624175" />
+        <NodeLayout
+          Size="275,42"
+          Id="Package\Assign ICD-9 Planned Admission for RY18"
+          TopLeft="63.5714227909941,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="200.035711395497,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.917649624175"
+              Start="0,0"
+              End="0,26.417649624175">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.417649624175" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

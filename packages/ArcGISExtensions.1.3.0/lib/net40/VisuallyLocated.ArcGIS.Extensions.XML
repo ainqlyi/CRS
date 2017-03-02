@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VisuallyLocated.ArcGIS.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:VisuallyLocated.ArcGIS.Extensions.SystemEnumerableExtensions">
+            <summary>
+            Provides extension methods for ArcGIS COM collections
+            </summary>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.SystemEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.esriSystem.IEnumBSTR)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.esriSystem.IEnumBSTR"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.esriSystem.IEnumBSTR"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the strings from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.SystemEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.esriSystem.ILongArray)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.esriSystem.ILongArray"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.esriSystem.ILongArray"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the numbers from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.SystemEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.esriSystem.IArray)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.esriSystem.IArray"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.esriSystem.IArray"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the objects from the input source.</returns>
+        </member>
+        <member name="T:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions">
+            <summary>
+            Provides extension methods for ArcGIS COM collections
+            </summary>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IFields)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IFields"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IFields"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the fields from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IEnumRelationshipClass)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumRelationshipClass"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumRelationshipClass"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the relationship classes from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.ICursor)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.ICursor"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.ICursor"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the rows from the input source.</returns>
+            <remarks>This method does not dispose of the cursor. Care should be taken to properly dispoose of all cursors</remarks>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IFeatureCursor)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IFeatureCursor"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IFeatureCursor"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the features from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IFeatureClassContainer)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IFeatureClassContainer"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IFeatureClassContainer"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the feature class from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IEnumFeatureClass)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumFeatureClass"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumFeatureClass"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the feature classes from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IFIDSet)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IFIDSet"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IFIDSet"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the IDs from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IEnumFeature)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumFeature"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumFeature"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the features from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IEnumRelationship)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumRelationship"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumRelationship"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the relationships from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IEnumDataset)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumDataset"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumDataset"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the datasets from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.GeodatabaseEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Geodatabase.IEnumSubtype)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumSubtype"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Geodatabase.IEnumSubtype"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the datasets from the input source.</returns>
+        </member>
+        <member name="T:VisuallyLocated.ArcGIS.Extensions.EnumExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.EnumExtensions.Is(ESRI.ArcGIS.Geodatabase.esriFeatureType,ESRI.ArcGIS.Geodatabase.esriFeatureType)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:ESRI.ArcGIS.Geodatabase.esriFeatureType"/> is the same as another.
+            </summary>
+            <param name="source"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.EnumExtensions.Is(ESRI.ArcGIS.Geodatabase.esriDatasetType,ESRI.ArcGIS.Geodatabase.esriDatasetType)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:ESRI.ArcGIS.Geodatabase.esriDatasetType"/> is the same as another.
+            </summary>
+            <param name="source"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.EnumExtensions.Is(ESRI.ArcGIS.Geodatabase.esriFieldType,ESRI.ArcGIS.Geodatabase.esriFieldType)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:ESRI.ArcGIS.Geodatabase.esriFieldType"/> is the same as another.
+            </summary>
+            <param name="source"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.EnumExtensions.Is(ESRI.ArcGIS.Geodatabase.esriWorkspaceType,ESRI.ArcGIS.Geodatabase.esriWorkspaceType)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:ESRI.ArcGIS.Geodatabase.esriWorkspaceType"/> is the same as another.
+            </summary>
+            <param name="source"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VisuallyLocated.ArcGIS.Extensions.CarAsEnumerableExtensions">
+            <summary>
+            Provides extension methods for ArcGIS COM collections
+            </summary>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.CarAsEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Carto.IMap)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Carto.ILayer"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Carto.IMap"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the layers from the input source.</returns>
+        </member>
+        <member name="M:VisuallyLocated.ArcGIS.Extensions.CarAsEnumerableExtensions.AsEnumerable(ESRI.ArcGIS.Carto.IEnumLayer)">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from an <see cref="T:ESRI.ArcGIS.Carto.ILayer"/>
+            </summary>
+            <param name="source">An <see cref="T:ESRI.ArcGIS.Carto.IEnumLayer"/> to create an <see cref="T:System.Collections.Generic.IEnumerable`1"/> from.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the layers from the input source.</returns>
+        </member>
+    </members>
+</doc>

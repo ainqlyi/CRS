@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreationDate="2/20/2014 2:00:39 PM"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="88"
+  DTS:VersionGUID="{989CE8FB-2EB2-491E-AD9A-4CA92C5B89B6}"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="HSCRCGeoCodingProcess"
+  DTS:DTSID="{3860D563-F303-485F-89F7-75213AC2223A}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:DataType="8"
+      DTS:ObjectName="CountQuery"
+      DTS:DTSID="{AC4BF5C2-851B-47A1-8AB0-E75FFCA3A23F}"
+      DTS:CreationName="">
+      <DTS:Property
+        DTS:Name="ParameterValue"
+        DTS:DataType="8">SELECT count(*)   FROM [Fact].[PatientExtras]   where GeoFlag is null   and [ADT_Zip] is not null</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:DataType="8"
+      DTS:ObjectName="HSCRC_ConnectionString"
+      DTS:DTSID="{724A745D-3ECC-4F42-A55D-08E9DB589D9D}"
+      DTS:CreationName="">
+      <DTS:Property
+        DTS:Name="ParameterValue"
+        DTS:DataType="8">Data Source=192.168.210.94;User Id=CRSReports;Password="CRSReports";Initial Catalog=HSCRC_DW_SS;Integrated Security=false</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:DataType="8"
+      DTS:ObjectName="Query"
+      DTS:DTSID="{CE6E31FD-7B84-4784-B65E-24AAFAAA8412}"
+      DTS:CreationName="">
+      <DTS:Property
+        DTS:Name="ParameterValue"
+        DTS:DataType="8">SELECT [VisitID] [Address_ID]       ,[ADT_Street] [Street]       ,[ADT_City] [City]       ,[ADT_State] [State]       ,[ADT_Zip] [ZipCode]   FROM [Fact].[PatientExtras]   where GeoFlag is null   and [ADT_Zip] is not null   ORDER BY [VisitID] OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:Expression="&quot;select [Address]&#xA;      ,[City]&#xA;      ,[State]&#xA;&#x9;  ,[Zip]&#xA;&#x9;,geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326) [Point]&#xA;from&#xA;(&#xA;SELECT distinct t.[Address]&#xA;      ,t.[City]&#xA;      ,t.[State]&#xA;&#x9;  ,t.[Longitude]&#xA;&#x9;  ,t.[Latitude]&#xA;&#x9;  ,t.[Zip]&#xA;  FROM &quot;+@[$Project::TempTable] +&quot; t&#xA;  left outer join [Dimension].[Location] l on (t.Address = l.Street and t.City = l.City and t.State = l.State and t.Zip = l.ZipCode)&#xA;  where l.LocationID is null&#xA;  and (t.[Address] &lt;&gt; l.[Street] or l.[Street] is null)&#xA;) t&quot;"
+      DTS:EvaluateAsExpression="True"
+      DTS:Namespace="User"
+      DTS:IncludeInDebugDump="2345"
+      DTS:ObjectName="QueryGeoCodedAddress"
+      DTS:DTSID="{52DF5284-0A98-4ACB-A36A-6B808D6650A2}"
+      DTS:CreationName="">
+      <DTS:VariableValue
+        DTS:DataType="8">select [Address]
+      ,[City]
+      ,[State]
+	  ,[Zip]
+	,geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326) [Point]
+from
+(
+SELECT distinct t.[Address]
+      ,t.[City]
+      ,t.[State]
+	  ,t.[Longitude]
+	  ,t.[Latitude]
+	  ,t.[Zip]
+  FROM dbo.Temp_GeoCodedAddress t
+  left outer join [Dimension].[Location] l on (t.Address = l.Street and t.City = l.City and t.State = l.State and t.Zip = l.ZipCode)
+  where l.LocationID is null
+  and (t.[Address] &lt;&gt; l.[Street] or l.[Street] is null)
+) t</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Add spatial index to temp table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Add spatial index to temp table"
+      DTS:DTSID="{3A90D5FC-8A9F-4CEE-B579-5388BF22554E}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"if exists(
+           SELECT 1
+           FROM sys.indexes 
+           WHERE name = 'SpatialIndex-TempGeoCoder'
+          )
+begin
+	DROP INDEX [SpatialIndex-TempGeoCoder] ON " + @[$Project::TempTable] +" 
+end
+
+
+
+CREATE SPATIAL INDEX [SpatialIndex-TempGeoCoder] ON "+ @[$Project::TempTable] +" 
+(
+	[Geography]
+)USING  GEOGRAPHY_GRID 
+WITH (GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), 
+CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A2D0BE93-929F-45B7-8954-6ACA67AC7DE8}"
+          SQLTask:SqlStatementSource="if exists(&#xA;           SELECT 1&#xA;           FROM sys.indexes &#xA;           WHERE name = 'SpatialIndex-TempGeoCoder'&#xA;          )&#xA;begin&#xA;&#x9;DROP INDEX [SpatialIndex-TempGeoCoder] ON dbo.Temp_GeoCodedAddress &#xA;end&#xA;&#xA;&#xA;&#xA;CREATE SPATIAL INDEX [SpatialIndex-TempGeoCoder] ON dbo.Temp_GeoCodedAddress &#xA;(&#xA;&#x9;[Geography]&#xA;)USING  GEOGRAPHY_GRID &#xA;WITH (GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), &#xA;CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Temporary Tables to store GeoCoded Address"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Create Temporary Tables to store GeoCoded Address"
+      DTS:DTSID="{875E0317-6BC0-494F-B50B-2DDCAB678318}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"IF OBJECT_ID('"+@[$Project::TempTable]+"', 'U') IS NOT NULL
+DROP TABLE "+@[$Project::TempTable]+"
+GO
+
+CREATE TABLE "+@[$Project::TempTable]+"(
+	[ID] [int] NOT NULL,
+	[Address] [varchar](150) NULL,
+	[City] [varchar](150) NULL,
+	[State] [varchar](50) NULL,
+	[Zip] [varchar](50) NULL,
+	[Longitude] [varchar](20) NULL,
+	[Latitude] [varchar](20) NULL,
+	[Geography] [geography] NULL,
+ CONSTRAINT [PK_Temp_GeoCoded] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A2D0BE93-929F-45B7-8954-6ACA67AC7DE8}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.Temp_GeoCodedAddress', 'U') IS NOT NULL&#xA;DROP TABLE dbo.Temp_GeoCodedAddress&#xA;GO&#xA;&#xA;CREATE TABLE dbo.Temp_GeoCodedAddress(&#xA;&#x9;[ID] [int] NOT NULL,&#xA;&#x9;[Address] [varchar](150) NULL,&#xA;&#x9;[City] [varchar](150) NULL,&#xA;&#x9;[State] [varchar](50) NULL,&#xA;&#x9;[Zip] [varchar](50) NULL,&#xA;&#x9;[Longitude] [varchar](20) NULL,&#xA;&#x9;[Latitude] [varchar](20) NULL,&#xA;&#x9;[Geography] [geography] NULL,&#xA; CONSTRAINT [PK_Temp_GeoCoded] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[ID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Geocode Addresses"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Geocode Addresses"
+      DTS:DTSID="{D083F986-942B-4C43-A335-715AE994591A}"
+      DTS:Description="Execute Process Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">"\"" + @[$Package::HSCRC_ConnectionString]  + "\" \"" + @[$Package::Query]  + "\" \"" + @[$Package::CountQuery] + "\" \"" +  @[$Project::TempTable] + "\" " + @[$Project::MaxThread] + " " +  @[$Project::MaxBatch]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[$Project::GeoCoderLocation]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Ai Development\CRSGeoCoder\CRSGeoCoder\bin\Release\CRSGeoCoder.exe"
+          Arguments="&quot;Data Source=192.168.210.94;User Id=CRSReports;Password=&quot;CRSReports&quot;;Initial Catalog=HSCRC_DW_SS;Integrated Security=false&quot; &quot;SELECT [VisitID] [Address_ID]       ,[ADT_Street] [Street]       ,[ADT_City] [City]       ,[ADT_State] [State]       ,[ADT_Zip] [ZipCode]   FROM [Fact].[PatientExtras]   where GeoFlag is null   and [ADT_Zip] is not null   ORDER BY [VisitID] OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY&quot; &quot;SELECT count(*)   FROM [Fact].[PatientExtras]   where GeoFlag is null   and [ADT_Zip] is not null&quot; &quot;dbo.Temp_GeoCodedAddress&quot; 6 400" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Geography in temp table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Update Geography in temp table"
+      DTS:DTSID="{AF617E90-47B6-45D3-ACBE-CF228B7FAC14}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"update "+  @[$Project::TempTable] +"
+set [Geography] = geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326)"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A2D0BE93-929F-45B7-8954-6ACA67AC7DE8}"
+          SQLTask:SqlStatementSource="update dbo.Temp_GeoCodedAddress&#xA;set [Geography] = geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:From="Package\Create Temporary Tables to store GeoCoded Address"
+      DTS:To="Package\Geocode Addresses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:DTSID="{810AB580-6ED3-4944-A942-A0A31CCE6566}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:From="Package\Geocode Addresses"
+      DTS:To="Package\Update Geography in temp table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:DTSID="{89B9E183-13DF-4350-9491-00F913FD54B9}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:From="Package\Update Geography in temp table"
+      DTS:To="Package\Add spatial index to temp table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:DTSID="{8D9C6C4A-0281-40CF-A0C3-F39064C2F2CB}"
+      DTS:CreationName="" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Add spatial index to temp table"
+          TopLeft="358.3549559715,253.788524248791" />
+        <NodeLayout
+          Size="330,42"
+          Id="Package\Create Temporary Tables to store GeoCoded Address"
+          TopLeft="44.6835684902374,36.1632502200274" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Geocode Addresses"
+          TopLeft="168.114627020912,112.649350917964" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Update Geography in temp table"
+          TopLeft="261.128718356705,188.458731960087" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="209.683568490237,78.1632502200274">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.9310585306741,34.4861006979368"
+              Start="0,0"
+              End="43.9310585306741,26.9861006979368">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.2430503489684" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.2430503489684"
+                    Point2="0,17.2430503489684"
+                    Point3="4,17.2430503489684" />
+                  <mssgle:LineSegment
+                    End="39.9310585306741,17.2430503489684" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.9310585306741,17.2430503489684"
+                    Point2="43.9310585306741,17.2430503489684"
+                    Point3="43.9310585306741,21.2430503489684" />
+                  <mssgle:LineSegment
+                    End="43.9310585306741,26.9861006979368" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="253.614627020912,154.649350917964">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="123.514091335794,33.8093810421231"
+              Start="0,0"
+              End="123.514091335794,26.3093810421231">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.9046905210616" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.9046905210616"
+                    Point2="0,16.9046905210616"
+                    Point3="4,16.9046905210616" />
+                  <mssgle:LineSegment
+                    End="119.514091335794,16.9046905210616" />
+                  <mssgle:CubicBezierSegment
+                    Point1="119.514091335794,16.9046905210616"
+                    Point2="123.514091335794,16.9046905210616"
+                    Point3="123.514091335794,20.9046905210616" />
+                  <mssgle:LineSegment
+                    End="123.514091335794,26.3093810421231" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="377.128718356705,230.458731960087">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="94.226237614795,23.3297922887038"
+              Start="0,0"
+              End="94.226237614795,15.8297922887038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.66489614435189" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.66489614435189"
+                    Point2="0,11.6648961443519"
+                    Point3="4,11.6648961443519" />
+                  <mssgle:LineSegment
+                    End="90.226237614795,11.6648961443519" />
+                  <mssgle:CubicBezierSegment
+                    Point1="90.226237614795,11.6648961443519"
+                    Point2="94.226237614795,11.6648961443519"
+                    Point3="94.226237614795,15.6648961443519" />
+                  <mssgle:LineSegment
+                    End="94.226237614795,15.8297922887038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

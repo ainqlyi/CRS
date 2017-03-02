@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CRSGeoCoder.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CRSGeoCoder_GeoCodeService_USA_GeocodeServer" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.210.96:6080/arcgis/services/Geocode/USA/GeocodeServer</Value>
+    </Setting>
+    <Setting Name="WS_Timeout" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000000000</Value>
+    </Setting>
+    <Setting Name="DB_Timeout" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000000000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

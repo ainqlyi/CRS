@@ -1,0 +1,861 @@
+<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreationDate="7/21/2014 1:33:36 PM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{5FD43BA2-4789-416A-9CC5-27F5538FE029}"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load_IP_ReadmitAttribution"
+  DTS:DTSID="{98F7F60C-8752-454C-ABB7-889AEDA3C8A4}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HSCRC_Reports]"
+      DTS:ObjectName="HSCRC_Reports"
+      DTS:DTSID="{7D0DFA9B-9EB3-435C-AD1C-35AE1966912A}"
+      DTS:CreationName="OLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.210.94;Initial Catalog=HSCRC_Reports;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Attribution table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Attribution table"
+      DTS:DTSID="{19D2D639-016A-424C-A328-7C10E4453E61}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D0DFA9B-9EB3-435C-AD1C-35AE1966912A}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.ReadmitAttribution', 'U') IS NOT NULL&#xA;  DROP TABLE dbo.ReadmitAttribution&#xA;&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[ReadmitAttribution](&#xA;&#x9;[VisitID] [INT] NOT NULL,&#xA;&#x9;[EIDID] [INT] NULL,&#xA;&#x9;[SourceID] [VARCHAR](10) NULL,&#xA;&#x9;[MRN] [VARCHAR](50) NULL,&#xA;&#x9;[AdmitDt] [DATE] NULL,&#xA;&#x9;[DischargeDt] [DATE] NULL,&#xA;&#x9;[TotalCharges] [FLOAT] NULL,&#xA;&#x9;[APRDRG_Code] [INT] NULL,&#xA;&#x9;[IsTransferOrDead] [INT] NULL,&#xA;&#x9;[IsPlannedAdmission] [INT] NULL,&#xA;&#x9;[Lead_VisitID] [INT] NULL,&#xA;&#x9;[ExpectedPayerCode] [char](2) NULL,&#xA;) ON [PRIMARY]&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Extract and Load to ReadmitAttribution"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract and Load to ReadmitAttribution"
+      DTS:DTSID="{9DFBBC1F-3439-4974-BC9B-0793EF07FE6C}"
+      DTS:Description="Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution"
+              name="Extract Readmit Attribution"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              description="OLE DB Source"
+              usesDispositions="true"
+              version="7"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7">
+              <properties>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out.">0</property>
+                <property
+                  name="OpenRowset"
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."></property>
+                <property
+                  name="OpenRowsetVariable"
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."></property>
+                <property
+                  name="SqlCommand"
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT EIDID
+       ,MRN
+       ,AdmitDt
+       ,DischargeDt
+       ,[APRDRG_Code]
+       ,VisitID
+       ,SourceID
+       ,IsTransferOrDead
+       ,IsPlannedAdmission
+       ,[TotalCharges]
+       ,LEAD(VisitID) OVER ( PARTITION BY EIDID ORDER BY DischargeDT, AdmitDtTime ) [Lead_VisitID]
+	   ,[ExpectedPayerCode]
+    FROM ( SELECT DISTINCT EIDID
+               ,VisitID
+               ,AdmitDT
+               ,AdmitDtTime
+               ,DischargeDT
+               ,IsTransferOrDead
+               ,[APRDRG_Code]
+               ,MRN
+               ,SourceID
+               ,IsPlannedAdmission
+               ,[TotalCharges]
+			   ,[ExpectedPayerCode]
+               ,RANK() OVER ( PARTITION BY VisitID ORDER BY IsPlannedAdmission DESC ) [Ranking]
+            FROM ( SELECT DISTINCT vm.[EIDID]
+                       ,vm.VisitID
+                       ,DATEADD(dd, 0, DATEDIFF(dd, 0, vm.AdmitDT)) [AdmitDT]
+                       ,AdmitDT [AdmitDtTime]
+                       ,vm.DischargeDT
+                       ,CASE WHEN aprdrg.Code IN ( '560', '540', '541', '542' ) THEN 4
+                             WHEN drc.CCS_Category IN ( '45', '194', '196', '254' ) THEN 2
+                             WHEN prc.CCS_Category IN ( '64', '105', '134', '135', '176' ) THEN 1
+                             WHEN (
+                                    ( prc.CCS_Category IN ( '3', '5', '9', '10', '12', '33', '36', '38', '40', '43', '44', '45', '47', '48', '49', '51', '52',
+                                                            '53', '55', '56', '59', '62', '66', '67', '74', '78', '79', '84', '85', '86', '99', '104', '106',
+                                                            '107', '109', '112', '113', '114', '119', '120', '124', '129', '132', '142', '152', '153', '154',
+                                                            '157', '158', '159', '166', '167', '169', '170', '172', '211', '224' )
+                                    OR p.[Type] IN ( '301', '3029', '303', '304', '3174', '346', '3818', '5503', '5504', '9426', '9427' ))
+                                  )
+                                  AND NOT (
+                                            ( drc.CCS_Category IN ( '1', '2', '3', '4', '5', '7', '8', '9', '54', '55', '60', '61', '63', '76', '77', '78', '82',
+                                                                    '83', '84', '85', '87', '89', '90', '91', '92', '93', '100', '102', '104', '107', '109',
+                                                                    '112', '116', '118', '120', '122', '123', '124', '125', '126', '127', '128', '129', '130',
+                                                                    '131', '135', '137', '139', '140', '142', '145', '146', '148', '153', '154', '157', '159',
+                                                                    '165', '168', '172', '197', '198', '225', '226', '227', '228', '229', '230', '232', '233',
+                                                                    '234', '235', '237', '238', '239', '240', '241', '242', '243', '244', '245', '246', '247',
+                                                                    '249', '250', '251', '252', '253', '259', '650', '651', '652', '653', '656', '658', '660',
+                                                                    '661', '662', '663', '670' ) )
+                                            OR ( dx.Diagnosis IN ( '03282', '03640', '03641', '03642', '03643', '07420', '07421', '07422', '07423', '11281',
+                                                                   '11503', '11504', '11513', '11514', '11593', '11594', '1303', '3910', '3911', '3912', '3918',
+                                                                   '3919', '3920', '3980', '39890', '39899', '4200', '42090', '42091', '42099', '4210', '4211',
+                                                                   '4219', '4220', '42290', '42291', '42292', '42293', '42299', '4230', '4231', '4232', '4233',
+                                                                   '4290', '4260', '42610', '42611', '42612', '42613', '4262', '4263', '4264', '42650', '42651',
+                                                                   '42652', '42653', '42654', '4266', '4267', '42681', '42682', '4269', '4272', '7850', '42789',
+                                                                   '4279', '42769', '39891', '4280', '4281', '42820', '42821', '42823', '42830', '42831',
+                                                                   '42833', '42840', '42841', '42843', '4289' ) )
+                                          ) THEN 3
+                             ELSE 0
+                        END AS [IsPlannedAdmission]
+                       ,CASE WHEN dd.Code IN ( '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '40', '41', '42' ) THEN 1
+                             WHEN dd.Code = '70' THEN 2
+                             ELSE 0
+                        END AS [IsTransferOrDead]
+                       ,aprdrg.Code [APRDRG_Code]
+                       ,mrn.Formatted [MRN]
+                       ,CASE WHEN hosp.SourceID = '210904' THEN '210009'
+                             WHEN hosp.SourceID IN ( '218994', '218992' ) THEN '210002'
+                             WHEN hosp.SourceID = '210080' THEN '210012'
+                             WHEN hosp.SourceID = '210054' THEN '210062'
+                             WHEN hosp.SourceID = '210007' THEN '210063'
+                             ELSE hosp.SourceID
+                        END [SourceID]
+                       ,FF.Charges1_Total [TotalCharges]
+					   ,payer.Code [ExpectedPayerCode]
+                    FROM [Fact].[VisitMain] vm
+                    INNER JOIN [Lookup].[VisitType] vt ON vm.VisitTypeID = vt.VisitTypeID
+                    INNER JOIN [Fact].[Extras_Inpatient] ip ON vm.VisitID = ip.VisitID
+                    LEFT JOIN [Lookup].[APRDRG] aprdrg ON ip.APR_DRGID = aprdrg.APRDRGID
+                    LEFT JOIN [Lookup].[DischargeDisposition] dd ON dd.DischargeDispID = vm.DischargeDispID
+                                                                    AND dd.FileTypeID = 1
+                    LEFT JOIN [CrossRef].[Diagnosis] dx ON dx.VisitID = vm.VisitID
+                                                           AND dx.SequenceNo = 1
+                    LEFT JOIN [CrossRef].[Procedure] p ON p.VisitID = vm.VisitID
+                                                          AND p.SequenceNo = 1
+                    LEFT JOIN [Lookup].[DiagnosisRefCCS] drc ON dx.Diagnosis = drc.Diagnosis
+                    LEFT JOIN [Lookup].[ProcedureRefCCS] prc ON p.Type = prc.Type
+                    LEFT JOIN Dimension.MedicalRecordNo mrn ON mrn.MedicalRecordNoID = vm.MedicalRecordNoID
+                    LEFT JOIN [Lookup].Hospital hosp ON hosp.HospitalId = vm.HospitalId
+                    LEFT JOIN [Fact].[Financial] ff ON vm.VisitID = ff.VisitID
+					LEFT JOIN [Lookup].[PayerExpected] payer ON payer.PayerExpectedID = vm.PayerExpectedPrimaryID
+                    WHERE vt.PTClass = 'I'
+                        AND vm.EIDID IS NOT NULL
+                        AND hosp.SourceID NOT IN ( '213028', '213029', '213300', '210083', '210089', '210333' )
+                 ) t1
+         ) t2
+    WHERE [Ranking] = 1</property>
+                <property
+                  name="SqlCommandVariable"
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed.">User::ReadmitAttrib</property>
+                <property
+                  name="DefaultCodePage"
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source.">1252</property>
+                <property
+                  name="AlwaysUseDefaultCodePage"
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data.">false</property>
+                <property
+                  name="AccessMode"
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  typeConverter="AccessMode">2</property>
+                <property
+                  name="ParameterMapping"
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Connections[OleDbConnection]"
+                  name="OleDbConnection"
+                  description="The OLE DB runtime connection used to access the database."
+                  connectionManagerID="{29D10680-A3AC-48CB-8E81-E165E7503239}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_DW]" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[EIDID]"
+                      name="EIDID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[EIDID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[EIDID]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[VisitID]"
+                      name="VisitID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[VisitID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[VisitID]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[IsPlannedAdmission]"
+                      name="IsPlannedAdmission"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[IsPlannedAdmission]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[IsPlannedAdmission]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[IsTransferOrDead]"
+                      name="IsTransferOrDead"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[IsTransferOrDead]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[IsTransferOrDead]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[MRN]"
+                      name="MRN"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[MRN]"
+                      length="13"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[MRN]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[SourceID]"
+                      name="SourceID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[SourceID]"
+                      length="6"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[SourceID]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[AdmitDt]"
+                      name="AdmitDt"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[AdmitDt]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[AdmitDt]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[DischargeDt]"
+                      name="DischargeDt"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[DischargeDt]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[DischargeDt]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[Lead_VisitID]"
+                      name="Lead_VisitID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[Lead_VisitID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[Lead_VisitID]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[APRDRG_Code]"
+                      name="APRDRG_Code"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[APRDRG_Code]"
+                      length="3"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[APRDRG_Code]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[TotalCharges]"
+                      name="TotalCharges"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[TotalCharges]"
+                      precision="9"
+                      scale="2"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[TotalCharges]" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[ExpectedPayerCode]"
+                      name="ExpectedPayerCode"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[ExpectedPayerCode]"
+                      length="2"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[ExpectedPayerCode]" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[EIDID]"
+                      name="EIDID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[VisitID]"
+                      name="VisitID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[IsPlannedAdmission]"
+                      name="IsPlannedAdmission"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[IsTransferOrDead]"
+                      name="IsTransferOrDead"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[MRN]"
+                      name="MRN"
+                      dataType="str"
+                      length="13"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[SourceID]"
+                      name="SourceID"
+                      dataType="str"
+                      length="6"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[AdmitDt]"
+                      name="AdmitDt"
+                      dataType="dbTimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[DischargeDt]"
+                      name="DischargeDt"
+                      dataType="dbTimeStamp2" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[Lead_VisitID]"
+                      name="Lead_VisitID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[APRDRG_Code]"
+                      name="APRDRG_Code"
+                      dataType="str"
+                      length="3"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[TotalCharges]"
+                      name="TotalCharges"
+                      dataType="numeric"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].ExternalColumns[ExpectedPayerCode]"
+                      name="ExpectedPayerCode"
+                      dataType="str"
+                      length="2"
+                      codePage="1252" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output]"
+                  name="OLE DB Source Error Output"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[EIDID]"
+                      name="EIDID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[EIDID]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[VisitID]"
+                      name="VisitID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[VisitID]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[IsPlannedAdmission]"
+                      name="IsPlannedAdmission"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[IsPlannedAdmission]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[IsTransferOrDead]"
+                      name="IsTransferOrDead"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[IsTransferOrDead]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[APRDRG_Code]"
+                      name="APRDRG_Code"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[APRDRG_Code]"
+                      length="3"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[AdmitDt]"
+                      name="AdmitDt"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[AdmitDt]"
+                      dataType="dbTimeStamp" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[DischargeDt]"
+                      name="DischargeDt"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[DischargeDt]"
+                      dataType="dbTimeStamp2" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[MRN]"
+                      name="MRN"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[MRN]"
+                      length="13"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[SourceID]"
+                      name="SourceID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[SourceID]"
+                      length="6"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[TotalCharges]"
+                      name="TotalCharges"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[TotalCharges]"
+                      precision="9"
+                      scale="2"
+                      dataType="numeric" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[Lead_VisitID]"
+                      name="Lead_VisitID"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[Lead_VisitID]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[ExpectedPayerCode]"
+                      name="ExpectedPayerCode"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[ExpectedPayerCode]"
+                      length="2"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution"
+              name="Load Readmit Attribution"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              description="OLE DB Destination"
+              usesDispositions="true"
+              version="4"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4">
+              <properties>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out.">0</property>
+                <property
+                  name="OpenRowset"
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset.">[dbo].[ReadmitAttribution]</property>
+                <property
+                  name="OpenRowsetVariable"
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."></property>
+                <property
+                  name="SqlCommand"
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  name="DefaultCodePage"
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source.">1252</property>
+                <property
+                  name="AlwaysUseDefaultCodePage"
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data.">false</property>
+                <property
+                  name="AccessMode"
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  typeConverter="AccessMode">3</property>
+                <property
+                  name="FastLoadKeepIdentity"
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on.">false</property>
+                <property
+                  name="FastLoadKeepNulls"
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on.">false</property>
+                <property
+                  name="FastLoadOptions"
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on.">TABLOCK</property>
+                <property
+                  name="FastLoadMaxInsertCommitSize"
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on.">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Connections[OleDbConnection]"
+                  name="OleDbConnection"
+                  description="The OLE DB runtime connection used to access the database."
+                  connectionManagerID="Package.ConnectionManagers[HSCRC_Reports]"
+                  connectionManagerRefId="Package.ConnectionManagers[HSCRC_Reports]" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Destination Input"
+                  hasSideEffects="true"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[EIDID]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[EIDID]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[EIDID]"
+                      cachedName="EIDID"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[VisitID]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[VisitID]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[VisitID]"
+                      cachedName="VisitID"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[IsPlannedAdmission]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[IsPlannedAdmission]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[IsPlannedAdmission]"
+                      cachedName="IsPlannedAdmission"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[IsTransferOrDead]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[IsTransferOrDead]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[IsTransferOrDead]"
+                      cachedName="IsTransferOrDead"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[MRN]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[MRN]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[MRN]"
+                      cachedName="MRN"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[SourceID]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[SourceID]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[SourceID]"
+                      cachedName="SourceID"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[AdmitDt]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[AdmitDt]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[AdmitDt]"
+                      cachedName="AdmitDt"
+                      cachedDataType="dbTimeStamp" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[DischargeDt]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[DischargeDt]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[DischargeDt]"
+                      cachedName="DischargeDt"
+                      cachedDataType="dbTimeStamp2" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[Lead_VisitID]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[Lead_VisitID]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[Lead_VisitID]"
+                      cachedName="Lead_VisitID"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[APRDRG_Code]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[APRDRG_Code]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[APRDRG_Code]"
+                      cachedName="APRDRG_Code"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[TotalCharges]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[TotalCharges]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[TotalCharges]"
+                      cachedName="TotalCharges"
+                      cachedDataType="numeric"
+                      cachedPrecision="9"
+                      cachedScale="2" />
+                    <inputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].Columns[ExpectedPayerCode]"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output].Columns[ExpectedPayerCode]"
+                      externalMetadataColumnId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[ExpectedPayerCode]"
+                      cachedName="ExpectedPayerCode"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedCodepage="1252" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[VisitID]"
+                      name="VisitID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[EIDID]"
+                      name="EIDID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[SourceID]"
+                      name="SourceID"
+                      dataType="str"
+                      length="10"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[MRN]"
+                      name="MRN"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[AdmitDt]"
+                      name="AdmitDt"
+                      dataType="dbDate" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[DischargeDt]"
+                      name="DischargeDt"
+                      dataType="dbDate" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[IsTransferOrDead]"
+                      name="IsTransferOrDead"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[IsPlannedAdmission]"
+                      name="IsPlannedAdmission"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[Lead_VisitID]"
+                      name="Lead_VisitID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[TotalCharges]"
+                      name="TotalCharges"
+                      dataType="r8" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[APRDRG_Code]"
+                      name="APRDRG_Code"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input].ExternalColumns[ExpectedPayerCode]"
+                      name="ExpectedPayerCode"
+                      dataType="str"
+                      length="2"
+                      codePage="1252" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Outputs[OLE DB Destination Error Output]"
+                  name="OLE DB Destination Error Output"
+                  exclusionGroup="1"
+                  synchronousInputId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input]"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Extract and Load to ReadmitAttribution.Paths[OLE DB Source Output]"
+              name="OLE DB Source Output"
+              startId="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution.Outputs[OLE DB Source Output]"
+              endId="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution.Inputs[OLE DB Destination Input]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:From="Package\Create Attribution table"
+      DTS:To="Package\Extract and Load to ReadmitAttribution"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:DTSID="{14DE634A-E193-42EC-B9A2-3AC605BD213A}"
+      DTS:CreationName="" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Create Attribution table"
+          TopLeft="365.872961363264,65.1217373568023" />
+        <NodeLayout
+          Size="263,42"
+          Id="Package\Extract and Load to ReadmitAttribution"
+          TopLeft="321.316512132305,242.870132630361" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="456.594736747785,107.121737356802">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,135.748395273559"
+              Start="0,0"
+              End="0,128.248395273559">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,128.248395273559" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract and Load to ReadmitAttribution">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution"
+          TopLeft="297.637970254438,217.508481803526" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution"
+          TopLeft="290.492824537465,59.2747089785804" />
+        <EdgeLayout
+          Id="Package\Extract and Load to ReadmitAttribution.Paths[OLE DB Source Output]"
+          TopLeft="394.815397395952,101.27470897858">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.233772824946"
+              Start="0,0"
+              End="0,108.733772824946">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,108.733772824946" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.45359375,49.582706724973,30.9071875,9.568359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract and Load to ReadmitAttribution\Extract Readmit Attribution">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract and Load to ReadmitAttribution\Load Readmit Attribution">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

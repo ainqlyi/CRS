@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="HSCRC_Insight"
+  DTS:DTSID="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=192.168.200.90;User ID=CrsJobRunner;Initial Catalog=HSCRC_Insight;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5fp37wO55kyQ0LrzLZ/3IAAAAAACAAAAAAADZgAAwAAAABAAAAA4QMLks2WNuHeB9+X/X+8lAAAAAASAAACgAAAAEAAAAJ6eD44gIiZsJWqKtYbatcF4AAAAL/Mw6XpRZS+PQBOShTFlQMsXn4U4OsmJI/gZLy5caoUqFsWvx4U4JCgdtbY2Jv8+nnSui5yJ8PJqqBoWSnhbCZZ53ShSCfpvMt7VSBjwx1M0qdvvkJw6yOjgAMrER7GbyCb62pJslBb4sXaG6tLFkrIstQmETAjbFAAAACzwEBLkdvtaBuP9AEssiqh/OEL9</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

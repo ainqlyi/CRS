@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<Reports>
+		<Report>
+			<ReportPath>/HSCRC_Reports/[Hospital Reports] IP Readmission Trends and Locations</ReportPath>
+			<FileName>\\192.168.210.90\d$\Applications\Report Extractor\TEST\{0}\{1}\IP Readmission Trends and Locations from {2} to {3} run on {4} for {5} {6}.xls</FileName>
+			<ExportFormat>EXCEL</ExportFormat>
+			<HospitalListName>targetHospital</HospitalListName>
+			<ExportReport>true</ExportReport>
+		</Report>
+		<Report>
+			<ReportPath>/HSCRC_Reports/[Hospital Reports] IP Top Utilizers</ReportPath>
+			<FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\Casemix\IP Top Utilizers on {2} for {3} {4}.xls</FileName>
+			<ExportFormat>EXCEL</ExportFormat>
+			<HospitalListName>targetHospital</HospitalListName>
+			<ExportReport>false</ExportReport>
+		</Report>
+		<Report>
+			<ReportPath>/HSCRC_Reports/[Hospital Reports] IP Discharge Details</ReportPath>
+			<FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\Casemix\CY13 Inpatient Discharge Details with Readmit Info on {2} for {3} {4}.xls</FileName>
+			<ExportFormat>EXCEL</ExportFormat>
+			<HospitalListName>targetHospital</HospitalListName>
+			<ExportReport>false</ExportReport>
+		</Report>
+		<Report>
+			<ReportPath>/HSCRC_Reports/[Hospital Reports] IP Readmissions by Clinical Service Line</ReportPath>
+			<FileName>\\192.168.210.90\d$\Applications\Report Extractor\TEST\{0}\{1}\IP Readmissions by Service Line of Initial Visit from {2} to {3} run on {4} for {5} {6}.xls</FileName>
+			<ExportFormat>EXCEL</ExportFormat>
+			<HospitalListName>sourceid</HospitalListName>
+			<ExportReport>true</ExportReport>
+		</Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] OBV Readmission Trend Report</ReportPath>
+      <FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\OBV Revisit Trends and Locations from {2} to {3} run on {4} for {5} {6}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+    <Report>
+      <ReportPath>/HSCRC_Reports/[Hospital Reports] ER Readmission Trend Report</ReportPath>
+      <FileName>\\Tpdc1\crispdev\CRS\Reports Standard\WebsiteStatic\DEV\{0}\{1}\ER Revisit Trends and Locations from {2} to {3} run on {4} for {5} {6}.xls</FileName>
+      <ExportFormat>EXCEL</ExportFormat>
+      <HospitalListName>targetHospital</HospitalListName>
+      <ExportReport>false</ExportReport>
+    </Report>
+	</Reports>
+</Root>

@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="HSCRC_Reports">
+      <rd:DataSourceID>1522edc6-8090-4d17-877c-f620dbe1c768</rd:DataSourceID>
+      <DataSourceReference>HSCRC_Reports</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <rd:ReportID>dbb918ab-bfed-40d8-aafa-14f4db6c7e6e</rd:ReportID>
+  <Width>5in</Width>
+  <Body>
+    <Height>1.29in</Height>
+    <ColumnSpacing>0.5in</ColumnSpacing>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <Style>
+          <FontFamily>Tahoma</FontFamily>
+          <FontSize>20pt</FontSize>
+          <Color>SteelBlue</Color>
+          <FontWeight>Bold</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Value>Report1</Value>
+        <CanGrow>true</CanGrow>
+        <Height>0.37in</Height>
+      </Textbox>
+      <List Name="List1">
+        <Style>
+          <FontFamily>Tahoma</FontFamily>
+          <FontSize>14pt</FontSize>
+          <Color>SlateGray</Color>
+        </Style>
+        <ReportItems>
+          <Textbox Name="YearMonth">
+            <Style>
+              <FontFamily>Tahoma</FontFamily>
+              <FontSize>14pt</FontSize>
+              <Color>SlateGray</Color>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+            <rd:DefaultName>YearMonth</rd:DefaultName>
+            <Value>=Fields!YearMonth.Value</Value>
+            <CanGrow>true</CanGrow>
+            <Height>0.27in</Height>
+          </Textbox>
+          <Matrix Name="matrix1">
+            <Top>0.5in</Top>
+            <RowGroupings>
+              <RowGrouping>
+                <DynamicRows>
+                  <Grouping Name="matrix1_SourceID">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!SourceID.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Grouping>
+                  <Sorting>
+                    <SortBy>
+                      <SortExpression>=Fields!SourceID.Value</SortExpression>
+                    </SortBy>
+                  </Sorting>
+                  <ReportItems>
+                    <Textbox Name="SourceID">
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>10pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>White</Color>
+                        <BackgroundColor>#6e9eca</BackgroundColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                        <BorderColor>
+                          <Default>LightGrey</Default>
+                        </BorderColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <rd:DefaultName>SourceID</rd:DefaultName>
+                      <Value>=Fields!SourceID.Value</Value>
+                      <CanGrow>true</CanGrow>
+                      <Height>0.21in</Height>
+                      <Width>1in</Width>
+                    </Textbox>
+                  </ReportItems>
+                </DynamicRows>
+                <Width>1in</Width>
+              </RowGrouping>
+            </RowGroupings>
+            <MatrixRows>
+              <MatrixRow>
+                <MatrixCells>
+                  <MatrixCell>
+                    <ReportItems>
+                      <Textbox Name="textbox2">
+                        <Style>
+                          <FontFamily>Tahoma</FontFamily>
+                          <FontSize>10pt</FontSize>
+                          <BorderStyle>
+                            <Default>Solid</Default>
+                          </BorderStyle>
+                          <BorderColor>
+                            <Default>LightGrey</Default>
+                          </BorderColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                        <rd:DefaultName>textbox2</rd:DefaultName>
+                        <Value>=First(Fields!Lead_SourceID.Value)</Value>
+                        <CanGrow>true</CanGrow>
+                        <Height>0.21in</Height>
+                        <Width>1in</Width>
+                      </Textbox>
+                    </ReportItems>
+                  </MatrixCell>
+                </MatrixCells>
+                <Height>0.21in</Height>
+              </MatrixRow>
+            </MatrixRows>
+            <Corner>
+              <ReportItems>
+                <Textbox Name="textbox3">
+                  <Style>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>10pt</FontSize>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                  <rd:DefaultName>textbox3</rd:DefaultName>
+                  <Value>
+                  </Value>
+                  <CanGrow>true</CanGrow>
+                  <Height>0.21in</Height>
+                </Textbox>
+              </ReportItems>
+            </Corner>
+            <DataSetName>DataSet1</DataSetName>
+            <MatrixColumns>
+              <MatrixColumn>
+                <Width>1in</Width>
+              </MatrixColumn>
+            </MatrixColumns>
+            <ColumnGroupings>
+              <ColumnGrouping>
+                <DynamicColumns>
+                  <Grouping Name="matrix1_ExpectedPayerCode">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!ExpectedPayerCode.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Grouping>
+                  <Sorting>
+                    <SortBy>
+                      <SortExpression>=Fields!ExpectedPayerCode.Value</SortExpression>
+                    </SortBy>
+                  </Sorting>
+                  <ReportItems>
+                    <Textbox Name="ExpectedPayerCode">
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>10pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>White</Color>
+                        <BackgroundColor>#6e9eca</BackgroundColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                        <BorderColor>
+                          <Default>LightGrey</Default>
+                        </BorderColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <rd:DefaultName>ExpectedPayerCode</rd:DefaultName>
+                      <Value>=Fields!ExpectedPayerCode.Value</Value>
+                      <CanGrow>true</CanGrow>
+                      <Height>0.21in</Height>
+                      <Width>1in</Width>
+                    </Textbox>
+                  </ReportItems>
+                </DynamicColumns>
+                <Height>0.21in</Height>
+              </ColumnGrouping>
+            </ColumnGroupings>
+          </Matrix>
+        </ReportItems>
+        <Grouping Name="list1_YearMonth">
+          <GroupExpressions>
+            <GroupExpression>=Fields!YearMonth.Value</GroupExpression>
+          </GroupExpressions>
+          <PageBreakAtEnd>true</PageBreakAtEnd>
+        </Grouping>
+        <Sorting>
+          <SortBy>
+            <SortExpression>=Fields!YearMonth.Value</SortExpression>
+          </SortBy>
+        </Sorting>
+        <Top>0.37in</Top>
+        <DataSetName>DataSet1</DataSetName>
+      </List>
+    </ReportItems>
+  </Body>
+  <Language>en-US</Language>
+  <LeftMargin>1in</LeftMargin>
+  <RightMargin>1in</RightMargin>
+  <TopMargin>1in</TopMargin>
+  <BottomMargin>1in</BottomMargin>
+  <PageWidth>8.5in</PageWidth>
+  <PageHeight>11in</PageHeight>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Fields>
+        <Field Name="YearMonth">
+          <DataField>YearMonth</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ExpectedPayerCode">
+          <DataField>ExpectedPayerCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SourceID">
+          <DataField>SourceID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Lead_SourceID">
+          <DataField>Lead_SourceID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Total_IP_Discharges">
+          <DataField>Total_IP_Discharges</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Total_IP_Discharges_Medicare">
+          <DataField>Total_IP_Discharges_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Eligible_IP_Discharges">
+          <DataField>Eligible_IP_Discharges</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Eligible_IP_Discharges_Medicare">
+          <DataField>Eligible_IP_Discharges_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IP_Readmits">
+          <DataField>IP_Readmits</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IP_Readmits_Medicare">
+          <DataField>IP_Readmits_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IP_Readmit_Intra_Hospital">
+          <DataField>IP_Readmit_Intra_Hospital</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IP_Readmit_Intra_Hospital_Medicare">
+          <DataField>IP_Readmit_Intra_Hospital_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IP_Readmit_Inter_Hospital">
+          <DataField>IP_Readmit_Inter_Hospital</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IP_Readmit_Inter_Hospital_Medicare">
+          <DataField>IP_Readmit_Inter_Hospital_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Unadjusted_IP_Readmits">
+          <DataField>Unadjusted_IP_Readmits</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Unadjusted_IP_Readmits_Medicare">
+          <DataField>Unadjusted_IP_Readmits_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Unadjusted_IP_Readmit_Intra_Hospital">
+          <DataField>Unadjusted_IP_Readmit_Intra_Hospital</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Unadjusted_IP_Readmit_Intra_Hospital_Medicare">
+          <DataField>Unadjusted_IP_Readmit_Intra_Hospital_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Unadjusted_IP_Readmit_Inter_Hospital">
+          <DataField>Unadjusted_IP_Readmit_Inter_Hospital</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Unadjusted_IP_Readmit_Inter_Hospital_Medicare">
+          <DataField>Unadjusted_IP_Readmit_Inter_Hospital_Medicare</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>HSCRC_Reports</DataSourceName>
+        <CommandType>Text</CommandType>
+        <CommandText>SELECT YearMonth
+       ,[ExpectedPayerCode]
+       ,SourceID
+       ,[Lead_SourceID]
+       ,COUNT(*) [Total_IP_Discharges]
+       ,CASE WHEN ExpectedPayerCode = '01' THEN COUNT(*)
+             ELSE 0
+        END [Total_IP_Discharges_Medicare]
+       ,SUM(IsEligibleDischarge) [Eligible_IP_Discharges]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsEligibleDischarge
+                 ELSE 0
+            END) [Eligible_IP_Discharges_Medicare]
+       ,SUM(IsAdjustedReadmissions) [IP_Readmits]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsAdjustedReadmissions
+                 ELSE 0
+            END) [IP_Readmits_Medicare]
+       ,SUM(IsAdjustedIntraReadmissions) [IP_Readmit_Intra_Hospital]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsAdjustedIntraReadmissions
+                 ELSE 0
+            END) [IP_Readmit_Intra_Hospital_Medicare]
+       ,SUM(IsAdjustedInterReadmissions) [IP_Readmit_Inter_Hospital]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsAdjustedInterReadmissions
+                 ELSE 0
+            END) [IP_Readmit_Inter_Hospital_Medicare]
+       ,SUM(IsUnAdjustedReadmissions) [Unadjusted_IP_Readmits]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsUnAdjustedReadmissions
+                 ELSE 0
+            END) [Unadjusted_IP_Readmits_Medicare]
+       ,SUM(IsUnAdjustedIntraReadmissions) [Unadjusted_IP_Readmit_Intra_Hospital]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsUnAdjustedIntraReadmissions
+                 ELSE 0
+            END) [Unadjusted_IP_Readmit_Intra_Hospital_Medicare]
+       ,SUM(IsUnAdjustedInterReadmissions) [Unadjusted_IP_Readmit_Inter_Hospital]
+       ,SUM(CASE WHEN ExpectedPayerCode = '01' THEN IsUnAdjustedInterReadmissions
+                 ELSE 0
+            END) [Unadjusted_IP_Readmit_Inter_Hospital_Medicare]
+    FROM ( SELECT EIDID
+               ,VisitID
+               ,SourceID
+               ,DATEADD(MONTH, DATEDIFF(MONTH, 0, DischargeDt), 0) [YearMonth]
+               ,CASE WHEN (
+                            ReadmitDiff &gt; 0
+                            OR ReadmitDiff IS NULL
+                          )
+                          AND IsTransferOrDead &lt;&gt; 2 THEN 1
+                     ELSE 0
+                END [IsEligibleDischarge]
+               ,CASE WHEN Lead_IsPlannedAdmt = 0
+                          AND ReadmitDiff BETWEEN 1 AND 30 THEN 1
+                     ELSE 0
+                END [IsAdjustedReadmissions]
+               ,ReadmitDiff
+               ,CASE WHEN Lead_IsPlannedAdmt = 0
+                          AND ( ReadmitDiff BETWEEN 1 AND 30 )
+                          AND SourceID = Lead_SourceID THEN 1
+                     ELSE 0
+                END [IsAdjustedIntraReadmissions]
+               ,CASE WHEN Lead_IsPlannedAdmt = 0
+                          AND ( ReadmitDiff BETWEEN 1 AND 30 )
+                          AND SourceID &lt;&gt; Lead_SourceID THEN 1
+                     ELSE 0
+                END [IsAdjustedInterReadmissions]
+               ,CASE WHEN ReadmitDiff BETWEEN 1 AND 30 THEN 1
+                     ELSE 0
+                END [IsUnadjustedReadmissions]
+               ,CASE WHEN ( ReadmitDiff BETWEEN 1 AND 30 )
+                          AND SourceID = Lead_SourceID THEN 1
+                     ELSE 0
+                END [IsUnadjustedIntraReadmissions]
+               ,CASE WHEN ( ReadmitDiff BETWEEN 1 AND 30 )
+                          AND SourceID &lt;&gt; Lead_SourceID THEN 1
+                     ELSE 0
+                END [IsUnadjustedInterReadmissions]
+               ,[ExpectedPayerCode]
+               ,[Lead_SourceID]
+            FROM ( SELECT c.EIDID
+                       ,c.VisitID
+                       ,c.SourceID
+                       ,c.DischargeDT
+                       ,c.IsPlannedAdmission
+                       ,c.IsTransferOrDead
+                       ,DATEDIFF(DAY, c.DischargeDt, l.AdmitDt) [ReadmitDiff]
+                       ,c.[Lead_VisitID]
+                       ,l.SourceID [Lead_SourceID]
+                       ,l.AdmitDt [Lead_AdmitDt]
+                       ,l.IsPlannedAdmission [Lead_IsPlannedAdmt]
+                       ,c.ExpectedPayerCode
+                    FROM dbo.ReadmitAttribution c
+                    LEFT JOIN dbo.ReadmitAttribution l ON c.Lead_VisitID = l.VisitID
+                    WHERE c.DischargeDt BETWEEN @from AND @cutoff
+                 ) t
+            WHERE DischargeDt &lt;= @to
+         ) t
+    GROUP BY YearMonth
+       ,[ExpectedPayerCode]
+       ,t.SourceID
+       ,t.Lead_SourceID</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <QueryParameters>
+          <QueryParameter Name="@from">
+            <Value>=Parameters!from.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@cutoff">
+            <Value>=Parameters!cutoff.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@to">
+            <Value>=Parameters!to.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <Timeout>0</Timeout>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="from">
+      <DataType>String</DataType>
+      <Prompt>from</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cutoff">
+      <DataType>String</DataType>
+      <Prompt>cutoff</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="to">
+      <DataType>String</DataType>
+      <Prompt>to</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

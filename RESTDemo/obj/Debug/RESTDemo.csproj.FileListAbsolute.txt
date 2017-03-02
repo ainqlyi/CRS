@@ -1,0 +1,21 @@
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\bin\Debug\RESTDemo.exe
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\bin\Debug\RESTDemo.pdb
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\obj\Debug\RESTDemo.Form1.resources
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\obj\Debug\RESTDemo.Properties.Resources.resources
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\obj\Debug\RESTDemo.csproj.GenerateResource.Cache
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\obj\Debug\RESTDemo.exe
+C:\Documents and Settings\hans2101\My Documents\Visual Studio 2008\Projects\RESTDemo\RESTDemo\obj\Debug\RESTDemo.pdb
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\obj\Debug\RESTDemo.exe
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\obj\Debug\RESTDemo.pdb
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\bin\Debug\RESTDemo.exe
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\bin\Debug\RESTDemo.pdb
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\obj\Debug\ResolveAssemblyReference.cache
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\obj\Debug\RESTDemo.Form1.resources
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\obj\Debug\RESTDemo.Properties.Resources.resources
+C:\temp\EUC2009\demos\rest\RESTDemo\RESTDemo\obj\Debug\RESTDemo.csproj.GenerateResource.Cache
+C:\Development\sshretha\sshrestha\CRS\RESTDemo\obj\Debug\RESTDemo.csprojResolveAssemblyReference.cache
+C:\Development\sshretha\sshrestha\CRS\RESTDemo\obj\Debug\RESTDemo.Form1.resources
+C:\Development\sshretha\sshrestha\CRS\RESTDemo\obj\Debug\RESTDemo.Properties.Resources.resources
+C:\Development\sshretha\sshrestha\CRS\RESTDemo\obj\Debug\RESTDemo.csproj.GenerateResource.Cache
+C:\Development\sshretha\sshrestha\CRS\RESTDemo\obj\Debug\RESTDemo.exe

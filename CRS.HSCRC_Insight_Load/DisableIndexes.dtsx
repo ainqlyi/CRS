@@ -1,0 +1,58 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/3/2014 4:35:49 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:DTSID="{4A4D071D-AE2C-4C8E-BB70-356B7EF9A44E}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DisableIndexes"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{904F71A5-F6F0-4B8F-A338-0F10167AA93C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Disable index"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D1445E5F-7D8A-4AC9-9445-920B98BCDCE6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Disable index"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="/* Disable columnstore indexes */&#xA;/******IP******/&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_IP_Visit' AND object_id = OBJECT_ID('Fact.IP_Visit'))&#xA;ALTER INDEX [IX_ColumnStore_IP_Visit] ON [Fact].[IP_Visit] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_IP_Diagnosis' AND object_id = OBJECT_ID('CrossRef.IP_Diagnosis'))&#xA;ALTER INDEX [IX_ColumnStore_IP_Diagnosis] ON [CrossRef].[IP_Diagnosis] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_IP_Procedure' AND object_id = OBJECT_ID('CrossRef.IP_Procedure'))&#xA;ALTER INDEX [IX_ColumnStore_IP_Procedure] ON [CrossRef].[IP_Procedure] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_IP_RateCenter' AND object_id = OBJECT_ID('CrossRef.IP_RateCenter'))&#xA;ALTER INDEX [IX_ColumnStore_IP_RateCenter] ON [CrossRef].[IP_RateCenter] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_IP_Visit_RecType2' AND object_id = OBJECT_ID('CrossRef.IP_Visit_RecType2'))&#xA;ALTER INDEX [IX_ColumnStore_IP_Visit_RecType2] ON [CrossRef].[IP_Visit_RecType2] DISABLE &#xA;GO&#xA;&#xA;/******OP******/&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_OP_Visit' AND object_id = OBJECT_ID('Fact.OP_Visit'))&#xA;ALTER INDEX [IX_ColumnStore_OP_Visit] ON [Fact].[OP_Visit] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_OP_Diagnosis' AND object_id = OBJECT_ID('CrossRef.OP_Diagnosis'))&#xA;ALTER INDEX [IX_ColumnStore_OP_Diagnosis] ON [CrossRef].[OP_Diagnosis] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_OP_RateCenter' AND object_id = OBJECT_ID('CrossRef.OP_RateCenter'))&#xA;ALTER INDEX [IX_ColumnStore_OP_RateCenter] ON [CrossRef].[OP_RateCenter] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_OP_FortyFive' AND object_id = OBJECT_ID('CrossRef.OP_FortyFive'))&#xA;ALTER INDEX [IX_ColumnStore_OP_FortyFive] ON [CrossRef].[OP_FortyFive] DISABLE &#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_OP_Procedure' AND object_id = OBJECT_ID('CrossRef.OP_Procedure'))&#xA;ALTER INDEX [IX_ColumnStore_OP_Procedure] ON [CrossRef].[OP_Procedure] DISABLE&#xA;GO&#xA;&#xA;/***Chronic****/&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_ColumnStore_Chronic' AND object_id = OBJECT_ID('Fact.Chronic'))&#xA;ALTER INDEX [IX_ColumnStore_Chronic] ON [Fact].[Chronic] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_Chronic_Diagnosis' AND object_id = OBJECT_ID('CrossRef.Chronic_Diagnosis'))&#xA;ALTER INDEX [IX_Chronic_Diagnosis] ON [CrossRef].[Chronic_Diagnosis] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_Chronic_Procedure' AND object_id = OBJECT_ID('CrossRef.Chronic_Procedure'))&#xA;ALTER INDEX [IX_Chronic_Procedure] ON [CrossRef].[Chronic_Procedure] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_Chronic_RateCenter' AND object_id = OBJECT_ID('CrossRef.Chronic_RateCenter'))&#xA;ALTER INDEX [IX_Chronic_RateCenter] ON [CrossRef].[Chronic_RateCenter] DISABLE&#xA;GO&#xA;&#xA;/***Psych****/&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'NonClustered_Psych' AND object_id = OBJECT_ID('Fact.Psych_Visit'))&#xA;ALTER INDEX [NonClustered_Psych] ON [Fact].[Psych_Visit] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'NonClustered_Psych_Diagnosis' AND object_id = OBJECT_ID('CrossRef.Psych_Diagnosis'))&#xA;ALTER INDEX [NonClustered_Psych_Diagnosis] ON [CrossRef].[Psych_Diagnosis] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'NonClustered_Psych_Procedure' AND object_id = OBJECT_ID('CrossRef.Psych_Procedure'))&#xA;ALTER INDEX [NonClustered_Psych_Procedure] ON [CrossRef].[Psych_Procedure] DISABLE&#xA;GO&#xA;&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'NonClustered_Psych_RateCenter' AND object_id = OBJECT_ID('CrossRef.Psych_RateCenter'))&#xA;ALTER INDEX [NonClustered_Psych_RateCenter] ON [CrossRef].[Psych_RateCenter] DISABLE&#xA;GO&#xA;&#xA;/* Disable other indexes */&#xA;IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_NC_EIDLookup' AND object_id = OBJECT_ID('Fact.OP_Visit'))&#xA;ALTER INDEX [IX_NC_EIDLookup] ON [Fact].[OP_Visit] DISABLE&#xA;GO&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Disable index"
+          TopLeft="32,31" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

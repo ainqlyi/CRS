@@ -1,0 +1,935 @@
+<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreationDate="3/20/2014 11:06:44 AM"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{45329899-0379-410F-9DD5-AE18E760813A}"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CentralGeoCodingProcess"
+  DTS:DTSID="{260A0681-67AC-478A-9EDD-C6A6C03D3C4D}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:DataType="8"
+      DTS:ObjectName="CentralConnectionString"
+      DTS:DTSID="{90FF6D2F-1570-43B6-BAFC-2B793C04CB67}"
+      DTS:CreationName="">
+      <DTS:Property
+        DTS:Name="ParameterValue"
+        DTS:DataType="8">Data Source=192.168.210.94;User Id=CRSReports;Password="CRSReports";Initial Catalog=Central;Integrated Security=false</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:DataType="8"
+      DTS:ObjectName="CentralCountQuery"
+      DTS:DTSID="{3CA2217F-EB59-43B3-8DFC-17396A1695D8}"
+      DTS:CreationName="">
+      <DTS:Property
+        DTS:Name="ParameterValue"
+        DTS:DataType="8">SELECT count(*) FROM [dbo].[Temp_DistinctAddress]</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:DataType="8"
+      DTS:ObjectName="CentralQuery"
+      DTS:DTSID="{E1DD6788-B96F-4647-B6D0-67302EA561A0}"
+      DTS:CreationName="">
+      <DTS:Property
+        DTS:Name="ParameterValue"
+        DTS:DataType="8">SELECT [ID] [Address_ID], [Address], [City], [State], [Zip] [ZipCode] FROM [dbo].[Temp_DistinctAddress] ORDER BY [ID] OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:Expression="&quot;select [Address]&#xA;      ,[City]&#xA;      ,[State]&#xA;&#x9;  ,[Zip]&#xA;&#x9;,geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326) [Point]&#xA;from&#xA;(&#xA;SELECT distinct t.[Address]&#xA;      ,t.[City]&#xA;      ,t.[State]&#xA;&#x9;  ,t.[Longitude]&#xA;&#x9;  ,t.[Latitude]&#xA;&#x9;  ,t.[Zip]&#xA;  FROM &quot;+@[$Project::TempTable] +&quot; t&#xA;  left outer join [Dimension].[Location] l on (t.Address = l.Street and t.City = l.City and t.State = l.State and t.Zip = l.ZipCode)&#xA;  where l.LocationID is null&#xA;  and (t.[Address] &lt;&gt; l.[Street] or l.[Street] is null)&#xA;) t&quot;"
+      DTS:EvaluateAsExpression="True"
+      DTS:Namespace="User"
+      DTS:IncludeInDebugDump="2345"
+      DTS:ObjectName="QueryGeocodedAddress"
+      DTS:DTSID="{1B292A75-FDEC-45B7-BAD8-0B3E41A37B96}"
+      DTS:CreationName="">
+      <DTS:VariableValue
+        DTS:DataType="8">select [Address]
+      ,[City]
+      ,[State]
+	  ,[Zip]
+	,geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326) [Point]
+from
+(
+SELECT distinct t.[Address]
+      ,t.[City]
+      ,t.[State]
+	  ,t.[Longitude]
+	  ,t.[Latitude]
+	  ,t.[Zip]
+  FROM dbo.Temp_GeoCodedAddress t
+  left outer join [Dimension].[Location] l on (t.Address = l.Street and t.City = l.City and t.State = l.State and t.Zip = l.ZipCode)
+  where l.LocationID is null
+  and (t.[Address] &lt;&gt; l.[Street] or l.[Street] is null)
+) t</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Add spatial index to temp table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Add spatial index to temp table"
+      DTS:DTSID="{6205b494-7048-4a30-b855-af0826495488}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"if exists(
+           SELECT 1
+           FROM sys.indexes 
+           WHERE name = 'SpatialIndex-TempGeoCoder'
+          )
+begin
+	DROP INDEX [SpatialIndex-TempGeoCoder] ON " + @[$Project::TempTable] +" 
+end
+
+
+
+CREATE SPATIAL INDEX [SpatialIndex-TempGeoCoder] ON "+ @[$Project::TempTable] +" 
+(
+	[Geography]
+)USING  GEOGRAPHY_GRID 
+WITH (GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), 
+CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{465202BA-DC95-4997-95A0-E3F038C689E8}"
+          SQLTask:SqlStatementSource="if exists(&#xA;           SELECT 1&#xA;           FROM sys.indexes &#xA;           WHERE name = 'SpatialIndex-TempGeoCoder'&#xA;          )&#xA;begin&#xA;&#x9;DROP INDEX [SpatialIndex-TempGeoCoder] ON dbo.Temp_GeoCodedAddress &#xA;end&#xA;&#xA;&#xA;&#xA;CREATE SPATIAL INDEX [SpatialIndex-TempGeoCoder] ON dbo.Temp_GeoCodedAddress &#xA;(&#xA;&#x9;[Geography]&#xA;)USING  GEOGRAPHY_GRID &#xA;WITH (GRIDS =(LEVEL_1 = MEDIUM,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = MEDIUM), &#xA;CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create temporary tables"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create temporary tables"
+      DTS:DTSID="{01F66B25-4B33-4FC3-96F4-32968C4B9300}"
+      DTS:Description="Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Create temporary tables\Create temp tables to store distinct Address"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:ThreadHint="1"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create temp tables to store distinct Address"
+          DTS:DTSID="{C29D4A70-5E10-4AD3-B27C-9D7BB2530A15}"
+          DTS:Description="Execute SQL Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{465202BA-DC95-4997-95A0-E3F038C689E8}"
+              SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.Temp_DistinctAddress', 'U') IS NOT NULL&#xA;DROP TABLE dbo.Temp_DistinctAddress&#xA;GO&#xA;&#xA;CREATE TABLE dbo.Temp_DistinctAddress(&#xA;&#x9;[ID] [int] IDENTITY(1,1) NOT NULL,&#xA;&#x9;[Address] [varchar](150) NULL,&#xA;&#x9;[City] [varchar](150) NULL,&#xA;&#x9;[State] [varchar](50) NULL,&#xA;&#x9;[Zip] [varchar](50) NULL&#xA; CONSTRAINT [PK_Temp_DistinctAddress] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[ID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create temporary tables\Create temporary tables to store GeoCoded Address"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:ThreadHint="0"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create temporary tables to store GeoCoded Address"
+          DTS:DTSID="{888F55F0-2439-4372-B4B6-876601F205BC}"
+          DTS:Description="Execute SQL Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"IF OBJECT_ID('"+@[$Project::TempTable]+"', 'U') IS NOT NULL
+DROP TABLE "+@[$Project::TempTable]+"
+GO
+
+CREATE TABLE "+@[$Project::TempTable]+"(
+	[ID] [int] NOT NULL,
+	[Address] [varchar](150) NULL,
+	[City] [varchar](150) NULL,
+	[State] [varchar](50) NULL,
+	[Zip] [varchar](50) NULL,
+	[Longitude] [varchar](20) NULL,
+	[Latitude] [varchar](20) NULL,
+	[Geography] [geography] NULL,
+ CONSTRAINT [PK_Temp_GeoCoded] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{465202BA-DC95-4997-95A0-E3F038C689E8}"
+              SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.Temp_GeoCodedAddress', 'U') IS NOT NULL&#xA;DROP TABLE dbo.Temp_GeoCodedAddress&#xA;GO&#xA;&#xA;CREATE TABLE dbo.Temp_GeoCodedAddress(&#xA;&#x9;[ID] [int] NOT NULL,&#xA;&#x9;[Address] [varchar](150) NULL,&#xA;&#x9;[City] [varchar](150) NULL,&#xA;&#x9;[State] [varchar](50) NULL,&#xA;&#x9;[Zip] [varchar](50) NULL,&#xA;&#x9;[Longitude] [varchar](20) NULL,&#xA;&#x9;[Latitude] [varchar](20) NULL,&#xA;&#x9;[Geography] [geography] NULL,&#xA; CONSTRAINT [PK_Temp_GeoCoded] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[ID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Bad Data from Temp Table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Bad Data from Temp Table"
+      DTS:DTSID="{DCCB69B9-BBD0-47FD-8205-08B2B3211ABD}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"DELETE FROM "+ @[$Project::TempTable] + " where Longitude = '0'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{465202BA-DC95-4997-95A0-E3F038C689E8}"
+          SQLTask:SqlStatementSource="DELETE FROM dbo.Temp_GeoCodedAddress where Longitude = '0'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Geocode Addresses"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Geocode Addresses"
+      DTS:DTSID="{52d6058b-3ba4-4258-a46f-eec02946b4db}"
+      DTS:Description="Execute Process Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">"\"" + @[$Package::CentralConnectionString] + "\" \"" + @[$Package::CentralQuery]  + "\" \"" + @[$Package::CentralCountQuery]  + "\" \"" +  @[$Project::TempTable] + "\" " + @[$Project::MaxThread] + " " +  @[$Project::MaxBatch]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[$Project::GeoCoderLocation]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Ai Development\CRSGeoCoder\CRSGeoCoder\bin\Release\CRSGeoCoder.exe"
+          Arguments="&quot;Data Source=192.168.210.94;User Id=CRSReports;Password=&quot;CRSReports&quot;;Initial Catalog=Central;Integrated Security=false&quot; &quot;SELECT [ID] [Address_ID], [Address], [City], [State], [Zip] [ZipCode] FROM [dbo].[Temp_DistinctAddress] ORDER BY [ID] OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY&quot; &quot;SELECT count(*) FROM [dbo].[Temp_DistinctAddress]&quot; &quot;dbo.Temp_GeoCodedAddress&quot; 6 400" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transfer Distinct Address"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Transfer Distinct Address"
+      DTS:DTSID="{BB378BC3-285D-4841-8FFC-DC6434E6A032}"
+      DTS:Description="Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transfer Distinct Address\Get Distinct Addresses"
+              name="Get Distinct Addresses"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              description="OLE DB Source"
+              usesDispositions="true"
+              version="7"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7">
+              <properties>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out.">0</property>
+                <property
+                  name="OpenRowset"
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."></property>
+                <property
+                  name="OpenRowsetVariable"
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."></property>
+                <property
+                  name="SqlCommand"
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT distinct [Street]
+      ,[City]
+      ,[State]
+      ,[ZipCode]
+  FROM [EnterpriseID].[EID]
+  where (GeoFlag is null or GeoFlag = 0)
+  and Street is not null or City is not null or State is not null or ZipCode is not null</property>
+                <property
+                  name="SqlCommandVariable"
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."></property>
+                <property
+                  name="DefaultCodePage"
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source.">1252</property>
+                <property
+                  name="AlwaysUseDefaultCodePage"
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data.">false</property>
+                <property
+                  name="AccessMode"
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  typeConverter="AccessMode">2</property>
+                <property
+                  name="ParameterMapping"
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer Distinct Address\Get Distinct Addresses.Connections[OleDbConnection]"
+                  name="OleDbConnection"
+                  description="The OLE DB runtime connection used to access the database."
+                  connectionManagerID="{465202BA-DC95-4997-95A0-E3F038C689E8}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Central]" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[Street]"
+                      name="Street"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[Street]"
+                      length="100"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[Street]" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[City]"
+                      length="30"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[City]" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[State]"
+                      length="20"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[State]" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                      name="ZipCode"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                      length="10"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[ZipCode]" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[Street]"
+                      name="Street"
+                      dataType="str"
+                      length="100"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      name="City"
+                      dataType="str"
+                      length="30"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      name="State"
+                      dataType="str"
+                      length="20"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].ExternalColumns[ZipCode]"
+                      name="ZipCode"
+                      dataType="str"
+                      length="10"
+                      codePage="1252" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output]"
+                  name="OLE DB Source Error Output"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[Street]"
+                      name="Street"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[Street]"
+                      length="100"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[City]"
+                      length="30"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[State]"
+                      length="20"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[ZipCode]"
+                      name="ZipCode"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[ZipCode]"
+                      length="10"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transfer Distinct Address\Load Distinct Addresses"
+              name="Load Distinct Addresses"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              description="OLE DB Destination"
+              usesDispositions="true"
+              version="4"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4">
+              <properties>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out.">0</property>
+                <property
+                  name="OpenRowset"
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset.">[dbo].[Temp_DistinctAddress]</property>
+                <property
+                  name="OpenRowsetVariable"
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."></property>
+                <property
+                  name="SqlCommand"
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  name="DefaultCodePage"
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source.">1252</property>
+                <property
+                  name="AlwaysUseDefaultCodePage"
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data.">false</property>
+                <property
+                  name="AccessMode"
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  typeConverter="AccessMode">3</property>
+                <property
+                  name="FastLoadKeepIdentity"
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on.">false</property>
+                <property
+                  name="FastLoadKeepNulls"
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on.">false</property>
+                <property
+                  name="FastLoadOptions"
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on.">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  name="FastLoadMaxInsertCommitSize"
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on.">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer Distinct Address\Load Distinct Addresses.Connections[OleDbConnection]"
+                  name="OleDbConnection"
+                  description="The OLE DB runtime connection used to access the database."
+                  connectionManagerID="{465202BA-DC95-4997-95A0-E3F038C689E8}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Central]" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Destination Input"
+                  hasSideEffects="true"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].Columns[City]"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[City]"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      cachedName="City"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].Columns[State]"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[State]"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      cachedName="State"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].Columns[Street]"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[Street]"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      cachedName="Street"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].Columns[ZipCode]"
+                      lineageId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                      externalMetadataColumnId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      cachedName="ZipCode"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedCodepage="1252" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      name="ID"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      name="Address"
+                      dataType="str"
+                      length="150"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      name="City"
+                      dataType="str"
+                      length="150"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      name="State"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      name="Zip"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transfer Distinct Address\Load Distinct Addresses.Outputs[OLE DB Destination Error Output]"
+                  name="OLE DB Destination Error Output"
+                  exclusionGroup="1"
+                  synchronousInputId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input]"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\Transfer Distinct Address\Load Distinct Addresses.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer Distinct Address\Load Distinct Addresses.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\Transfer Distinct Address\Load Distinct Addresses.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transfer Distinct Address.Paths[OLE DB Source Output]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer Distinct Address\Get Distinct Addresses.Outputs[OLE DB Source Output]"
+              endId="Package\Transfer Distinct Address\Load Distinct Addresses.Inputs[OLE DB Destination Input]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Geography in temp table"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:DelayValidation="True"
+      DTS:ObjectName="Update Geography in temp table"
+      DTS:DTSID="{cc7387c1-485b-4a2d-a954-4e495ada6dda}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"update "+  @[$Project::TempTable] +"
+set [Geography] = geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326)"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{465202BA-DC95-4997-95A0-E3F038C689E8}"
+          SQLTask:SqlStatementSource="update dbo.Temp_GeoCodedAddress&#xA;set [Geography] = geography::STPointFromText('POINT(' + [Longitude] + ' ' + [Latitude] + ')', 4326)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:From="Package\Create temporary tables"
+      DTS:To="Package\Transfer Distinct Address"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:DTSID="{49DC4B1F-BA9E-4E65-8898-FA7F76D58D41}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:From="Package\Geocode Addresses"
+      DTS:To="Package\Delete Bad Data from Temp Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:DTSID="{8E4E3ACA-9F5B-492C-946B-C510CEE94E0C}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:From="Package\Update Geography in temp table"
+      DTS:To="Package\Add spatial index to temp table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:DTSID="{5BD67D89-B3B0-42F0-8020-95139139BC1F}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:From="Package\Transfer Distinct Address"
+      DTS:To="Package\Geocode Addresses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:DTSID="{20812ADA-A096-4C3D-82AE-BC203E37B2A7}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:From="Package\Delete Bad Data from Temp Table"
+      DTS:To="Package\Update Geography in temp table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:DTSID="{3A921F39-3812-4895-9F94-D84520DDFDAC}"
+      DTS:CreationName="" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Add spatial index to temp table"
+          TopLeft="547.574857088042,675.861602590937" />
+        <NodeLayout
+          Size="285,42"
+          Id="Package\Create temporary tables\Create temp tables to store distinct Address"
+          TopLeft="5.5,74.1744186686869" />
+        <NodeLayout
+          Size="324,42"
+          Id="Package\Create temporary tables\Create temporary tables to store GeoCoded Address"
+          TopLeft="5.5,21.6353353298271" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="385,158"
+          Size="385,201"
+          Id="Package\Create temporary tables"
+          TopLeft="85.9173073307575,163.348370644698" />
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Delete Bad Data from Temp Table"
+          TopLeft="530.827446327994,521.672735553046" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Geocode Addresses"
+          TopLeft="315.999273041227,480.733700336974" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\Transfer Distinct Address"
+          TopLeft="256,407" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Update Geography in temp table"
+          TopLeft="537.907677520594,598.713207777145" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="278.417307330757,364.348370644698">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76.0826926692425,42.651629355302"
+              Start="0,0"
+              End="76.0826926692425,35.151629355302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.325814677651" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.325814677651"
+                    Point2="0,21.325814677651"
+                    Point3="4,21.325814677651" />
+                  <mssgle:LineSegment
+                    End="72.0826926692425,21.325814677651" />
+                  <mssgle:CubicBezierSegment
+                    Point1="72.0826926692425,21.325814677651"
+                    Point2="76.0826926692425,21.325814677651"
+                    Point3="76.0826926692425,25.325814677651" />
+                  <mssgle:LineSegment
+                    End="76.0826926692425,35.151629355302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="486.999273041227,501.733700336974">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.8281732867674,35.2723685494053"
+              Start="0,0"
+              End="36.3281732867674,35.2723685494053">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="21.3318799730857,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.3318799730857,0"
+                    Point2="25.3318799730857,0"
+                    Point3="25.3318799730857,4" />
+                  <mssgle:LineSegment
+                    End="25.3318799730857,31.2723685494053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.3318799730857,31.2723685494053"
+                    Point2="25.3318799730857,35.2723685494053"
+                    Point3="29.3318799730857,35.2723685494053" />
+                  <mssgle:LineSegment
+                    End="36.3281732867674,35.2723685494053" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="657.241267304318,640.713207777145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.148394813792"
+              Start="0,0"
+              End="0,27.648394813792">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.648394813792" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="354.5,449">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.999273041227,31.733700336974"
+              Start="0,0"
+              End="46.999273041227,24.233700336974">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.866850168487" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.866850168487"
+                    Point2="0,15.866850168487"
+                    Point3="4,15.866850168487" />
+                  <mssgle:LineSegment
+                    End="42.999273041227,15.866850168487" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42.999273041227,15.866850168487"
+                    Point2="46.999273041227,15.866850168487"
+                    Point3="46.999273041227,19.866850168487" />
+                  <mssgle:LineSegment
+                    End="46.999273041227,24.233700336974" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="652.367561924294,563.672735553046">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.0404722240992"
+              Start="0,0"
+              End="0,27.5404722240992">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5404722240992" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Transfer Distinct Address">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Transfer Distinct Address\Get Distinct Addresses"
+          TopLeft="395,45" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Transfer Distinct Address\Load Distinct Addresses"
+          TopLeft="403,183" />
+        <EdgeLayout
+          Id="Package\Transfer Distinct Address.Paths[OLE DB Source Output]"
+          TopLeft="487,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.5,96"
+              Start="0,0"
+              End="11.5,88.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44"
+                    Point2="0,48"
+                    Point3="4,48" />
+                  <mssgle:LineSegment
+                    End="7.5,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.5,48"
+                    Point2="11.5,48"
+                    Point3="11.5,52" />
+                  <mssgle:LineSegment
+                    End="11.5,88.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer Distinct Address\Get Distinct Addresses">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer Distinct Address\Load Distinct Addresses">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

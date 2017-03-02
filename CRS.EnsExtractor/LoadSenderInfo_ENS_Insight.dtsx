@@ -1,0 +1,476 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/10/2015 4:50:04 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{C03DABA7-FEED-409B-91E8-515F6AF267F6}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadSenderInfo_ENS_Insight"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{F4BCC126-DEE6-4FD8-9FF5-0D3C89CE7DED}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Drop_Create or Truncate Table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E93912B8-2179-4BBC-A946-71ACC2709081}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop_Create or Truncate Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('ENS.SenderInfo') IS NULL &#xA;&#xA;&#x9;CREATE TABLE [ENS].[SenderInfo](&#xA;&#x9;&#x9;[OrganizationID] [INT] NOT NULL,&#xA;&#x9;&#x9;[OrganizationName] [VARCHAR](100) NULL,&#xA;&#x9;&#x9;[SourceCode] [VARCHAR](50) NULL,&#xA;&#x9;&#x9;&#x9;CONSTRAINT [PK_SenderInfo] PRIMARY KEY CLUSTERED &#xA;&#x9;&#x9;(&#xA;&#x9;&#x9;&#x9;[OrganizationID] ASC&#xA;&#x9;&#x9;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;&#x9;) ON [PRIMARY]&#xA;&#xA;ELSE&#xA;&#x9;IF NOT EXISTS &#xA;&#x9;&#x9;(&#xA;&#x9;&#x9;SELECT * &#xA;&#x9;&#x9;FROM sys.columns &#xA;&#x9;&#x9;WHERE name = 'OrganizationID' &#xA;&#x9;&#x9;&#x9;AND object_id = OBJECT_ID('ENS.SenderInfo')&#xA;&#x9;&#x9;)&#xA;&#xA;&#x9;&#x9;BEGIN&#xA;&#xA;&#x9;&#x9;&#x9;DROP TABLE ENS.SenderInfo&#xA;&#xA;&#x9;&#x9;&#x9;CREATE TABLE [ENS].[SenderInfo](&#xA;&#x9;&#x9;&#x9;&#x9;[OrganizationID] [INT] NOT NULL,&#xA;&#x9;&#x9;&#x9;&#x9;[OrganizationName] [VARCHAR](100) NULL,&#xA;&#x9;&#x9;&#x9;&#x9;[SourceCode] [VARCHAR](50) NULL,&#xA;&#x9;&#x9;&#x9;&#x9; CONSTRAINT [PK_SenderInfo] PRIMARY KEY CLUSTERED &#xA;&#x9;&#x9;&#x9;&#x9;(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;[OrganizationID] ASC&#xA;&#x9;&#x9;&#x9;&#x9;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;&#x9;&#x9;&#x9;) ON [PRIMARY]&#xA;&#xA;&#x9;&#x9;END&#xA;&#xA;&#x9;ELSE&#xA;&#xA;&#x9;&#x9;TRUNCATE TABLE ENS.SenderInfo" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load SenderInfo"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{91E69070-91CE-48E4-994A-1C6A3C73A595}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load SenderInfo"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load SenderInfo\Extract Sender Info"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract Sender Info"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT OrganizationID, OrganizationName, SourceCode 
+	FROM [configure].[Organization]  WITH (NOLOCK)
+WHERE FlagCode IN (7,9)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load SenderInfo\Extract Sender Info.Connections[OleDbConnection]"
+                  connectionManagerID="{4BAD9B42-8195-4DD5-AEFB-7563F9D29BD5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ENS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[OrganizationName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].ExternalColumns[OrganizationName]"
+                      length="100"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[OrganizationName]"
+                      name="OrganizationName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[SourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].ExternalColumns[SourceCode]"
+                      length="50"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[SourceCode]"
+                      name="SourceCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[OrganizationID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].ExternalColumns[OrganizationID]"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[OrganizationID]"
+                      name="OrganizationID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].ExternalColumns[OrganizationName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OrganizationName" />
+                    <externalMetadataColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].ExternalColumns[SourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SourceCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].ExternalColumns[OrganizationID]"
+                      dataType="i4"
+                      name="OrganizationID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[OrganizationID]"
+                      dataType="i4"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[OrganizationID]"
+                      name="OrganizationID" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[OrganizationName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[OrganizationName]"
+                      name="OrganizationName" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[SourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[SourceCode]"
+                      name="SourceCode" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load SenderInfo\Load to Insight"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load to Insight"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[ENS].[SenderInfo]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load SenderInfo\Load to Insight.Connections[OleDbConnection]"
+                  connectionManagerID="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].Columns[OrganizationName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrganizationName"
+                      externalMetadataColumnId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationName]"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[OrganizationName]" />
+                    <inputColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].Columns[SourceCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SourceCode"
+                      externalMetadataColumnId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].ExternalColumns[SourceCode]"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[SourceCode]" />
+                    <inputColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].Columns[OrganizationID]"
+                      cachedDataType="i4"
+                      cachedName="OrganizationID"
+                      externalMetadataColumnId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationID]"
+                      lineageId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output].Columns[OrganizationID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationID]"
+                      dataType="i4"
+                      name="OrganizationID" />
+                    <externalMetadataColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OrganizationName" />
+                    <externalMetadataColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input].ExternalColumns[SourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SourceCode" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load SenderInfo\Load to Insight.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load SenderInfo\Load to Insight.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load SenderInfo\Load to Insight.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load SenderInfo\Load to Insight.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load SenderInfo.Paths[OLE DB Source Output]"
+              endId="Package\Load SenderInfo\Load to Insight.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load SenderInfo\Extract Sender Info.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{249EAB06-31B2-4C66-9885-DCEFA2C3B797}"
+      DTS:From="Package\Drop_Create or Truncate Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load SenderInfo" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Drop_Create or Truncate Table"
+          TopLeft="282,36" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Load SenderInfo"
+          TopLeft="319,169" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="396,78">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,91"
+              Start="0,0"
+              End="0,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load SenderInfo">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load SenderInfo\Load to Insight"
+          TopLeft="305.788254894662,164.962939974102" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Load SenderInfo\Extract Sender Info"
+          TopLeft="302,43" />
+        <EdgeLayout
+          Id="Package\Load SenderInfo.Paths[OLE DB Source Output]"
+          TopLeft="383.894127447331,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79.9629399741021"
+              Start="0,0"
+              End="0,72.4629399741021">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.4629399741021" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load SenderInfo\Extract Sender Info">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load SenderInfo\Load to Insight">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

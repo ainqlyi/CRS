@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>HSCRC_Insight</DataSourceReference>
+      <CommandText>declare @maxdate date
+SELECT @maxdate = MAX(DischargeDT) FROM Fact.IP_Visit
+
+SELECT        
+cast('2015-01-01' as date) as fromDate
+,case 
+	when @maxdate &lt; '2016-01-31'						
+		then cast(
+				dateadd(s,-1,
+							dateadd(mm,
+									datediff(m,0,@maxdate)--month number from 1900-01-01
+									,0)--first day of current month
+						)--yesterday of first day of current month, i.e. last day of last month
+				as date)
+	else 
+		cast('2015-12-31' as date)
+end as toDate
+,case 
+	when @maxdate &lt; '2016-01-31'						
+		then cast(
+				dateadd(s,-1,
+							dateadd(mm,
+									datediff(m,0,@maxdate)+1--month number from 1900-01-01 plus 1
+									,0)--first day of next month
+						)--yesterday of first day of next month, i.e. last day of current month
+				as date)
+	else 
+		cast('2016-01-31' as date)
+end as cutoffDate</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="fromDate">
+        <DataField>fromDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="toDate">
+        <DataField>toDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="cutoffDate">
+        <DataField>cutoffDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

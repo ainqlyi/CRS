@@ -1,0 +1,467 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/1/2015 9:35:00 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20150616"
+  DTS:CreatorName="INTRANET\rnaik"
+  DTS:DTSID="{3D5858B0-1A65-48A2-B506-DD9D26AE32E6}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="IP_DeleteData_FactandOrphanedRows"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{1CC2A277-656F-4B9C-8BED-4D91B08B2A1B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Check if from date is less than to date"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{e834b3fc-2ef9-472d-96e3-0dc0943ffb54}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check if from date is less than to date">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Check to and from dates"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3b3f05f4-5fdd-44c4-b176-b980620b5014}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check to and from dates">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Chronic Orphaned Rows"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{f28e5c08-402d-4920-992a-dcfc7a854856}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Chronic Orphaned Rows"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="--delete Chronic orphaned rows&#xA;delete from CrossRef.Chronic_RateCenter where visitid in(&#xA;     SELECT DISTINCT R.VisitID [Orphaned]&#xA;     FROM CrossRef.Chronic_RateCenter R&#xA;     LEFT JOIN Fact.Chronic I ON R.VisitID = I.VisitID&#xA;     WHERE I.VisitID IS NULL)&#xA; &#xA;  &#xA;delete from CrossRef.Chronic_diagnosis where visitid in(&#xA;     SELECT DISTINCT R.VisitID [Orphaned]&#xA;     FROM CrossRef.Chronic_diagnosis R&#xA;     LEFT JOIN Fact.Chronic I ON R.VisitID = I.VisitID&#xA;     WHERE I.VisitID IS NULL)&#xA; &#xA;  &#xA;delete from CrossRef.Chronic_Procedure where visitid in(&#xA;   SELECT DISTINCT R.VisitID [Orphaned]&#xA;     FROM CrossRef.Chronic_Procedure R&#xA;     LEFT JOIN Fact.Chronic I ON R.VisitID = I.VisitID&#xA;     WHERE I.VisitID IS NULL)&#xA;&#xA;delete from CrossRef.Chronic_RecType2 where visitid in(  &#xA;SELECT DISTINCT R.VisitID [Orphaned]&#xA;FROM CrossRef.Chronic_RecType2 R&#xA;LEFT JOIN Fact.Chronic I ON R.VisitID = I.VisitID&#xA;WHERE I.VisitID IS NULL) &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete from Chronic both dates are in 2016"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8b35df85-7fc7-448e-bde6-c083527582ee}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete from Chronic both dates are in 2016"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"delete from Fact.Chronic where DischargeDT between " +  "'"+@[$Project::IP_Fromdate] +"'"+" and "+  "'"+@[$Project::IP_Todate]+"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="delete from Fact.Chronic where DischargeDT between '1/1/2016' and '6/30/2016'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete from Chronic in 2016"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{971eb3ed-fd9c-41db-a558-cce3da2805c8}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete from Chronic in 2016"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"delete from Fact.Chronic where DischargeDT between ' 1/1/2016 ' and"+ "'" + @[$Project::IP_Todate] +"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="delete from Fact.Chronic where DischargeDT between ' 1/1/2016 ' and'6/30/2016'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete from IP between to and from dates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{09ace5c4-c91f-4c53-b3c2-e9db14a7652a}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete from IP between to and from dates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"delete from Fact.IP_visit where DischargeDT between " +  "'"+@[$Project::IP_Fromdate] +"'"+" and "+  "'"+@[$Project::IP_Todate]+"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="delete from Fact.IP_visit where DischargeDT between '1/1/2016' and '6/30/2016'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Orphaned Rows from IP"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2307b24e-be16-494e-be3c-77001d618b12}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Orphaned Rows from IP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="-- IP Orphaned Rows&#xA;delete from CrossRef.IP_RateCenter where visitid in(&#xA;     SELECT DISTINCT R.VisitID [Orphaned]&#xA;     FROM CrossRef.IP_RateCenter R&#xA;     LEFT JOIN Fact.IP_Visit I ON R.VisitID = I.VisitID&#xA;     WHERE I.VisitID IS NULL)&#xA; &#xA;  &#xA;delete from CrossRef.IP_Diagnosis where visitid in(&#xA;     SELECT DISTINCT R.VisitID [Orphaned]&#xA;     FROM CrossRef.IP_Diagnosis R&#xA;     LEFT JOIN Fact.IP_Visit I ON R.VisitID = I.VisitID&#xA;     WHERE I.VisitID IS NULL)&#xA; &#xA;  &#xA;delete from CrossRef.IP_Procedure where visitid in(&#xA;   SELECT DISTINCT R.VisitID [Orphaned]&#xA;     FROM CrossRef.IP_Procedure R&#xA;     LEFT JOIN Fact.IP_Visit I ON R.VisitID = I.VisitID&#xA;     WHERE I.VisitID IS NULL)&#xA;&#xA;delete from CrossRef.IP_Visit_RecType2 where visitid in(  &#xA;SELECT DISTINCT R.VisitID [Orphaned]&#xA;FROM CrossRef.IP_Visit_RecType2 R&#xA;LEFT JOIN Fact.IP_Visit I ON R.VisitID = I.VisitID&#xA;WHERE I.VisitID IS NULL) &#xA;&#xA;&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{be538948-157e-4827-b35c-e66363f3791c}"
+      DTS:From="Package\Delete from IP between to and from dates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Delete Orphaned Rows from IP" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{9ee556a2-0f84-4e82-aa57-f16531221ab6}"
+      DTS:EvalOp="1"
+      DTS:Expression="(DT_DBDATE)( @[$Project::IP_Todate])&gt;= (DT_DBDATE)(@[$Project::IP_Fromdate])"
+      DTS:From="Package\Check if from date is less than to date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Check to and from dates" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{1E3110C9-9E58-4D16-9930-4448BDD83580}"
+      DTS:EvalOp="1"
+      DTS:Expression="(DT_DBDATE) (@[$Project::IP_Fromdate] ) &gt;=(DT_DBDATE)( &quot;1/1/2016&quot; ) &amp;&amp; (DT_DBDATE)( @[$Project::IP_Todate] )&gt;= (DT_DBDATE)(&quot;1/1/2016&quot;)"
+      DTS:From="Package\Check to and from dates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Delete from Chronic both dates are in 2016" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4D3F548D-6329-4060-953E-05F21A86CD29}"
+      DTS:EvalOp="1"
+      DTS:Expression="(DT_DBDATE) (@[$Project::IP_Fromdate] ) &lt;(DT_DBDATE)( &quot;1/1/2016&quot; ) &amp;&amp; (DT_DBDATE)( @[$Project::IP_Todate] )&gt;= (DT_DBDATE)(&quot;1/1/2016&quot;)"
+      DTS:From="Package\Check to and from dates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Delete from Chronic in 2016" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{10BF58F0-AAA8-4078-9B7F-4F23F664EDDA}"
+      DTS:From="Package\Delete from Chronic both dates are in 2016"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Delete Chronic Orphaned Rows" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{2687FB80-ADEA-4EFD-B727-0507DECC71F3}"
+      DTS:From="Package\Check to and from dates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Delete from IP between to and from dates" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{7135A691-CA66-433F-B10B-8FBB42CD3F37}"
+      DTS:From="Package\Delete from Chronic in 2016"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Delete Chronic Orphaned Rows" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="281.6,55.2"
+          Size="281.6,98.4"
+          Id="Package\Check if from date is less than to date"
+          TopLeft="618.5,27" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="217.6,55.2"
+          Size="217.6,97.6"
+          Id="Package\Check to and from dates"
+          TopLeft="649.5,178" />
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Delete Chronic Orphaned Rows"
+          TopLeft="836.5,519" />
+        <NodeLayout
+          Size="283.2,41.6"
+          Id="Package\Delete from Chronic both dates are in 2016"
+          TopLeft="601.5,418" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Delete from Chronic in 2016"
+          TopLeft="960.5,414" />
+        <NodeLayout
+          Size="279.2,41.6"
+          Id="Package\Delete from IP between to and from dates"
+          TopLeft="182.5,360" />
+        <NodeLayout
+          Size="292.8,48.8"
+          Id="Package\Delete Orphaned Rows from IP"
+          TopLeft="181,440.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="324.75,402">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.5"
+              Start="0,0"
+              End="0,31">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="758.8,125.4">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.6"
+              Start="0,0"
+              End="0,45.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,14.55,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="793.5,276">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-50.5,142"
+              Start="0,0"
+              End="-50.5,134.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.4207650273224" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53.4207650273224"
+                    Point2="0,57.4207650273224"
+                    Point3="-4,57.4207650273224" />
+                  <mssgle:LineSegment
+                    End="-46.5,57.4207650273224" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-46.5,57.4207650273224"
+                    Point2="-50.5,57.4207650273224"
+                    Point3="-50.5,61.4207650273224" />
+                  <mssgle:LineSegment
+                    End="-50.5,134.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-33.25,62.4207650273224,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="811,276">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="255,138"
+              Start="0,0"
+              End="255,130.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.1117824773414" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.1117824773414"
+                    Point2="0,47.1117824773414"
+                    Point3="4,47.1117824773414" />
+                  <mssgle:LineSegment
+                    End="251,47.1117824773414" />
+                  <mssgle:CubicBezierSegment
+                    Point1="251,47.1117824773414"
+                    Point2="255,47.1117824773414"
+                    Point3="255,51.1117824773414" />
+                  <mssgle:LineSegment
+                    End="255,130.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="119.5,52.1117824773414,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="743.1,459.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="169.933333333333,59.4"
+              Start="0,0"
+              End="169.933333333333,51.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.389014084507" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.389014084507"
+                    Point2="0,35.389014084507"
+                    Point3="4,35.389014084507" />
+                  <mssgle:LineSegment
+                    End="165.933333333333,35.389014084507" />
+                  <mssgle:CubicBezierSegment
+                    Point1="165.933333333333,35.389014084507"
+                    Point2="169.933333333333,35.389014084507"
+                    Point3="169.933333333333,39.389014084507" />
+                  <mssgle:LineSegment
+                    End="169.933333333333,51.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="706,276">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-384,84"
+              Start="0,0"
+              End="-384,76.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.6767371601209" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.6767371601209"
+                    Point2="0,28.6767371601209"
+                    Point3="-4,28.6767371601209" />
+                  <mssgle:LineSegment
+                    End="-380,28.6767371601209" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-380,28.6767371601209"
+                    Point2="-384,28.6767371601209"
+                    Point3="-384,32.6767371601209" />
+                  <mssgle:LineSegment
+                    End="-384,76.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1066.1,455.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-80.5333333333331,63.4"
+              Start="0,0"
+              End="-80.5333333333331,55.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.7721126760563" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.7721126760563"
+                    Point2="0,37.7721126760563"
+                    Point3="-4,37.7721126760563" />
+                  <mssgle:LineSegment
+                    End="-76.5333333333331,37.7721126760563" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-76.5333333333331,37.7721126760563"
+                    Point2="-80.5333333333331,37.7721126760563"
+                    Point3="-80.5333333333331,41.7721126760563" />
+                  <mssgle:LineSegment
+                    End="-80.5333333333331,55.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,968 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/17/2014 1:16:22 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:DTSID="{115F774B-9858-4244-907E-2E46E832FB54}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="HSCRCGeocodingProcess"
+  DTS:PackageType="5"
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{6ED5C712-EF12-4BE0-8353-B41BD1457C81}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{cea3c2c4-0118-4366-953c-05b89ec45ca6}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Eid_Address_Loading.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Geocode Addresses"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:DTSID="{b7de604b-064b-43c0-af09-581e117953ef}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Geocode Addresses"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[$Project::GeocodeAppLocation]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\CRISP-ERS-SIM\Developers\sshrestha\CRS\RestfulGeoCoder\bin\Debug\RestfulGeocoder.exe" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Enterprise EID table into Dimension Location"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2cfdaa63-988c-4b8b-9033-84ae644eb3a1}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Enterprise EID table into Dimension Location"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Enterprise EID Table"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Dimension].[Location]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT e.EID
+       ,e.Street
+       ,e.City
+       ,e.State
+       ,e.ZipCode
+       ,e.AuditDT
+    FROM ( SELECT *
+            FROM ( SELECT [EID]
+                       ,[Street1] [Street]
+                       ,[City]
+                       ,[State]
+                       ,[AuditDT]
+        ,[Zip] [ZipCode]
+                       ,ROW_NUMBER() OVER ( PARTITION BY EID ORDER BY AuditDT DESC ) [AuditRank]
+                    FROM [Central].[EnterpriseID].[Initiate_Load]
+                 ) t
+            WHERE AuditRank = 1
+         ) e
+    FULL OUTER JOIN [Fact].[IP_Visit] i ON i.EID = e.EID
+    FULL OUTER JOIN [Fact].[OP_Visit] o ON o.EID = e.EID
+    WHERE (
+            i.EID IS NOT NULL
+            OR o.EID IS NOT NULL
+          ) AND E.ZipCode IS NOT NULL AND E.ZipCode != ''</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Connections[OleDbConnection]"
+                  connectionManagerID="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[EID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[EID]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[EID]"
+                      name="EID"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[Street]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[Street]"
+                      length="100"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[Street]"
+                      name="Street"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="30"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="20"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[ZipCode]"
+                      length="10"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                      name="ZipCode"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[AuditDT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[AuditDT]"
+                      length="50"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[AuditDT]"
+                      name="AuditDT"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[EID]"
+                      dataType="i8"
+                      name="EID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[Street]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Street" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[ZipCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ZipCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].ExternalColumns[AuditDT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AuditDT" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[EID]"
+                      dataType="i8"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[EID]"
+                      name="EID" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[Street]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[Street]"
+                      name="Street" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[ZipCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[ZipCode]"
+                      name="ZipCode" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[AuditDT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[AuditDT]"
+                      name="AuditDT" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load into HSCRC_Insight Dimension Location table"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Dimension].[Location]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Connections[OleDbConnection]"
+                  connectionManagerID="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="IgnoreFailure"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].Columns[EID]"
+                      cachedDataType="i8"
+                      cachedName="EID"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[EID]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[EID]" />
+                    <inputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].Columns[Street]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Street"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[Street]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[Street]" />
+                    <inputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].Columns[ZipCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="ZipCode"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[ZipCode]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[ZipCode]" />
+                    <inputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].Columns[AuditDT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AuditDT"
+                      externalMetadataColumnId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[AuditDT]"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output].Columns[AuditDT]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[EID]"
+                      dataType="i8"
+                      name="EID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[Street]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Street" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[ZipCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ZipCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input].ExternalColumns[AuditDT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AuditDT" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Enterprise EID table into Dimension Location.Paths[OLE DB Source Output]"
+              endId="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set PKs and Indexes for Dimension GeoLocation and USA STATES COUNTIES MD ZIPS"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B4EDA050-5ED6-4D17-9251-34C0BF003C11}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set PKs and Indexes for Dimension GeoLocation and USA STATES COUNTIES MD ZIPS"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS &#xA;WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'GeoLocation' AND TABLE_SCHEMA = 'Dimension')&#xA;BEGIN&#xA;ALTER TABLE [Dimension].[GeoLocation] ADD  CONSTRAINT [PK_GeoLocation] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[EID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;END&#xA;&#xA;GO&#xA;&#xA;SET ARITHABORT ON&#xA;SET CONCAT_NULL_YIELDS_NULL ON&#xA;SET QUOTED_IDENTIFIER ON&#xA;SET ANSI_NULLS ON&#xA;SET ANSI_PADDING ON&#xA;SET ANSI_WARNINGS ON&#xA;SET NUMERIC_ROUNDABORT OFF&#xA;&#xA;GO&#xA;&#xA;IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'SpatialIndex-V2' AND object_id = OBJECT_ID('Dimension.GeoLocation'))&#xA;BEGIN&#xA;CREATE SPATIAL INDEX [SpatialIndex-V2] ON [Dimension].[GeoLocation]&#xA;(&#xA;&#x9;[GeomPoint]&#xA;)USING  GEOMETRY_GRID &#xA;WITH (BOUNDING_BOX =(-180, 18, 180, 72), GRIDS =(LEVEL_1 = LOW,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = HIGH), &#xA;CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;END&#xA;GO&#xA;&#xA;GO&#xA;&#xA;IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS &#xA;WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'Geolocator' AND TABLE_SCHEMA = 'Lookup')&#xA;BEGIN&#xA;&#xA;/****** Object:  Index [PK_USA_STATES_COUNTIES_MD_ZIPS]    Script Date: 5/7/2015 4:02:56 PM ******/&#xA;ALTER TABLE Lookup.[Geolocator] ADD  CONSTRAINT [PK_Geolocator] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[OBJECTID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;END&#xA;&#xA;GO&#xA;&#xA;SET ARITHABORT ON&#xA;SET CONCAT_NULL_YIELDS_NULL ON&#xA;SET QUOTED_IDENTIFIER ON&#xA;SET ANSI_NULLS ON&#xA;SET ANSI_PADDING ON&#xA;SET ANSI_WARNINGS ON&#xA;SET NUMERIC_ROUNDABORT OFF&#xA;&#xA;GO&#xA;&#xA;IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'SpatialIndex-V2' AND object_id = OBJECT_ID('Lookup.Geolocator'))&#xA;BEGIN&#xA;CREATE SPATIAL INDEX [SpatialIndex-V2] ON Lookup.[Geolocator]&#xA;(&#xA;&#x9;[Shape]&#xA;)USING  GEOMETRY_GRID &#xA;WITH (BOUNDING_BOX =(-180, -15, 180, 72), GRIDS =(LEVEL_1 = LOW,LEVEL_2 = MEDIUM,LEVEL_3 = MEDIUM,LEVEL_4 = HIGH), &#xA;CELLS_PER_OBJECT = 16, PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;END&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Location table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DCA102E9-D4F2-4FFC-876D-02FB1036A109}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Location table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Dimension.Location" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Census Data"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3875F056-E366-4D72-AEFB-D65F7DB36D2E}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Census Data"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="WHILE(1=1)&#xA;BEGIN&#xA;&#x9;BEGIN TRANSACTION&#xA;&#xA;&#x9;UPDATE TOP(10000) T&#xA;&#x9;set T.CensusStateID = S.StateID&#xA;, T.CensusCountyID = S.CountyID&#xA;, T.CensusZipID = S.Zipcode&#xA;, T.CensusTractID = S.TractID&#xA;, T.CensusBlockGroupID = S.BGroupID&#xA;, T.CensusBlockID = S.BlockID&#xA;, T.GEOID10 = S.GEOID10_12&#xA;from dimension.Geolocation T&#xA;inner join Lookup.Geolocator S on&#xA;S.shape.STIntersects(T.GeomPoint) = 1 &#xA;&#xA;IF @@ROWCOUNT = 0&#xA;&#x9;BEGIN&#xA;&#x9;&#x9;COMMIT TRANSACTION&#xA;&#x9;&#x9;BREAK&#xA;&#x9;END&#xA;&#xA;&#x9;COMMIT TRANSACTION&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Geography in GeoLocation table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{d6f52610-cccb-49f6-9695-72ea9c453930}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Geography in GeoLocation table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="IF NOT Exists(SELECT * FROM sys.columns WHERE Name = 'GeomPoint' AND Object_ID = Object_ID('Dimension.GeoLocation'))&#xA;BEGIN&#xA;ALTER TABLE Dimension.GeoLocation&#xA;ADD GeomPoint geometry&#xA;END&#xA;GO&#xA;&#xA;UPDATE Dimension.GeoLocation&#xA;SET dimension.geolocation.Geompoint=geometry::Point(dimension.geolocation.PointX, dimension.geolocation.PointY,4326)&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update GeoLocation AuditDT from Location table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A01DE777-33B3-4D5B-9F71-96F5C8CACA4C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update GeoLocation AuditDT from Location table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE Dimension.GeoLocation&#xA;  SET Dimension.GeoLocation.AuditDt = L.AuditDT&#xA;  FROM Dimension.Location L&#xA;  WHERE Dimension.GeoLocation.EID = L.EID" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2E1EB7F3-9948-4776-AE68-9C1535F1F41E}"
+      DTS:From="Package\Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Geocode Addresses" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{47E9DBCB-9502-4375-AC55-E4C6AD794470}"
+      DTS:From="Package\Geocode Addresses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Truncate Location table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{EBC23070-97E9-4142-81EC-E657FBE1A91C}"
+      DTS:From="Package\Update Geography in GeoLocation table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Set PKs and Indexes for Dimension GeoLocation and USA STATES COUNTIES MD ZIPS" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{54C75C70-9D17-44DC-92C4-59AFC05E780F}"
+      DTS:From="Package\Truncate Location table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Load Enterprise EID table into Dimension Location" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{3C72CD1F-5A44-4A70-AF61-6F04961526EE}"
+      DTS:From="Package\Load Enterprise EID table into Dimension Location"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Update GeoLocation AuditDT from Location table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{B3111403-EE86-4260-85BD-F1F07279AC89}"
+      DTS:From="Package\Update GeoLocation AuditDT from Location table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Update Geography in GeoLocation table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{91C3F4F2-F85F-483F-B92F-EB5A95427CC2}"
+      DTS:From="Package\Set PKs and Indexes for Dimension GeoLocation and USA STATES COUNTIES MD ZIPS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Update Census Data" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="451.333333333334,41.3333333333334"
+          Id="Package\Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+          TopLeft="116.573575846074,76.7779267910863" />
+        <NodeLayout
+          Size="171.333333333334,41.3333333333334"
+          Id="Package\Geocode Addresses"
+          TopLeft="142.973914739321,139.262571123157" />
+        <NodeLayout
+          Size="315.333333333334,41.3333333333334"
+          Id="Package\Load Enterprise EID table into Dimension Location"
+          TopLeft="182.285717390021,266.729415505485" />
+        <NodeLayout
+          Size="486.666666666667,41.3333333333334"
+          Id="Package\Set PKs and Indexes for Dimension GeoLocation and USA STATES COUNTIES MD ZIPS"
+          TopLeft="529.714294735266,401.035299248349" />
+        <NodeLayout
+          Size="190.666666666667,41.3333333333334"
+          Id="Package\Truncate Location table"
+          TopLeft="104.68571602763,207.105885201424" />
+        <NodeLayout
+          Size="174.666666666667,41.3333333333334"
+          Id="Package\Update Census Data"
+          TopLeft="538.285723452665,332.000003938114" />
+        <NodeLayout
+          Size="265.333333333334,41.3333333333334"
+          Id="Package\Update Geography in GeoLocation table"
+          TopLeft="218.845148640316,403.495484219614" />
+        <NodeLayout
+          Size="308.666666666667,41.3333333333334"
+          Id="Package\Update GeoLocation AuditDT from Location table"
+          TopLeft="188.114288876981,330.258827947993" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="342.173575846074,118.377926791086">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-27.9996611067534,41.6846443320703"
+              Start="0,0"
+              End="-20.4996611067534,41.6846443320703">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.6846443320703" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.6846443320703"
+                    Point2="0,41.6846443320703"
+                    Point3="-4,41.6846443320703" />
+                  <mssgle:LineSegment
+                    End="-20.4996611067534,41.6846443320703" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="228.573914739321,180.862571123157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-28.688198711691,26.2433140782679"
+              Start="0,0"
+              End="-28.688198711691,18.7433140782679">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.12165703913395" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.12165703913395"
+                    Point2="0,13.121657039134"
+                    Point3="-4,13.121657039134" />
+                  <mssgle:LineSegment
+                    End="-24.688198711691,13.121657039134" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24.688198711691,13.121657039134"
+                    Point2="-28.688198711691,13.121657039134"
+                    Point3="-28.688198711691,17.121657039134" />
+                  <mssgle:LineSegment
+                    End="-28.688198711691,18.7433140782679" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="484.445148640316,423.065391733981">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.2691460949503,0"
+              Start="0,0"
+              End="37.7691460949503,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.7691460949503,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="295.08571602763,227.905885201424">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.8000013623918,38.8235303040608"
+              Start="0,0"
+              End="44.8000013623918,31.3235303040608">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="40.8000013623918,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.8000013623918,0"
+                    Point2="44.8000013623918,0"
+                    Point3="44.8000013623918,4" />
+                  <mssgle:LineSegment
+                    End="44.8000013623918,31.3235303040608" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="182.285717390021,287.529415505485">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="5.82857148695973,63.5294124425076"
+              Start="0,0"
+              End="-1.67142851304027,63.5294124425076">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,59.5294124425076" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,59.5294124425076"
+                    Point2="-22.5,63.5294124425076"
+                    Point3="-18.5,63.5294124425076" />
+                  <mssgle:LineSegment
+                    End="-1.67142851304027,63.5294124425076" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="342.514288876981,371.858827947993">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-33.8024735699984,31.636656271621"
+              Start="0,0"
+              End="-33.8024735699984,24.136656271621">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.8683291296614" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.8683291296614"
+                    Point2="0,18.8683291296614"
+                    Point3="-4,18.8683291296614" />
+                  <mssgle:LineSegment
+                    End="-29.8024735699984,18.8683291296614" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-29.8024735699984,18.8683291296614"
+                    Point2="-33.8024735699984,18.8683291296614"
+                    Point3="-33.8024735699984,22.8683291296614" />
+                  <mssgle:LineSegment
+                    End="-33.8024735699984,24.136656271621" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="772.914294735266,401.035299248349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-147.428571282601,-27.4352953102347"
+              Start="0,0"
+              End="-147.428571282601,-19.9352953102347">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-9.71764765511733" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-9.71764765511733"
+                    Point2="0,-13.7176476551173"
+                    Point3="-4,-13.7176476551173" />
+                  <mssgle:LineSegment
+                    End="-143.428571282601,-13.7176476551173" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-143.428571282601,-13.7176476551173"
+                    Point2="-147.428571282601,-13.7176476551173"
+                    Point3="-147.428571282601,-17.7176476551173" />
+                  <mssgle:LineSegment
+                    End="-147.428571282601,-19.9352953102347" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Enterprise EID table into Dimension Location">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,41.3333333333334"
+          Id="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table"
+          TopLeft="356.8,30.4" />
+        <NodeLayout
+          Size="318.666666666667,41.3333333333334"
+          Id="Package\Load Enterprise EID table into Dimension Location\Load into HSCRC_Insight Dimension Location table"
+          TopLeft="291.085713166607,119.717645831917" />
+        <EdgeLayout
+          Id="Package\Load Enterprise EID table into Dimension Location.Paths[OLE DB Source Output]"
+          TopLeft="447.542856583303,72">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.717645831917"
+              Start="0,0"
+              End="0,40.217645831917">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.217645831917" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Enterprise EID table into Dimension Location\Enterprise EID Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

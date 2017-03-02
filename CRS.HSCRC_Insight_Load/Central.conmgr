@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Central"
+  DTS:DTSID="{7f5b2654-4423-4cf7-8fb3-80eedbbb1e2c}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=192.168.210.94;User ID=CRSReports;Initial Catalog=Central;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdq6irZsLWkSEcBVwgIAHvAAAAAACAAAAAAADZgAAwAAAABAAAADt8VUcVn28kjhDCDY1vBgFAAAAAASAAACgAAAAEAAAAPGJFTVCc7ekTiIk3six5Ud4AAAA7M2mQpSUxYSC9GoSKAwiC2QBPPMgKwLsu/581A340SxXw7wytlfg8rVA3Zn6BQ8aw9F2d2UJPym/QVfGnUsBfLGejHjm/k2QQ8NURxBIK7A7zM3KWVzxNNR566P38tKWYu9ZDOjogxrdpBDb5itGkOU/GQQ4cmIfFAAAAPMvtx4fSX1pMFEtjlFEOCLQzClV</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

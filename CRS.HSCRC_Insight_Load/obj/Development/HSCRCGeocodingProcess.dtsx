@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/17/2014 1:16:22 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:DTSID="{115F774B-9858-4244-907E-2E46E832FB54}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="HSCRCGeocodingProcess"
+  DTS:PackageType="5"
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{321237CA-256B-47FE-95A4-4DD7AF23BD05}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{cea3c2c4-0118-4366-953c-05b89ec45ca6}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Eid_Address_Loading.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Geocode Addresses"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{b7de604b-064b-43c0-af09-581e117953ef}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Geocode Addresses"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="\\192.168.210.90\d$\Applications\RestfulGeocoder\Debug\RestfulGeoCoder.exe" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Census Data"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6650ECB2-C6B3-456B-8E10-B44EF5CE5594}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Census Data">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Update Census Data\Update CensusBlockGroup"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ccbccbeb-829b-49c5-8d4e-05e6c61fe056}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update CensusBlockGroup"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}"
+              SQLTask:SqlStatementSource="DECLARE @COUNTER INT = 0&#xA;DECLARE @ROWS_TO_FETCH INT = 100000&#xA;DECLARE @NUM_ROWS INT&#xA;&#xA;SET @NUM_ROWS = (SELECT Count(*)&#xA; FROM [Dimension].[GeoLocation])&#xA;&#xA;WHILE (1 = 1)&#xA;BEGIN&#xA;    BEGIN TRANSACTION&#xA;    &#xA; IF OBJECT_ID('tempdb..#tempCensus') IS NOT NULL&#xA; DROP TABLE #tempCensus&#xA;&#xA; select * into #tempCensus&#xA; from&#xA; (SELECT [EID], Point&#xA; FROM [Dimension].[GeoLocation]&#xA; ORDER BY [EID] OFFSET @COUNTER ROWS FETCH NEXT @ROWS_TO_FETCH ROWS ONLY) t&#xA;&#xA; SET @COUNTER = @COUNTER + @ROWS_TO_FETCH&#xA;&#xA; UPDATE g&#xA; SET g.CensusBlockGroupID = c.CensusBlockGroupID&#xA; FROM #tempCensus t&#xA; INNER JOIN [Dimension].[GeoLocation] g on t.EID = g.EID&#xA; INNER JOIN [Lookup].[CensusBlockGroup] c on c.Geometry.STContains(t.Point) = 1&#xA;&#xA;    IF @COUNTER &gt;= @NUM_ROWS&#xA;      BEGIN&#xA;  drop table #tempCensus&#xA;        COMMIT TRANSACTION&#xA;        BREAK&#xA;      END&#xA;    &#xA;    COMMIT TRANSACTION&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update Census Data\Update CensusState, CensusCounty, CensusTract"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2866babd-ea2b-4b9e-92c1-ce7ed26289d2}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update CensusState, CensusCounty, CensusTract"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{ACFAE712-9FFD-4B64-9150-7DA9BA2A6CBA}"
+              SQLTask:SqlStatementSource="UPDATE G&#xA;  SET G.CensusStateID = B.CensusStateID&#xA;  , G.CensusCountyID = B.CensusCountyID_MD&#xA;  , G.CensusTractID = B.CensusTractID&#xA;  FROM Dimension.GeoLocation G&#xA;  INNER JOIN Lookup.CensusBlockGroup B ON G.CensusBlockGroupID = B.CensusBlockID" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update Census Data.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{F5AFA81A-77E0-4B0A-8559-44D5E99C003B}"
+          DTS:From="Package\Update Census Data\Update CensusBlockGroup"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Update Census Data\Update CensusState, CensusCounty, CensusTract" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Geography in GeoLocation table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{d6f52610-cccb-49f6-9695-72ea9c453930}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Geography in GeoLocation table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8F95F7BD-E6C2-435C-8C21-0C4267006CED}"
+          SQLTask:SqlStatementSource="UPDATE Dimension.GeoLocation&#xA;SET Point = geography::STPointFromText('POINT('+convert(varchar(20),PointX)+' '+convert(varchar(20),PointY)+')',4326) persisted" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2E1EB7F3-9948-4776-AE68-9C1535F1F41E}"
+      DTS:From="Package\Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Geocode Addresses" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0880DBBB-50BD-470D-82ED-663EA7A1C429}"
+      DTS:From="Package\Geocode Addresses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update Geography in GeoLocation table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{FC309A5D-B34B-4F41-A689-367040B8958A}"
+      DTS:From="Package\Update Geography in GeoLocation table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update Census Data" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="451.2,41.6"
+          Id="Package\Create Dimension Location and GeoLocation Tables to store Geocoded Address"
+          TopLeft="116.573575846074,76.7779267910863" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Geocode Addresses"
+          TopLeft="257.831059552469,151.497865412399" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Update Census Data\Update CensusBlockGroup"
+          TopLeft="59.1,5.50000000000007" />
+        <NodeLayout
+          Size="310.4,41.6"
+          Id="Package\Update Census Data\Update CensusState, CensusCounty, CensusTract"
+          TopLeft="5.50000000000003,107.1" />
+        <EdgeLayout
+          Id="Package\Update Census Data.PrecedenceConstraints[Constraint]"
+          TopLeft="160.7,47.1000000000001">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="321.6,171.2"
+          Size="321.6,214.4"
+          Id="Package\Update Census Data"
+          TopLeft="526.457121652484,147.105883597008" />
+        <NodeLayout
+          Size="265.6,41.6"
+          Id="Package\Update Geography in GeoLocation table"
+          TopLeft="209.130862760597,229.142540597909" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="342.802317699271,118.377926791086">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.1199386213124"
+              Start="0,0"
+              End="0,25.6199386213124">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.6199386213124" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="342.680961156532,193.097865412399">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.04467518551"
+              Start="0,0"
+              End="0,28.54467518551">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.54467518551" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="474.730862760597,252.124212097458">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51.7262588918869,0"
+              Start="0,0"
+              End="44.2262588918869,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="44.2262588918869,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,299 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/20/2014 6:09:59 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:DTSID="{C2F48CF1-AD42-461A-97EE-BFF7FBF816E3}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Medicaid_Summary_By_Group"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{C6EF29EA-2CB3-4500-9C6B-1211C4628A9E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{17C80982-EC49-4238-8B96-6325777E5456}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="elgbegdt">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3FC3CA31-D8B6-44BD-A503-8881621909F6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="elgenddt">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C997B836-712B-4F2E-A73C-961698E5E1ED}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="F1Insert">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E5E35C40-2854-49AC-BDD8-0035A2DFE5D9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="F2Insert">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A0D30AA0-B867-40E0-9156-B411FDADA787}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Medicaid_Summary_covGroup">
+      <DTS:VariableValue
+        DTS:DataType="8">Medicaid_CovGroup_Summary</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE424873-5521-4243-B6E5-A4122BFB2E61}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;IF EXISTS(&#xA;SELECT 1 FROM INFORMATION_SCHEMA.TABLES&#xA;WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = '&quot; +  @[User::Medicaid_Summary_covGroup]  + &quot;'&#xA;)&#xA;BEGIN&#xA;DROP TABLE &quot; + @[User::Medicaid_Summary_covGroup] + &quot;&#xA;END&#xA;CREATE TABLE &quot; + @[User::Medicaid_Summary_covGroup] + &quot; (&#xA;&#x9;[CovGroup] VARCHAR(3) NULL,&#xA;&#x9;[MedicaidMemberDays] bigint NULL,&#xA;&#x9;[F1MemberDays] bigint NULL,&#xA;&#x9;[F2MemberDays] bigint NULL,&#xA;&#x9;[Year] int NULL,&#xA;&#x9;[Quarter] int NULL&#xA;)&#xA;GO&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sqlCreateTable">
+      <DTS:VariableValue
+        DTS:DataType="8">IF EXISTS(
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'Medicaid_CovGroup_Summary'
+)
+BEGIN
+DROP TABLE Medicaid_CovGroup_Summary
+END
+CREATE TABLE Medicaid_CovGroup_Summary (
+	[CovGroup] VARCHAR(3) NULL,
+	[MedicaidMemberDays] bigint NULL,
+	[F1MemberDays] bigint NULL,
+	[F2MemberDays] bigint NULL,
+	[Year] int NULL,
+	[Quarter] int NULL
+)
+GO</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create table if it does not exist"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BE2E7ABF-8D6B-46DE-A875-F133C7B5414C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create table if it does not exist"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D0B3A9D6-7F3C-427C-B288-9C53318B824B}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::sqlCreateTable" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\For Loop Container"
+      DTS:CreationName="STOCK:FORLOOP"
+      DTS:Description="For Loop Container"
+      DTS:DTSID="{1BDFB077-ACB2-445F-9869-14E30909B448}"
+      DTS:EvalExpression=""
+      DTS:ExecutableType="STOCK:FORLOOP"
+      DTS:LocaleID="-1"
+      DTS:MaxConcurrent="1"
+      DTS:ObjectName="For Loop Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\For Loop Container\Insert F1 covgroup, covered_days"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F6D36D0B-9A52-4B98-9204-5D7D2C652363}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Insert F1 covgroup, covered_days"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\For Loop Container\Insert F2 covgroup, covered_days"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{AB4F9C45-16F6-4B2E-A76F-82FBAA7FB62B}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Insert F2 covgroup, covered_days"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Medicaid MemberDays"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6C3BB39F-E1E4-4A1E-9BFA-46572935EA4F}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Medicaid MemberDays"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{93C7D055-18BB-4DF6-9437-207DE738DFB0}"
+      DTS:From="Package\Create table if it does not exist"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\For Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FB2FCDCA-4B92-48F2-9EF9-7B3F6289C0D5}"
+      DTS:From="Package\For Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Insert Medicaid MemberDays" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Create table if it does not exist"
+          TopLeft="44.0000007493156,17.1294120049394" />
+        <NodeLayout
+          Size="238.4,41.6"
+          Id="Package\For Loop Container\Insert F1 covgroup, covered_days"
+          TopLeft="9.4857186161742,1.03529589365924" />
+        <NodeLayout
+          Size="238.4,41.6"
+          Id="Package\For Loop Container\Insert F2 covgroup, covered_days"
+          TopLeft="11.4285723043948,52.4235319084775" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="359.2,162.4"
+          Size="359.2,205.6"
+          Id="Package\For Loop Container"
+          TopLeft="31.4285719637968,105.835295601947" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="156.000000749316,58.7294120049394">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="55.0285712144812,47.1058835970077"
+              Start="0,0"
+              End="55.0285712144812,39.6058835970077">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5529417985038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5529417985038"
+                    Point2="0,23.5529417985038"
+                    Point3="4,23.5529417985038" />
+                  <mssgle:LineSegment
+                    End="51.0285712144812,23.5529417985038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.0285712144812,23.5529417985038"
+                    Point2="55.0285712144812,23.5529417985038"
+                    Point3="55.0285712144812,27.5529417985038" />
+                  <mssgle:LineSegment
+                    End="55.0285712144812,39.6058835970077" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="216,41.6"
+          Id="Package\Insert Medicaid MemberDays"
+          TopLeft="427.085720114805,258.352943913417" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="390.628571963797,208.635295601947">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.4571481510085,70.5176483114698"
+              Start="0,0"
+              End="28.9571481510085,70.5176483114698">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="14.2285740755042,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.2285740755042,0"
+                    Point2="18.2285740755042,0"
+                    Point3="18.2285740755042,4" />
+                  <mssgle:LineSegment
+                    End="18.2285740755042,66.5176483114698" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.2285740755042,66.5176483114698"
+                    Point2="18.2285740755042,70.5176483114698"
+                    Point3="22.2285740755042,70.5176483114698" />
+                  <mssgle:LineSegment
+                    End="28.9571481510085,70.5176483114698" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

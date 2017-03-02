@@ -1,0 +1,1078 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/10/2015 4:49:11 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{9DE3901E-FD53-41E2-9D69-2B81471ACFD9}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadNotifications_ENS_Insight"
+  DTS:PackageType="5"
+  DTS:VersionBuild="59"
+  DTS:VersionGUID="{07818E03-FB5D-41CE-98A7-2504E8C0A762}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{63086B3D-488B-47F1-B389-A80CEF67F519}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="maxCreatedTimeStamp">
+      <DTS:VariableValue
+        DTS:DataType="8">9/16/2015</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Attach EID"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{321DFD8E-CE08-46C5-B9C8-1F49B16A1C87}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Attach EID"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}"
+          SQLTask:SqlStatementSource="UPDATE &#xA;&#x9;a&#xA;SET &#xA;&#x9;a.EID = e.EID&#xA;FROM&#xA;&#x9;ENS.Notifications AS a&#xA;&#x9;LEFT JOIN EnterpriseID.EIDByRawMRN AS e&#xA;&#x9;&#x9;ON a.AssigningAuthorityCode = e.SourceCode&#xA;&#x9;&#x9;AND a.PatientIdentifier = e.RawMRN" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Diable ColumnStoreIndex"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{906039D4-2BA4-46E5-A233-49C624E0E75D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Diable ColumnStoreIndex"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}"
+          SQLTask:SqlStatementSource="IF EXISTS&#xA;&#x9;(&#xA;&#x9;SELECT * &#xA;&#x9;FROM sys.indexes&#xA;&#x9;WHERE name = 'NonClusteredColumnStoreIndexNotifications'&#xA;&#x9;AND object_id = OBJECT_ID('[ENS].[Notifications]')&#xA;&#x9;)&#xA;ALTER INDEX NonClusteredColumnStoreIndexNotifications ON [ENS].[Notifications]&#xA;DISABLE&#xA;&#xA;ELSE&#xA;&#xA;BEGIN&#xA;&#xA;&#x9;CREATE NONCLUSTERED COLUMNSTORE INDEX [NonClusteredColumnStoreIndexNotifications] ON [ENS].[Notifications]&#xA;&#x9;(&#xA;&#x9;&#x9;[AssigningAuthorityCode],&#xA;&#x9;&#x9;[PatientIdentifier],&#xA;&#x9;&#x9;[EventType],&#xA;&#x9;&#x9;[EvtTimeStamp],&#xA;&#x9;&#x9;[CreatedTimeStamp],&#xA;&#x9;&#x9;[TransactionCreatedTimeStamp],&#xA;&#x9;&#x9;[ParticipantID],&#xA;&#x9;&#x9;[RosterID],&#xA;&#x9;&#x9;[EID],&#xA;&#x9;&#x9;[PatientClass],&#xA;&#x9;&#x9;[AdmitTime],&#xA;&#x9;&#x9;[DischargeTime],&#xA;&#x9;&#x9;[Race],&#xA;&#x9;&#x9;[Ethnicity],&#xA;&#x9;&#x9;[ENSVersion]&#xA;&#x9;)WITH (DROP_EXISTING = OFF)&#xA;&#xA;&#x9;ALTER INDEX NonClusteredColumnStoreIndexNotifications ON [ENS].[Notifications]&#xA;&#x9;DISABLE&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Enable ColumnStoreIndex"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1FA016BD-6903-4891-8CC8-B6F30FD8B38D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Enable ColumnStoreIndex"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}"
+          SQLTask:SqlStatementSource="ALTER INDEX NonClusteredColumnStoreIndexNotifications ON [ENS].[Notifications]&#xA;REBUILD" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get MaxCreatedTimeStamp"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{051AF9D5-5CDE-440B-8CA9-4FDE9A6E5C06}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get MaxCreatedTimeStamp"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}"
+          SQLTask:SqlStatementSource="SELECT CONVERT(VARCHAR(50),MAX(CreatedTimeStamp)) [MaxCreatedTimeStamp] FROM [ENS].[Notifications]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="MaxCreatedTimeStamp"
+            SQLTask:DtsVariableName="User::maxCreatedTimeStamp" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Notifications"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E3C0B212-3FE1-4C0E-950A-3B1C59CEE8C2}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Notifications"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Notifications\Extract ENS Notifications"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract ENS Notifications"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH a AS 
+(
+SELECT  
+	c.CandidateID
+	,FIRST_VALUE(c.CandidateID) OVER (PARTITION BY c.ParticipantID,c.RosterId,c.TransactionID ORDER BY c.CandidateID) AS FirstCandidateID 
+	,c.ParticipantID
+	,c.RosterId
+	,t.PatientClass
+	,NULL AS EID
+	,t.AssigningAuthorityCode
+	,t.PatientIdentifier
+	,t.EventType
+	,t.EvtTimeStamp
+	,n.CreatedTimeStamp
+	,t.CreatedTimeStamp [TransactionCreatedTimeStamp]
+	,cdx.DataSourceAttributes.value('(/SerializableDictionaryOfStringSerializableDictionaryOfStringObject/Item[Key/string= ''HL7Fields_Ext'']/Value/SerializableDictionaryOfStringObject/Item[Key/string=''AdmitTimeStamp'']/Value)[1]','varchar(255)') AS AdmitTime
+	,cdx.DataSourceAttributes.value('(/SerializableDictionaryOfStringSerializableDictionaryOfStringObject/Item[Key/string= ''HL7Fields_Ext'']/Value/SerializableDictionaryOfStringObject/Item[Key/string=''DischargeTimeStamp'']/Value)[1]','varchar(255)') AS DischargeTime
+	,cdx.DataSourceAttributes.value('(/SerializableDictionaryOfStringSerializableDictionaryOfStringObject/Item[Key/string= ''HL7Fields'']/Value/SerializableDictionaryOfStringObject/Item[Key/string=''Race'']/Value)[1]','varchar(25)') AS Race
+	,cdx.DataSourceAttributes.value('(/SerializableDictionaryOfStringSerializableDictionaryOfStringObject/Item[Key/string= ''HL7Fields'']/Value/SerializableDictionaryOfStringObject/Item[Key/string=''Ethnicity'']/Value)[1]','varchar(25)') AS Ethnicity      
+FROM 
+	[intermediate].[Candidate] c  WITH (NOLOCK)
+	JOIN [inbound].[Transaction] t  WITH (NOLOCK)
+		ON c.TransactionID = t.TransactionID
+	JOIN [outbound].[Notification] n  WITH (NOLOCK)
+		ON n.NotificationID = c.NotificationID
+	JOIN [intermediate].[Candidate_DataSourceXml] cdx  WITH (NOLOCK)
+		ON cdx.CandidateId = c.CandidateID
+WHERE 
+	t.CreatedTimeStamp&gt; ?
+)
+SELECT 
+	a.AssigningAuthorityCode
+	,a.PatientIdentifier
+	,a.EventType
+	,a.EvtTimeStamp
+	,a.CreatedTimeStamp
+	,a.ParticipantID
+	,a.PatientClass
+	,a.TransactionCreatedTimeStamp
+	,a.EID
+	,CASE 
+	WHEN ISDATE(a.AdmitTime) = 1
+	THEN CAST(a.AdmitTime AS DATETIME)
+	ELSE NULL
+	END AS 'AdmitTime'
+	,CASE 
+	WHEN ISDATE(a.DischargeTime) = 1
+	THEN CAST(a.DischargeTime AS DATETIME) 
+	ELSE NULL
+	END AS 'DischargeTime'
+	,a.Race
+	,a.Ethnicity       
+	,a.RosterId
+	,2 AS ENSVersion
+FROM 
+	a 
+WHERE 
+	a.CandidateID = a.FirstCandidateID;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::queryNotifications</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{63086B3D-488B-47F1-B389-A80CEF67F519};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Notifications\Extract ENS Notifications.Connections[OleDbConnection]"
+                  connectionManagerID="{4BAD9B42-8195-4DD5-AEFB-7563F9D29BD5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ENS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[AssigningAuthorityCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[AssigningAuthorityCode]"
+                      length="50"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[AssigningAuthorityCode]"
+                      name="AssigningAuthorityCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[PatientIdentifier]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[PatientIdentifier]"
+                      length="50"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[PatientIdentifier]"
+                      name="PatientIdentifier"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EventType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[EventType]"
+                      length="10"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EventType]"
+                      name="EventType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EvtTimeStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[EvtTimeStamp]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EvtTimeStamp]"
+                      name="EvtTimeStamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[CreatedTimeStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[CreatedTimeStamp]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[CreatedTimeStamp]"
+                      name="CreatedTimeStamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[ParticipantID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[ParticipantID]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[ParticipantID]"
+                      name="ParticipantID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[PatientClass]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[PatientClass]"
+                      length="10"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[PatientClass]"
+                      name="PatientClass"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[EID]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EID]"
+                      name="EID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[AdmitTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[AdmitTime]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[AdmitTime]"
+                      name="AdmitTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[DischargeTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[DischargeTime]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[DischargeTime]"
+                      name="DischargeTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[Race]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[Race]"
+                      length="25"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[Race]"
+                      name="Race"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[Ethnicity]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity]"
+                      length="25"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[Ethnicity]"
+                      name="Ethnicity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[RosterId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[RosterId]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[RosterId]"
+                      name="RosterId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[TransactionCreatedTimeStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[TransactionCreatedTimeStamp]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[TransactionCreatedTimeStamp]"
+                      name="TransactionCreatedTimeStamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[ENSVersion]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[ENSVersion]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[ENSVersion]"
+                      name="ENSVersion"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[AssigningAuthorityCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AssigningAuthorityCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[PatientIdentifier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientIdentifier" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[EventType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="EventType" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[EvtTimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="EvtTimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[CreatedTimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="CreatedTimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[ParticipantID]"
+                      dataType="i4"
+                      name="ParticipantID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[PatientClass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PatientClass" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[EID]"
+                      dataType="i4"
+                      name="EID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[AdmitTime]"
+                      dataType="dbTimeStamp"
+                      name="AdmitTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[DischargeTime]"
+                      dataType="dbTimeStamp"
+                      name="DischargeTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[Race]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Race" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Ethnicity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[RosterId]"
+                      dataType="i4"
+                      name="RosterId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[TransactionCreatedTimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="TransactionCreatedTimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].ExternalColumns[ENSVersion]"
+                      dataType="i4"
+                      name="ENSVersion" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[AssigningAuthorityCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[AssigningAuthorityCode]"
+                      name="AssigningAuthorityCode" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[PatientIdentifier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[PatientIdentifier]"
+                      name="PatientIdentifier" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[EventType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[EventType]"
+                      name="EventType" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[EvtTimeStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[EvtTimeStamp]"
+                      name="EvtTimeStamp" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[CreatedTimeStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[CreatedTimeStamp]"
+                      name="CreatedTimeStamp" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ParticipantID]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ParticipantID]"
+                      name="ParticipantID" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[PatientClass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[PatientClass]"
+                      name="PatientClass" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[TransactionCreatedTimeStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[TransactionCreatedTimeStamp]"
+                      name="TransactionCreatedTimeStamp" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[EID]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[EID]"
+                      name="EID" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[AdmitTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[AdmitTime]"
+                      name="AdmitTime" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[DischargeTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[DischargeTime]"
+                      name="DischargeTime" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[Race]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[Race]"
+                      name="Race" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[Ethnicity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[Ethnicity]"
+                      name="Ethnicity" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[RosterId]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[RosterId]"
+                      name="RosterId" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ENSVersion]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ENSVersion]"
+                      name="ENSVersion" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Notifications\Load Notifications"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load Notifications"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[ENS].[Notifications]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Notifications\Load Notifications.Connections[OleDbConnection]"
+                  connectionManagerID="{7D32B1F4-2E59-4FC8-BE4F-48105CC41301}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HSCRC_Insight]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[AssigningAuthorityCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AssigningAuthorityCode"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[AssigningAuthorityCode]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[AssigningAuthorityCode]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[PatientIdentifier]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PatientIdentifier"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[PatientIdentifier]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[PatientIdentifier]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[EventType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="EventType"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[EventType]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EventType]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[EvtTimeStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EvtTimeStamp"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[EvtTimeStamp]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EvtTimeStamp]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[CreatedTimeStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatedTimeStamp"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[CreatedTimeStamp]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[CreatedTimeStamp]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[ParticipantID]"
+                      cachedDataType="i4"
+                      cachedName="ParticipantID"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[ParticipantID]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[ParticipantID]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[EID]"
+                      cachedDataType="i4"
+                      cachedName="EID"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[EID]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[EID]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[PatientClass]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PatientClass"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[PatientClass]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[PatientClass]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[AdmitTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="AdmitTime"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[AdmitTime]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[AdmitTime]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[DischargeTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DischargeTime"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[DischargeTime]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[DischargeTime]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[Race]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Race"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[Race]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[Race]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[Ethnicity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Ethnicity"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[Ethnicity]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[Ethnicity]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[RosterId]"
+                      cachedDataType="i4"
+                      cachedName="RosterId"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[RosterID]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[RosterId]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[TransactionCreatedTimeStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TransactionCreatedTimeStamp"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCreatedTimeStamp]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[TransactionCreatedTimeStamp]" />
+                    <inputColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].Columns[ENSVersion]"
+                      cachedDataType="i4"
+                      cachedName="ENSVersion"
+                      externalMetadataColumnId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[ENSVersion]"
+                      lineageId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output].Columns[ENSVersion]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[AssigningAuthorityCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AssigningAuthorityCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[PatientIdentifier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientIdentifier" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[EventType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="EventType" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[EvtTimeStamp]"
+                      dataType="dbTimeStamp2"
+                      name="EvtTimeStamp"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[CreatedTimeStamp]"
+                      dataType="dbTimeStamp2"
+                      name="CreatedTimeStamp"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[ParticipantID]"
+                      dataType="i4"
+                      name="ParticipantID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[RosterID]"
+                      dataType="i4"
+                      name="RosterID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[EID]"
+                      dataType="i8"
+                      name="EID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[PatientClass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PatientClass" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[AdmitTime]"
+                      dataType="dbTimeStamp"
+                      name="AdmitTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[DischargeTime]"
+                      dataType="dbTimeStamp"
+                      name="DischargeTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[Race]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="Race" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[Ethnicity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Ethnicity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCreatedTimeStamp]"
+                      dataType="dbTimeStamp2"
+                      name="TransactionCreatedTimeStamp"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input].ExternalColumns[ENSVersion]"
+                      dataType="ui1"
+                      name="ENSVersion" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Notifications\Load Notifications.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Notifications\Load Notifications.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Load Notifications.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Notifications\Load Notifications.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Notifications\Load Notifications.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Notifications.Paths[OLE DB Source Output]"
+              endId="Package\Load Notifications\Load Notifications.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Notifications\Extract ENS Notifications.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{24B5A544-2B70-4948-B2AD-92CFFA947791}"
+      DTS:From="Package\Get MaxCreatedTimeStamp"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Notifications" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C5BA9696-C974-4A52-A353-F2CAA088C1F5}"
+      DTS:From="Package\Load Notifications"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Attach EID" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{54B145D0-8A11-457F-A053-EB460A3841D5}"
+      DTS:From="Package\Diable ColumnStoreIndex"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Get MaxCreatedTimeStamp" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{D7D5CFA0-C08C-410B-84D4-326483414E7E}"
+      DTS:From="Package\Attach EID"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Enable ColumnStoreIndex" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Attach EID"
+          TopLeft="193.42857141884,410" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Diable ColumnStoreIndex"
+          TopLeft="153,50" />
+        <NodeLayout
+          Size="201,42"
+          Id="Package\Enable ColumnStoreIndex"
+          TopLeft="155,525" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Get MaxCreatedTimeStamp"
+          TopLeft="149,179" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load Notifications"
+          TopLeft="170,294" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="252,221">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73"
+              Start="0,0"
+              End="0,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="254.91428570942,335.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74.4"
+              Start="0,0"
+              End="0,66.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="252.5,92">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,87"
+              Start="0,0"
+              End="0,79.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="256.81428570942,451.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.4"
+              Start="0,0"
+              End="0,65.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Notifications">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load Notifications\Load Notifications"
+          TopLeft="329,186" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Load Notifications\Extract ENS Notifications"
+          TopLeft="311,74" />
+        <EdgeLayout
+          Id="Package\Load Notifications.Paths[OLE DB Source Output]"
+          TopLeft="409.5,116">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Notifications\Extract ENS Notifications">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Notifications\Load Notifications">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

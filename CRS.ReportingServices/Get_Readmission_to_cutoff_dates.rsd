@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>HSCRC_Insight</DataSourceReference>
+      <CommandText> SELECT [cutoff_date], DATEADD(month, -1, [cutoff_date]) [to_date]
+ FROM (
+ SELECT MAX(I.DischargeDT) [cutoff_date]
+ FROM Fact.IP_Visit I ) t</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="to_date">
+        <DataField>to_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="cutoff_date">
+        <DataField>cutoff_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

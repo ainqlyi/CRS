@@ -1,0 +1,942 @@
+<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="SABALSHRESTCCED\sabalshrestha"
+  DTS:CreatorComputerName="SABALSHRESTCCED"
+  DTS:CreationDate="6/9/2014 2:35:47 PM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{92D9697E-C546-44F9-B4C7-45A7DF53E2C8}"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadDataSet_IP_Stg_DW"
+  DTS:DTSID="{25742B3B-62FB-4AD9-84D7-BA78435FF241}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert CrossRef Diagnosis"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert CrossRef Diagnosis"
+      DTS:DTSID="{188bb86a-df69-41ed-a2f1-cd2b8a6613de}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 01, Diagnosis01, PoADiag01 FROM ETL.Staging_Inp3 WHERE Diagnosis01 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 02, Diagnosis02, PoADiag02 FROM ETL.Staging_Inp3 WHERE Diagnosis02 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 03, Diagnosis03, PoADiag03 FROM ETL.Staging_Inp3 WHERE Diagnosis03 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 04, Diagnosis04, PoADiag04 FROM ETL.Staging_Inp3 WHERE Diagnosis04 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 05, Diagnosis05, PoADiag05 FROM ETL.Staging_Inp3 WHERE Diagnosis05 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 06, Diagnosis06, PoADiag06 FROM ETL.Staging_Inp3 WHERE Diagnosis06 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 07, Diagnosis07, PoADiag07 FROM ETL.Staging_Inp3 WHERE Diagnosis07 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 08, Diagnosis08, PoADiag08 FROM ETL.Staging_Inp3 WHERE Diagnosis08 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 09, Diagnosis09, PoADiag09 FROM ETL.Staging_Inp3 WHERE Diagnosis09 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 10, Diagnosis10, PoADiag10 FROM ETL.Staging_Inp3 WHERE Diagnosis10 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 11, Diagnosis11, PoADiag11 FROM ETL.Staging_Inp3 WHERE Diagnosis11 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 12, Diagnosis12, PoADiag12 FROM ETL.Staging_Inp3 WHERE Diagnosis12 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 13, Diagnosis13, PoADiag13 FROM ETL.Staging_Inp3 WHERE Diagnosis13 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 14, Diagnosis14, PoADiag14 FROM ETL.Staging_Inp3 WHERE Diagnosis14 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 15, Diagnosis15, PoADiag15 FROM ETL.Staging_Inp3 WHERE Diagnosis15 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 16, Diagnosis16, PoADiag16 FROM ETL.Staging_Inp3 WHERE Diagnosis16 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 17, Diagnosis17, PoADiag17 FROM ETL.Staging_Inp3 WHERE Diagnosis17 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 18, Diagnosis18, PoADiag18 FROM ETL.Staging_Inp3 WHERE Diagnosis18 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 19, Diagnosis19, PoADiag19 FROM ETL.Staging_Inp3 WHERE Diagnosis19 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 20, Diagnosis20, PoADiag20 FROM ETL.Staging_Inp3 WHERE Diagnosis20 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 21, Diagnosis21, PoADiag21 FROM ETL.Staging_Inp3 WHERE Diagnosis21 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 22, Diagnosis22, PoADiag22 FROM ETL.Staging_Inp3 WHERE Diagnosis22 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 23, Diagnosis23, PoADiag23 FROM ETL.Staging_Inp3 WHERE Diagnosis23 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 24, Diagnosis24, PoADiag24 FROM ETL.Staging_Inp3 WHERE Diagnosis24 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 25, Diagnosis25, PoADiag25 FROM ETL.Staging_Inp3 WHERE Diagnosis25 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 26, Diagnosis26, PoADiag26 FROM ETL.Staging_Inp3 WHERE Diagnosis26 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 27, Diagnosis27, PoADiag27 FROM ETL.Staging_Inp3 WHERE Diagnosis27 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 28, Diagnosis28, PoADiag28 FROM ETL.Staging_Inp3 WHERE Diagnosis28 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 29, Diagnosis29, PoADiag29 FROM ETL.Staging_Inp3 WHERE Diagnosis29 IS NOT NULL&#xA; INSERT CrossRef.Diagnosis SELECT VisitID, 30, Diagnosis30, PoADiag30 FROM ETL.Staging_Inp3 WHERE Diagnosis30 IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert CrossRef Procedure"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert CrossRef Procedure"
+      DTS:DTSID="{67eb2fb2-a6f5-45b1-9c59-cfb302486ffe}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 01, ProcType01, ProcClass01, ProcDate01, ProcPreOpTime01 FROM ETL.Staging_Inp3 WHERE ProcType01 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 02, ProcType02, ProcClass02, ProcDate02, ProcPreOpTime02 FROM ETL.Staging_Inp3 WHERE ProcType02 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 03, ProcType03, ProcClass03, ProcDate03, ProcPreOpTime03 FROM ETL.Staging_Inp3 WHERE ProcType03 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 04, ProcType04, ProcClass04, ProcDate04, ProcPreOpTime04 FROM ETL.Staging_Inp3 WHERE ProcType04 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 05, ProcType05, ProcClass05, ProcDate05, ProcPreOpTime05 FROM ETL.Staging_Inp3 WHERE ProcType05 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 06, ProcType06, ProcClass06, ProcDate06, ProcPreOpTime06 FROM ETL.Staging_Inp3 WHERE ProcType06 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 07, ProcType07, ProcClass07, ProcDate07, ProcPreOpTime07 FROM ETL.Staging_Inp3 WHERE ProcType07 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 08, ProcType08, ProcClass08, ProcDate08, ProcPreOpTime08 FROM ETL.Staging_Inp3 WHERE ProcType08 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 09, ProcType09, ProcClass09, ProcDate09, ProcPreOpTime09 FROM ETL.Staging_Inp3 WHERE ProcType09 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 10, ProcType10, ProcClass10, ProcDate10, ProcPreOpTime10 FROM ETL.Staging_Inp3 WHERE ProcType10 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 11, ProcType11, ProcClass11, ProcDate11, ProcPreOpTime11 FROM ETL.Staging_Inp3 WHERE ProcType11 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 12, ProcType12, ProcClass12, ProcDate12, ProcPreOpTime12 FROM ETL.Staging_Inp3 WHERE ProcType12 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 13, ProcType13, ProcClass13, ProcDate13, ProcPreOpTime13 FROM ETL.Staging_Inp3 WHERE ProcType13 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 14, ProcType14, ProcClass14, ProcDate14, ProcPreOpTime14 FROM ETL.Staging_Inp3 WHERE ProcType14 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 15, ProcType15, ProcClass15, ProcDate15, ProcPreOpTime15 FROM ETL.Staging_Inp3 WHERE ProcType15 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 16, ProcType16, ProcClass16, ProcDate16, ProcPreOpTime16 FROM ETL.Staging_Inp3 WHERE ProcType16 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 17, ProcType17, ProcClass17, ProcDate17, ProcPreOpTime17 FROM ETL.Staging_Inp3 WHERE ProcType17 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 18, ProcType18, ProcClass18, ProcDate18, ProcPreOpTime18 FROM ETL.Staging_Inp3 WHERE ProcType18 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 19, ProcType19, ProcClass19, ProcDate19, ProcPreOpTime19 FROM ETL.Staging_Inp3 WHERE ProcType19 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 20, ProcType20, ProcClass20, ProcDate20, ProcPreOpTime20 FROM ETL.Staging_Inp3 WHERE ProcType20 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 21, ProcType21, ProcClass21, ProcDate21, ProcPreOpTime21 FROM ETL.Staging_Inp3 WHERE ProcType21 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 22, ProcType22, ProcClass22, ProcDate22, ProcPreOpTime22 FROM ETL.Staging_Inp3 WHERE ProcType22 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 23, ProcType23, ProcClass23, ProcDate23, ProcPreOpTime23 FROM ETL.Staging_Inp3 WHERE ProcType23 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 24, ProcType24, ProcClass24, ProcDate24, ProcPreOpTime24 FROM ETL.Staging_Inp3 WHERE ProcType24 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 25, ProcType25, ProcClass25, ProcDate25, ProcPreOpTime25 FROM ETL.Staging_Inp3 WHERE ProcType25 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 26, ProcType26, ProcClass26, ProcDate26, ProcPreOpTime26 FROM ETL.Staging_Inp3 WHERE ProcType26 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 27, ProcType27, ProcClass27, ProcDate27, ProcPreOpTime27 FROM ETL.Staging_Inp3 WHERE ProcType27 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 28, ProcType28, ProcClass28, ProcDate28, ProcPreOpTime28 FROM ETL.Staging_Inp3 WHERE ProcType28 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 29, ProcType29, ProcClass29, ProcDate29, ProcPreOpTime29 FROM ETL.Staging_Inp3 WHERE ProcType29 IS NOT NULL&#xA; INSERT CrossRef.[Procedure] SELECT VisitID, 30, ProcType30, ProcClass30, ProcDate30, ProcPreOpTime30 FROM ETL.Staging_Inp3 WHERE ProcType30 IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert CrossRef RateCenter"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert CrossRef RateCenter"
+      DTS:DTSID="{76f5e15e-f838-4e8d-807b-a3d1dc18d7f3}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource=" INSERT CrossRef.RateCenter SELECT VisitID, 01, RC_Charges01, RC_Units01 FROM ETL.Staging_Inp3 WHERE RC_Charges01 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 02, RC_Charges02, RC_Units02 FROM ETL.Staging_Inp3 WHERE RC_Charges02 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 03, RC_Charges03, RC_Units03 FROM ETL.Staging_Inp3 WHERE RC_Charges03 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 04, RC_Charges04, RC_Units04 FROM ETL.Staging_Inp3 WHERE RC_Charges04 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 05, RC_Charges05, RC_Units05 FROM ETL.Staging_Inp3 WHERE RC_Charges05 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 06, RC_Charges06, RC_Units06 FROM ETL.Staging_Inp3 WHERE RC_Charges06 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 07, RC_Charges07, RC_Units07 FROM ETL.Staging_Inp3 WHERE RC_Charges07 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 08, RC_Charges08, RC_Units08 FROM ETL.Staging_Inp3 WHERE RC_Charges08 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 09, RC_Charges09, RC_Units09 FROM ETL.Staging_Inp3 WHERE RC_Charges09 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 10, RC_Charges10, RC_Units10 FROM ETL.Staging_Inp3 WHERE RC_Charges10 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 11, RC_Charges11, RC_Units11 FROM ETL.Staging_Inp3 WHERE RC_Charges11 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 12, RC_Charges12, RC_Units12 FROM ETL.Staging_Inp3 WHERE RC_Charges12 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 13, RC_Charges13, RC_Units13 FROM ETL.Staging_Inp3 WHERE RC_Charges13 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 14, RC_Charges14, RC_Units14 FROM ETL.Staging_Inp3 WHERE RC_Charges14 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 15, RC_Charges15, RC_Units15 FROM ETL.Staging_Inp3 WHERE RC_Charges15 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 16, RC_Charges16, RC_Units16 FROM ETL.Staging_Inp3 WHERE RC_Charges16 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 17, RC_Charges17, RC_Units17 FROM ETL.Staging_Inp3 WHERE RC_Charges17 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 18, RC_Charges18, RC_Units18 FROM ETL.Staging_Inp3 WHERE RC_Charges18 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 19, RC_Charges19, RC_Units19 FROM ETL.Staging_Inp3 WHERE RC_Charges19 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 20, RC_Charges20, RC_Units20 FROM ETL.Staging_Inp3 WHERE RC_Charges20 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 21, RC_Charges21, RC_Units21 FROM ETL.Staging_Inp3 WHERE RC_Charges21 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 22, RC_Charges22, RC_Units22 FROM ETL.Staging_Inp3 WHERE RC_Charges22 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 23, RC_Charges23, RC_Units23 FROM ETL.Staging_Inp3 WHERE RC_Charges23 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 24, RC_Charges24, RC_Units24 FROM ETL.Staging_Inp3 WHERE RC_Charges24 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 25, RC_Charges25, RC_Units25 FROM ETL.Staging_Inp3 WHERE RC_Charges25 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 26, RC_Charges26, RC_Units26 FROM ETL.Staging_Inp3 WHERE RC_Charges26 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 27, RC_Charges27, RC_Units27 FROM ETL.Staging_Inp3 WHERE RC_Charges27 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 28, RC_Charges28, RC_Units28 FROM ETL.Staging_Inp3 WHERE RC_Charges28 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 29, RC_Charges29, RC_Units29 FROM ETL.Staging_Inp3 WHERE RC_Charges29 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 30, RC_Charges30, RC_Units30 FROM ETL.Staging_Inp3 WHERE RC_Charges30 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 31, RC_Charges31, RC_Units31 FROM ETL.Staging_Inp3 WHERE RC_Charges31 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 32, RC_Charges32, RC_Units32 FROM ETL.Staging_Inp3 WHERE RC_Charges32 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 33, RC_Charges33, RC_Units33 FROM ETL.Staging_Inp3 WHERE RC_Charges33 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 34, RC_Charges34, RC_Units34 FROM ETL.Staging_Inp3 WHERE RC_Charges34 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 35, RC_Charges35, RC_Units35 FROM ETL.Staging_Inp3 WHERE RC_Charges35 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 36, RC_Charges36, RC_Units36 FROM ETL.Staging_Inp3 WHERE RC_Charges36 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 37, RC_Charges37, RC_Units37 FROM ETL.Staging_Inp3 WHERE RC_Charges37 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 38, RC_Charges38, RC_Units38 FROM ETL.Staging_Inp3 WHERE RC_Charges38 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 39, RC_Charges39, RC_Units39 FROM ETL.Staging_Inp3 WHERE RC_Charges39 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 40, RC_Charges40, RC_Units40 FROM ETL.Staging_Inp3 WHERE RC_Charges40 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 41, RC_Charges41, RC_Units41 FROM ETL.Staging_Inp3 WHERE RC_Charges41 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 42, RC_Charges42, RC_Units42 FROM ETL.Staging_Inp3 WHERE RC_Charges42 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 43, RC_Charges43, RC_Units43 FROM ETL.Staging_Inp3 WHERE RC_Charges43 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 44, RC_Charges44, RC_Units44 FROM ETL.Staging_Inp3 WHERE RC_Charges44 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 45, RC_Charges45, RC_Units45 FROM ETL.Staging_Inp3 WHERE RC_Charges45 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 46, RC_Charges46, RC_Units46 FROM ETL.Staging_Inp3 WHERE RC_Charges46 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 47, RC_Charges47, RC_Units47 FROM ETL.Staging_Inp3 WHERE RC_Charges47 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 48, RC_Charges48, RC_Units48 FROM ETL.Staging_Inp3 WHERE RC_Charges48 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 49, RC_Charges49, RC_Units49 FROM ETL.Staging_Inp3 WHERE RC_Charges49 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 50, RC_Charges50, RC_Units50 FROM ETL.Staging_Inp3 WHERE RC_Charges50 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 51, RC_Charges51, RC_Units51 FROM ETL.Staging_Inp3 WHERE RC_Charges51 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 52, RC_Charges52, RC_Units52 FROM ETL.Staging_Inp3 WHERE RC_Charges52 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 53, RC_Charges53, RC_Units53 FROM ETL.Staging_Inp3 WHERE RC_Charges53 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 54, RC_Charges54, RC_Units54 FROM ETL.Staging_Inp3 WHERE RC_Charges54 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 55, RC_Charges55, RC_Units55 FROM ETL.Staging_Inp3 WHERE RC_Charges55 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 56, RC_Charges56, RC_Units56 FROM ETL.Staging_Inp3 WHERE RC_Charges56 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 57, RC_Charges57, RC_Units57 FROM ETL.Staging_Inp3 WHERE RC_Charges57 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 58, RC_Charges58, RC_Units58 FROM ETL.Staging_Inp3 WHERE RC_Charges58 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 59, RC_Charges59, RC_Units59 FROM ETL.Staging_Inp3 WHERE RC_Charges59 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 60, RC_Charges60, RC_Units60 FROM ETL.Staging_Inp3 WHERE RC_Charges60 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 61, RC_Charges61, RC_Units61 FROM ETL.Staging_Inp3 WHERE RC_Charges61 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 62, RC_Charges62, RC_Units62 FROM ETL.Staging_Inp3 WHERE RC_Charges62 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 63, RC_Charges63, RC_Units63 FROM ETL.Staging_Inp3 WHERE RC_Charges63 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 64, RC_Charges64, RC_Units64 FROM ETL.Staging_Inp3 WHERE RC_Charges64 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 65, RC_Charges65, RC_Units65 FROM ETL.Staging_Inp3 WHERE RC_Charges65 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 66, RC_Charges66, RC_Units66 FROM ETL.Staging_Inp3 WHERE RC_Charges66 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 67, RC_Charges67, RC_Units67 FROM ETL.Staging_Inp3 WHERE RC_Charges67 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 68, RC_Charges68, RC_Units68 FROM ETL.Staging_Inp3 WHERE RC_Charges68 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 69, RC_Charges69, RC_Units69 FROM ETL.Staging_Inp3 WHERE RC_Charges69 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 70, RC_Charges70, RC_Units70 FROM ETL.Staging_Inp3 WHERE RC_Charges70 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 71, RC_Charges71, RC_Units71 FROM ETL.Staging_Inp3 WHERE RC_Charges71 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 72, RC_Charges72, RC_Units72 FROM ETL.Staging_Inp3 WHERE RC_Charges72 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 73, RC_Charges73, RC_Units73 FROM ETL.Staging_Inp3 WHERE RC_Charges73 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 74, RC_Charges74, RC_Units74 FROM ETL.Staging_Inp3 WHERE RC_Charges74 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 75, RC_Charges75, RC_Units75 FROM ETL.Staging_Inp3 WHERE RC_Charges75 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 76, RC_Charges76, RC_Units76 FROM ETL.Staging_Inp3 WHERE RC_Charges76 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 77, RC_Charges77, RC_Units77 FROM ETL.Staging_Inp3 WHERE RC_Charges77 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 78, RC_Charges78, RC_Units78 FROM ETL.Staging_Inp3 WHERE RC_Charges78 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 79, RC_Charges79, RC_Units79 FROM ETL.Staging_Inp3 WHERE RC_Charges79 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 80, RC_Charges80, RC_Units80 FROM ETL.Staging_Inp3 WHERE RC_Charges80 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 81, RC_Charges81, RC_Units81 FROM ETL.Staging_Inp3 WHERE RC_Charges81 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 82, RC_Charges82, RC_Units82 FROM ETL.Staging_Inp3 WHERE RC_Charges82 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 83, RC_Charges83, RC_Units83 FROM ETL.Staging_Inp3 WHERE RC_Charges83 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 84, RC_Charges84, RC_Units84 FROM ETL.Staging_Inp3 WHERE RC_Charges84 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 85, RC_Charges85, RC_Units85 FROM ETL.Staging_Inp3 WHERE RC_Charges85 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 86, RC_Charges86, RC_Units86 FROM ETL.Staging_Inp3 WHERE RC_Charges86 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 87, RC_Charges87, RC_Units87 FROM ETL.Staging_Inp3 WHERE RC_Charges87 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 88, RC_Charges88, RC_Units88 FROM ETL.Staging_Inp3 WHERE RC_Charges88 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 89, RC_Charges89, RC_Units89 FROM ETL.Staging_Inp3 WHERE RC_Charges89 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 90, RC_Charges90, RC_Units90 FROM ETL.Staging_Inp3 WHERE RC_Charges90 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 91, RC_Charges91, RC_Units91 FROM ETL.Staging_Inp3 WHERE RC_Charges91 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 92, RC_Charges92, RC_Units92 FROM ETL.Staging_Inp3 WHERE RC_Charges92 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 93, RC_Charges93, RC_Units93 FROM ETL.Staging_Inp3 WHERE RC_Charges93 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 94, RC_Charges94, RC_Units94 FROM ETL.Staging_Inp3 WHERE RC_Charges94 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 95, RC_Charges95, RC_Units95 FROM ETL.Staging_Inp3 WHERE RC_Charges95 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 96, RC_Charges96, RC_Units96 FROM ETL.Staging_Inp3 WHERE RC_Charges96 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 97, RC_Charges97, RC_Units97 FROM ETL.Staging_Inp3 WHERE RC_Charges97 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 98, RC_Charges98, RC_Units98 FROM ETL.Staging_Inp3 WHERE RC_Charges98 IS NOT NULL&#xA; INSERT CrossRef.RateCenter SELECT VisitID, 99, RC_Charges99, RC_Units99 FROM ETL.Staging_Inp3 WHERE RC_Charges99 IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension AccountNo"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="3"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension AccountNo"
+      DTS:DTSID="{1f7e8f20-cd07-4b81-8615-57506730efb0}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource=" INSERT Dimension.AccountNo (Formatted, [Raw])&#xA; SELECT DISTINCT S1.AccountNo_Format, S1.AccountNo_Raw&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.AccountNo as D&#xA; ON D.Formatted = S1.AccountNo_Format AND D.[Raw] = S1.AccountNo_Raw&#xA; WHERE D.Formatted IS NULL&#xA;  AND S1.AccountNo_Raw IS NOT NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension MRN"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension MRN"
+      DTS:DTSID="{7c1074bb-e815-4bbc-bac4-cfd3571158c4}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;&#xA;INSERT [Lookup].Hospital (SourceID, SourceCode, Name)&#xA;SELECT DISTINCT S.SourceID, 'HSCRC_NEW', 'New HSCRC'&#xA;FROM ETL.Staging_Inp1 as S&#xA;LEFT OUTER JOIN [Lookup].Hospital as H&#xA;ON H.SourceID = S.SourceID&#xA;WHERE H.SourceID IS NULL&#xA;&#xA;INSERT Dimension.MedicalRecordNo (Formatted, [Raw])&#xA;SELECT DISTINCT S1.MRN_Format, S1.MRN_Raw&#xA;FROM ETL.Staging_Inp1 as S1&#xA;LEFT OUTER JOIN Dimension.MedicalRecordNo as D&#xA;ON D.Formatted = S1.MRN_Format AND D.[Raw] = S1.MRN_Raw&#xA;WHERE D.Formatted IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension Patient"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension Patient"
+      DTS:DTSID="{89766d98-83e6-4689-97dd-e1e04193b823}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT Dimension.Patient (DateOfBirth, Gender, Race, Ethnicity, MaritalStatus)&#xA; SELECT DISTINCT S1.DateOfBirth, S1.Gender, S1.Race, S1.Ethnicity, S1.MaritalStatus&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.Patient as D&#xA; ON ISNULL(D.DateOfBirth, '') = ISNULL(S1.DateOfBirth, '') AND ISNULL(D.Gender, '') = ISNULL(S1.Gender, '') &#xA;  AND ISNULL(D.Race, '') = ISNULL(S1.Race, '') AND ISNULL(D.Ethnicity, '') = ISNULL(S1.Ethnicity, '') AND ISNULL(D.MaritalStatus, '') = ISNULL(S1.MaritalStatus, '')&#xA; WHERE D.DateOfBirth IS NULL AND D.Gender IS NULL AND D.Race IS NULL AND D.Ethnicity IS NULL AND D.MaritalStatus IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimension Physician"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="5"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimension Physician"
+      DTS:DTSID="{cd8f19a8-e794-451e-8f50-7d64917f75dd}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT Dimension.Physician (Number, GhostNumber, NPI, ValidFlag)&#xA; SELECT DISTINCT S1.PhysAtt_Number, S1.PhysAtt_GhostNumber, S1.PhysAtt_NPINumber, S1.PhysAtt_Flag&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.Physician as D&#xA; ON ISNULL(D.Number, '') = ISNULL(S1.PhysAtt_Number, '') AND ISNULL(D.GhostNumber, '') = ISNULL(S1.PhysAtt_GhostNumber, '')&#xA;  AND ISNULL(D.NPI, '') = ISNULL(S1.PhysAtt_NPINumber, '') AND ISNULL(D.ValidFlag, '') = ISNULL(S1.PhysAtt_Flag, '')&#xA; WHERE D.Number IS NULL AND D.GhostNumber IS NULL AND D.NPI IS NULL&#xA;  AND (S1.PhysAtt_Number IS NOT NULL OR S1.PhysAtt_GhostNumber IS NOT NULL OR S1.PhysAtt_NPINumber IS NOT NULL)&#xA;&#xA; INSERT Dimension.Physician (Number, GhostNumber, NPI, ValidFlag)&#xA; SELECT DISTINCT S1.PhysOper_Number, S1.PhysOper_GhostNumber, S1.PhysOper_NPINumber, S1.PhysOper_Flag&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.Physician as D&#xA; ON ISNULL(D.Number, '') = ISNULL(S1.PhysOper_Number, '') AND ISNULL(D.GhostNumber, '') = ISNULL(S1.PhysOper_GhostNumber, '')&#xA;  AND ISNULL(D.NPI, '') = ISNULL(S1.PhysOper_NPINumber, '') AND ISNULL(D.ValidFlag, '') = ISNULL(S1.PhysOper_Flag, '')&#xA; WHERE D.Number IS NULL AND D.GhostNumber IS NULL AND D.NPI IS NULL&#xA;  AND (S1.PhysOper_Number IS NOT NULL OR S1.PhysOper_GhostNumber IS NOT NULL OR S1.PhysOper_NPINumber IS NOT NULL)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimensions A &amp; D Dates"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimensions A &amp; D Dates"
+      DTS:DTSID="{790e897a-aebe-4499-aba6-0cdaddfad336}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT Dimension.AdmitDate (Value, [Year], [Month], [DayOfMonth], &#xA;  [Quarter], WeekOfYear, [DayOfYear], [DayOfWeek] )&#xA; SELECT DISTINCT CAST(S1.AdmitDT as date), DATEPART(YEAR, S1.AdmitDT), DATEPART(MONTH, S1.AdmitDT), DATEPART(DAY, S1.AdmitDT), &#xA;  DATEPART(QUARTER, S1.AdmitDT), DATEPART(WEEK, S1.AdmitDT), DATEPART(DAYOFYEAR, S1.AdmitDT), DATEPART(WEEKDAY, S1.AdmitDT)&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.AdmitDate as D&#xA; ON D.Value = CAST(S1.AdmitDT as date)&#xA; WHERE D.Value IS NULL&#xA;&#xA;&#xA; INSERT Dimension.DischargeDate (Value, [Year], [Month], [DayOfMonth], &#xA;  [Quarter], WeekOfYear, [DayOfYear], [DayOfWeek] )&#xA; SELECT DISTINCT CAST(S1.DischargeDT as date), DATEPART(YEAR, S1.DischargeDT), DATEPART(MONTH, S1.DischargeDT), DATEPART(DAY, S1.DischargeDT), &#xA;  DATEPART(QUARTER, S1.DischargeDT), DATEPART(WEEK, S1.DischargeDT), DATEPART(DAYOFYEAR, S1.DischargeDT), DATEPART(WEEKDAY, S1.DischargeDT)&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.DischargeDate as D&#xA; ON D.Value = CAST(S1.DischargeDT as date)&#xA; WHERE D.Value IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Dimensions Calculated"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="4"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Dimensions Calculated"
+      DTS:DTSID="{d150ca52-3014-4feb-a803-59142dc7af66}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT Dimension.PatientAge (Years)&#xA; SELECT DISTINCT S1.AgeYears&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.PatientAge as D&#xA; ON D.Years = S1.AgeYears&#xA; WHERE D.Years IS NULL &#xA;  AND S1.AgeYears IS NOT NULL&#xA;&#xA; INSERT Dimension.LengthOfStay ([Days])&#xA; SELECT DISTINCT S1.LengthOfStay&#xA; FROM ETL.Staging_Inp1 as S1&#xA; LEFT OUTER JOIN Dimension.LengthOfStay as D&#xA; ON D.[Days] = S1.LengthOfStay&#xA; WHERE D.[Days] IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact Clinical"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="5"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact Clinical"
+      DTS:DTSID="{71bea351-731d-484f-ad09-1eae6932b1ab}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource=" INSERT Fact.Clinical (VisitID,&#xA;  InjuryCodeER, AdmitFromER, PsychAdmit, ICDFlag, &#xA;  Days_NonPsychiatric, Days_Psychiatric, Days_MedicalICU, Days_CoronaryCare, Days_BurnCare, Days_NeoNatal, Days_Pediatric, Days_ShockTrauma, Days_OtherCare)&#xA; SELECT VisitID,&#xA;  InjuryCodeER, AdmitFromER, PsychAdmit, ICDFlag,&#xA;  Days_NonPsychiatric, Days_Psychiatric, Days_MedicalICU, Days_CoronaryCare, Days_BurnCare, Days_NeoNatal, Days_Pediatric, Days_ShockTrauma, Days_OtherCare &#xA; FROM ETL.Staging_Inp2 as S2&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact Extras_Inpatient"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="4"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact Extras_Inpatient"
+      DTS:DTSID="{88bd846b-791a-4e8c-89f1-98f2bff562aa}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource=" INSERT Fact.Extras_Inpatient (VisitID,&#xA;  APR_DRGID, APR_MDCID, APR_Severity, APR_RiskOfMortality, APR_MedSurgID, APR_ProdLineID,&#xA;  CMS_MDCCode, CMS_DRGCode, MHAProductLine,&#xA;  ReadmitFlag, SourceAdmitCode, SourceDischargeCode, UMDService)&#xA; SELECT VisitID,&#xA;  D.APRDRGID, M.APRMDCID, APR_Severity, APR_RiskOfMortality, T.APRMedSurgID, P.ProdLineID,&#xA;  CMS_MDCCode, CMS_DRGCode, MHAProductLine,&#xA;  ReadmitFlag, SourceAdmitCode, SourceDischargeCode, UMDService&#xA; FROM ETL.Staging_Inp2 as S2&#xA; LEFT OUTER JOIN [Lookup].APRDRG as D&#xA; ON S2.APR_DRGCode = D.Code&#xA; LEFT OUTER JOIN [Lookup].APRMDC as M&#xA; ON S2.APR_MDCCode = M.Code&#xA; LEFT OUTER JOIN [Lookup].APRMedSurg as T&#xA; ON S2.APR_DRGCode = T.DRGCode AND S2.APR_MDCCode = T.MDCCode&#xA; LEFT OUTER JOIN [Lookup].APRProductLine as P&#xA; ON S2.APR_DRGCode = P.DRGCode&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact Financial"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="6"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact Financial"
+      DTS:DTSID="{a504ec12-ad73-4ff2-b29f-f94a864e6311}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource=" INSERT Fact.Financial (VisitID,&#xA;  MedicaidIDNo,&#xA;  Charges1_Room, Charges1_OperatingRoom, Charges1_Drugs, Charges1_Radiology, Charges1_Laboratory, &#xA;  Charges1_Supplies, Charges1_Therapy, Charges1_Other, Charges1_Total, &#xA;  Charges2_MedicalSurgical, Charges2_CoronaryCare, Charges2_Intensive, Charges2_Nursery, Charges2_Oncology, &#xA;  Charges2_SkilledNursing, Charges2_Psychiatric, Charges2_OperatingRoom, Charges2_Drugs, Charges2_RadiologyDiag, &#xA;  Charges2_RadiationTherapy, Charges2_NuclearMedicine, Charges2_CATScan, Charges2_MRI, Charges2_IVC, &#xA;  Charges2_Laboratory, Charges2_Supplies, Charges2_Respiratory, Charges2_PhysicalTherapy, Charges2_OccupTherapy, &#xA;  Charges2_SpeechAudiology, Charges2_Pulmonary, Charges2_Anesthesia, Charges2_EmergencyRoom, Charges2_OutpatientClinic, &#xA;  Charges2_FreestandingClinic, Charges2_LaborDelivery, Charges2_EKG, Charges2_EEG, Charges2_Other, &#xA;  Charges2_Total)&#xA; SELECT VisitID,&#xA;  MedicaidIDNo,  &#xA;  Charges1_Room, Charges1_OperatingRoom, Charges1_Drugs, Charges1_Radiology, Charges1_Laboratory, &#xA;  Charges1_Supplies, Charges1_Therapy, Charges1_Other, Charges1_Total, &#xA;  Charges2_MedicalSurgical, Charges2_CoronaryCare, Charges2_Intensive, Charges2_Nursery, Charges2_Oncology, &#xA;  Charges2_SkilledNursing, Charges2_Psychiatric, Charges2_OperatingRoom, Charges2_Drugs, Charges2_RadiologyDiag, &#xA;  Charges2_RadiationTherapy, Charges2_NuclearMedicine, Charges2_CATScan, Charges2_MRI, Charges2_IVC, &#xA;  Charges2_Laboratory, Charges2_Supplies, Charges2_Respiratory, Charges2_PhysicalTherapy, Charges2_OccupTherapy, &#xA;  Charges2_SpeechAudiology, Charges2_Pulmonary, Charges2_Anesthesia, Charges2_EmergencyRoom, Charges2_OutpatientClinic, &#xA;  Charges2_FreestandingClinic, Charges2_LaborDelivery, Charges2_EKG, Charges2_EEG, Charges2_Other, &#xA;  Charges2_Total&#xA; FROM ETL.Staging_Inp2 as S2&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact PatientExtras"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="3"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact PatientExtras"
+      DTS:DTSID="{b88895cf-6a17-407f-bf19-24aeb8bcc99e}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="&#xA; INSERT Fact.PatientExtras (VisitID,&#xA;  CountyID, Zip, CensusTract, AreaCodeMetro, AreaCodePSRO, AreaCodeHSA, AreaCodeICG, &#xA;  NewbornWeight, AgeDays, CountryOrigin, [Language])&#xA; SELECT VisitID,&#xA;  C.CountyID, Zip, CensusTract, AreaCodeMetro, AreaCodePSRO, AreaCodeHSA, AreaCodeICG, &#xA;  NewbornWeight, AgeDays, CountryOrigin, [Language]&#xA; FROM ETL.Staging_Inp2 as S2&#xA; LEFT OUTER JOIN [Lookup].County as C&#xA; ON S2.County = C.Code&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact VisitHospital"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="7"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact VisitHospital"
+      DTS:DTSID="{d98145d5-ace2-4e6f-8455-1fb7210dc772}"
+      DTS:Description="Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource=" INSERT Fact.VisitHospital (VisitID,&#xA;  DailyService, RehabilitationClass, RehabilitationGroup, TeachingHospital, &#xA;  AmbulanceRunNo1, AmbulanceRunNo2, BedCapacity, HospitalSPCC, EMPI)&#xA; SELECT VisitID,&#xA;  DailyService, RehabilitationClass, RehabilitationGroup, TeachingHospital, &#xA;  AmbulanceRunNo1, AmbulanceRunNo2, BedCapacity, HospitalSPCC, EMPI&#xA; FROM ETL.Staging_Inp2 as S2&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Fact VisitMain"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Fact VisitMain"
+      DTS:DTSID="{ea84b703-25d2-4217-9711-c90ee5141a2d}"
+      DTS:Description="Dummy task to converge previous tasks"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9957431E-C2ED-432C-9AF7-A26BC490FCDB}"
+          SQLTask:SqlStatementSource="-- insert to VisitMain so other tables can refer to FK&#xA;&#xA; INSERT Fact.VisitMain (VisitID, PatientID, HospitalID, MedicalRecordNoID, AccountNoID,&#xA;  AdmitDT, AdmitDateID, AdmitTimeID, DischargeDT, DischargeDateID, DischargeTimeID, VisitTypeID,&#xA;  PatientAgeID, SourceOfAdmitID, DischargeDispID, PhysAttendingID, PhysOperatingID,&#xA;  ServiceLineID, PayerSourcePrimaryID, PayerSourceSecondaryID, PayerExpectedPrimaryID, PayerExpectedSecondaryID, LengthOfStayID )&#xA;&#xA; SELECT S1.VisitID, PT.PatientID, HS.HospitalID, MR.MedicalRecordNoID, AC.AccountNoID, &#xA;  S1.AdmitDT, AD.AdmitDateID, AT.TimeID, S1.DischargeDT, DD.DischargeDateID, DT.TimeID, VT.VisitTypeID,&#xA;  AG.PatientAgeID, SA.SourceOfAdmitID, DI.DischargeDispID, P1.PhysicianID, P2.PhysicianID,&#xA;  SL.ServiceLineID, PS1.PayerSourceID, PS2.PayerSourceID, PE1.PayerExpectedID, PE2.PayerExpectedID, LS.LengthOfStayID&#xA;&#xA; FROM ETL.Staging_Inp1 as S1&#xA;&#xA; LEFT OUTER JOIN Dimension.Patient as PT&#xA; ON ( (S1.DateOfBirth IS NULL AND PT.DateOfBirth IS NULL) OR (S1.DateOfBirth = PT.DateOfBirth) )&#xA;  AND S1.Gender = PT.Gender AND S1.Race = PT.Race AND S1.Ethnicity = PT.Ethnicity AND S1.MaritalStatus = PT.MaritalStatus&#xA;&#xA; LEFT OUTER JOIN [Lookup].Hospital as HS&#xA; ON S1.SourceID = HS.SourceID&#xA;&#xA; LEFT OUTER JOIN Dimension.MedicalRecordNo as MR&#xA; ON S1.MRN_Format = MR.Formatted AND S1.MRN_Raw = MR.[Raw]&#xA; LEFT OUTER JOIN Dimension.AccountNo as AC&#xA; ON S1.AccountNo_Format = AC.Formatted AND S1.AccountNo_Raw = AC.[Raw]&#xA;&#xA; LEFT OUTER JOIN Dimension.AdmitDate as AD&#xA; ON CAST(S1.AdmitDT as date) = AD.Value&#xA; LEFT OUTER JOIN [Lookup].[Time] as AT&#xA; ON CAST(S1.AdmitDT as time) = AT.Value&#xA; LEFT OUTER JOIN Dimension.DischargeDate as DD&#xA; ON CAST(S1.DischargeDT as date) = DD.Value&#xA; LEFT OUTER JOIN [Lookup].[Time] as DT&#xA; ON CAST(S1.DischargeDT as time) = DT.Value&#xA;&#xA; LEFT OUTER JOIN [Lookup].VisitType as VT&#xA; ON S1.AdmitTypeCode = VT.AdmitTypeCode AND VT.FileTypeID = 1&#xA;&#xA; LEFT OUTER JOIN Dimension.Physician as P1&#xA; ON ISNULL(S1.PhysAtt_Number, '') = ISNULL(P1.Number, '') AND ISNULL(S1.PhysAtt_GhostNumber, '') = ISNULL(P1.GhostNumber, '') &#xA;  AND ISNULL(S1.PhysAtt_NPINumber, '') = ISNULL(P1.NPI, '') AND ISNULL(S1.PhysAtt_Flag, '') = ISNULL(P1.ValidFlag, '')&#xA; LEFT OUTER JOIN Dimension.Physician as P2&#xA; ON ISNULL(S1.PhysOper_Number, '') = ISNULL(P2.Number, '') AND ISNULL(S1.PhysOper_GhostNumber, '') = ISNULL(P2.GhostNumber, '') &#xA;  AND ISNULL(S1.PhysOper_NPINumber, '') = ISNULL(P2.NPI, '') AND ISNULL(S1.PhysOper_Flag, '') = ISNULL(P2.ValidFlag, '')&#xA;  &#xA; LEFT OUTER JOIN Dimension.PatientAge as AG&#xA; ON S1.AgeYears = AG.Years&#xA; LEFT OUTER JOIN [Lookup].SourceOfAdmit as SA&#xA; ON S1.SourceOfAdmit = SA.Code AND SA.FileTypeID = 1&#xA; LEFT OUTER JOIN [Lookup].DischargeDisposition as DI&#xA; ON S1.DischargeDisposition = DI.Code AND DI.FileTypeID = 1&#xA;&#xA; LEFT OUTER JOIN [Lookup].ServiceLine as SL&#xA; ON S1.ServiceLine = SL.Code&#xA;&#xA; LEFT OUTER JOIN [Lookup].PayerSource as PS1&#xA; ON S1.PayerSourcePrimary = PS1.Code AND PS1.FileTypeID = 1&#xA; LEFT OUTER JOIN [Lookup].PayerSource as PS2&#xA; ON S1.PayerSourceSecondary = PS2.Code AND PS2.FileTypeID = 1&#xA; LEFT OUTER JOIN [Lookup].PayerExpected as PE1&#xA; ON S1.PayerExpectedPrimary = PE1.Code &#xA; LEFT OUTER JOIN [Lookup].PayerExpected as PE2&#xA; ON S1.PayerExpectedSecondary = PE2.Code &#xA;&#xA; LEFT OUTER JOIN Dimension.LengthOfStay as LS&#xA; ON S1.LengthOfStay = LS.[Days]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert CrossRef RateCenter"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:DTSID="{75f5e729-d9cb-430d-94e5-942aaad428a9}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:From="Package\Insert Dimension MRN"
+      DTS:To="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:DTSID="{91c27756-af26-4845-a628-9ef96d82b1d7}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:From="Package\Insert Dimension AccountNo"
+      DTS:To="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:DTSID="{8ffe11e2-9de0-426d-a884-02364c45817f}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 21]"
+      DTS:From="Package\Insert Dimensions A &amp; D Dates"
+      DTS:To="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 21"
+      DTS:DTSID="{0b434ed9-946c-44f6-adf2-60905484ab40}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 22]"
+      DTS:From="Package\Insert Dimension Patient"
+      DTS:To="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 22"
+      DTS:DTSID="{e2483c84-4e97-485f-b82f-5411a11c60fe}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 23]"
+      DTS:From="Package\Insert Dimensions Calculated"
+      DTS:To="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 23"
+      DTS:DTSID="{c9c85e61-29c0-4cec-86be-248b0289ec65}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 24]"
+      DTS:From="Package\Insert Dimension Physician"
+      DTS:To="Package\Insert Fact VisitMain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 24"
+      DTS:DTSID="{cd35cebb-3571-46ff-9f04-6845b89be618}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert Fact Extras_Inpatient"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:DTSID="{17be7779-5973-4146-b5b9-0d3ab07485ac}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert CrossRef Procedure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:DTSID="{835781b4-159d-487b-a894-790634dde715}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert Fact VisitHospital"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:DTSID="{48deec09-2f9c-4bd4-a999-08aec7e0ab2e}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert CrossRef Diagnosis"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:DTSID="{734ed585-9a0f-47d7-ae06-ed395e73c92a}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert Fact Financial"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:DTSID="{a7d45896-09a2-404b-9007-cb7305e46e53}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert Fact Clinical"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:DTSID="{83ada07b-5eba-454f-8fc1-dfd537a6d84b}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:From="Package\Insert Fact VisitMain"
+      DTS:To="Package\Insert Fact PatientExtras"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:DTSID="{0503cc43-d3bc-4a9d-8d21-0a3ede0f80ef}"
+      DTS:CreationName="" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Insert CrossRef Diagnosis"
+          TopLeft="1071.0623363526,270.605346285915" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert CrossRef Procedure"
+          TopLeft="1072.01982320765,331.21243774424" />
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Insert CrossRef RateCenter"
+          TopLeft="1066.50137909692,389.252216960043" />
+        <NodeLayout
+          Size="213,42"
+          Id="Package\Insert Dimension AccountNo"
+          TopLeft="300.790845754987,152.244293770419" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Insert Dimension MRN"
+          TopLeft="300.141301620774,89" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Insert Dimension Patient"
+          TopLeft="300.811575919931,285.258339563099" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Insert Dimension Physician"
+          TopLeft="298,413.804116617772" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Insert Dimensions A &amp; D Dates"
+          TopLeft="300.29271905896,217.135802376404" />
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Insert Dimensions Calculated"
+          TopLeft="304.032597523136,345.609153925313" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Insert Fact Clinical"
+          TopLeft="724.022568165298,205.745936860454" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Insert Fact Extras_Inpatient"
+          TopLeft="727.100995953293,388.835752028622" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Insert Fact Financial"
+          TopLeft="723.052470483812,274.759247093687" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Insert Fact PatientExtras"
+          TopLeft="719.384153838068,148.295873623389" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Insert Fact VisitHospital"
+          TopLeft="727.793134377888,332.836564554343" />
+        <NodeLayout
+          Size="491,42"
+          Id="Package\Insert Fact VisitMain"
+          TopLeft="564.213882113473,485.161702868343" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="1021.02638211347,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153.474996983447,-53.9094859083008"
+              Start="0,0"
+              End="153.474996983447,-46.4094859083008">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-37.5896064339308" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-37.5896064339308"
+                    Point2="0,-41.5896064339308"
+                    Point3="4,-41.5896064339308" />
+                  <mssgle:LineSegment
+                    End="149.474996983447,-41.5896064339308" />
+                  <mssgle:CubicBezierSegment
+                    Point1="149.474996983447,-41.5896064339308"
+                    Point2="153.474996983447,-41.5896064339308"
+                    Point3="153.474996983447,-45.5896064339308" />
+                  <mssgle:LineSegment
+                    End="153.474996983447,-46.4094859083008" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="392.141301620774,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="256.3725804927,354.161702868343"
+              Start="0,0"
+              End="256.3725804927,346.661702868343">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.96339171987347" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.96339171987347"
+                    Point2="0,12.9633917198735"
+                    Point3="4,12.9633917198735" />
+                  <mssgle:LineSegment
+                    End="252.3725804927,12.9633917198735" />
+                  <mssgle:CubicBezierSegment
+                    Point1="252.3725804927,12.9633917198735"
+                    Point2="256.3725804927,12.9633917198735"
+                    Point3="256.3725804927,16.9633917198735" />
+                  <mssgle:LineSegment
+                    End="256.3725804927,346.661702868343" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="407.290845754987,194.244293770419">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="242.123036358487,290.917409097924"
+              Start="0,0"
+              End="242.123036358487,283.417409097924">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,4.32871907282657" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,4.32871907282657"
+                    Point2="0,8.32871907282657"
+                    Point3="4,8.32871907282657" />
+                  <mssgle:LineSegment
+                    End="238.123036358487,8.32871907282657" />
+                  <mssgle:CubicBezierSegment
+                    Point1="238.123036358487,8.32871907282657"
+                    Point2="242.123036358487,8.32871907282657"
+                    Point3="242.123036358487,12.3287190728266" />
+                  <mssgle:LineSegment
+                    End="242.123036358487,283.417409097924" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 21]"
+          TopLeft="412.79271905896,259.135802376404">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="235.221163054513,226.02590049194"
+              Start="0,0"
+              End="235.221163054513,218.52590049194">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.34302816980167" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.34302816980167"
+                    Point2="0,11.3430281698017"
+                    Point3="4,11.3430281698017" />
+                  <mssgle:LineSegment
+                    End="231.221163054513,11.3430281698017" />
+                  <mssgle:CubicBezierSegment
+                    Point1="231.221163054513,11.3430281698017"
+                    Point2="235.221163054513,11.3430281698017"
+                    Point3="235.221163054513,15.3430281698017" />
+                  <mssgle:LineSegment
+                    End="235.221163054513,218.52590049194" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 22]"
+          TopLeft="398.311575919931,327.258339563099">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="250.502306193542,157.903363305244"
+              Start="0,0"
+              End="250.502306193542,150.403363305244">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.00599737485538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.00599737485538"
+                    Point2="0,12.0059973748554"
+                    Point3="4,12.0059973748554" />
+                  <mssgle:LineSegment
+                    End="246.502306193542,12.0059973748554" />
+                  <mssgle:CubicBezierSegment
+                    Point1="246.502306193542,12.0059973748554"
+                    Point2="250.502306193542,12.0059973748554"
+                    Point3="250.502306193542,16.0059973748554" />
+                  <mssgle:LineSegment
+                    End="250.502306193542,150.403363305244" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 23]"
+          TopLeft="412.032597523135,387.609153925313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="234.681284590338,97.55254894303"
+              Start="0,0"
+              End="234.681284590338,90.05254894303">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.776274471515" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.776274471515"
+                    Point2="0,15.776274471515"
+                    Point3="4,15.776274471515" />
+                  <mssgle:LineSegment
+                    End="230.681284590338,15.776274471515" />
+                  <mssgle:CubicBezierSegment
+                    Point1="230.681284590338,15.776274471515"
+                    Point2="234.681284590338,15.776274471515"
+                    Point3="234.681284590338,19.776274471515" />
+                  <mssgle:LineSegment
+                    End="234.681284590338,90.05254894303" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 24]"
+          TopLeft="401,455.804116617772">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="246.113882113473,29.3575862505709"
+              Start="0,0"
+              End="246.113882113473,21.8575862505709">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.27405533599182" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.27405533599182"
+                    Point2="0,12.2740553359918"
+                    Point3="4,12.2740553359918" />
+                  <mssgle:LineSegment
+                    End="242.113882113473,12.2740553359918" />
+                  <mssgle:CubicBezierSegment
+                    Point1="242.113882113473,12.2740553359918"
+                    Point2="246.113882113473,12.2740553359918"
+                    Point3="246.113882113473,16.2740553359918" />
+                  <mssgle:LineSegment
+                    End="246.113882113473,21.8575862505709" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="964.313882113473,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-132.21288616018,-54.3259508397211"
+              Start="0,0"
+              End="-132.21288616018,-46.8259508397211">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-35.5099748479576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-35.5099748479576"
+                    Point2="0,-39.5099748479576"
+                    Point3="-4,-39.5099748479576" />
+                  <mssgle:LineSegment
+                    End="-128.21288616018,-39.5099748479576" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-128.21288616018,-39.5099748479576"
+                    Point2="-132.21288616018,-39.5099748479576"
+                    Point3="-132.21288616018,-43.5099748479576" />
+                  <mssgle:LineSegment
+                    End="-132.21288616018,-46.8259508397211" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1021.02638211347,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="151.993441094173,-111.949265124103"
+              Start="0,0"
+              End="151.993441094173,-104.449265124103">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-95.684077770477" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-95.684077770477"
+                    Point2="0,-99.684077770477"
+                    Point3="4,-99.684077770477" />
+                  <mssgle:LineSegment
+                    End="147.993441094173,-99.684077770477" />
+                  <mssgle:CubicBezierSegment
+                    Point1="147.993441094173,-99.684077770477"
+                    Point2="151.993441094173,-99.684077770477"
+                    Point3="151.993441094173,-103.684077770477" />
+                  <mssgle:LineSegment
+                    End="151.993441094173,-104.449265124103" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="964.57751847711,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-141.784384099222,-110.325138314"
+              Start="0,0"
+              End="-141.784384099222,-102.825138314">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-95.6165878987414" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-95.6165878987414"
+                    Point2="0,-99.6165878987414"
+                    Point3="-4,-99.6165878987414" />
+                  <mssgle:LineSegment
+                    End="-137.784384099222,-99.6165878987414" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-137.784384099222,-99.6165878987414"
+                    Point2="-141.784384099222,-99.6165878987414"
+                    Point3="-141.784384099222,-103.616587898741" />
+                  <mssgle:LineSegment
+                    End="-141.784384099222,-102.825138314" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1020.96388211347,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="149.598454239128,-172.556356582428"
+              Start="0,0"
+              End="149.598454239128,-165.056356582428">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-157.352437545375" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-157.352437545375"
+                    Point2="0,-161.352437545375"
+                    Point3="4,-161.352437545375" />
+                  <mssgle:LineSegment
+                    End="145.598454239128,-161.352437545375" />
+                  <mssgle:CubicBezierSegment
+                    Point1="145.598454239128,-161.352437545375"
+                    Point2="149.598454239128,-161.352437545375"
+                    Point3="149.598454239128,-165.352437545375" />
+                  <mssgle:LineSegment
+                    End="149.598454239128,-165.056356582428" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="964.613882113473,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-153.561411629661,-168.402455774656"
+              Start="0,0"
+              End="-153.561411629661,-160.902455774656">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-153.346648462215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-153.346648462215"
+                    Point2="0,-157.346648462215"
+                    Point3="-4,-157.346648462215" />
+                  <mssgle:LineSegment
+                    End="-149.561411629661,-157.346648462215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-149.561411629661,-157.346648462215"
+                    Point2="-153.561411629661,-157.346648462215"
+                    Point3="-153.561411629661,-161.346648462215" />
+                  <mssgle:LineSegment
+                    End="-153.561411629661,-160.902455774656" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="964.901382113473,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-153.378813948176,-237.415766007889"
+              Start="0,0"
+              End="-153.378813948176,-229.915766007889">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-217.931413793188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-217.931413793188"
+                    Point2="0,-221.931413793188"
+                    Point3="-4,-221.931413793188" />
+                  <mssgle:LineSegment
+                    End="-149.378813948176,-221.931413793188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-149.378813948176,-221.931413793188"
+                    Point2="-153.378813948176,-221.931413793188"
+                    Point3="-153.378813948176,-225.931413793188" />
+                  <mssgle:LineSegment
+                    End="-153.378813948176,-229.915766007889" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="966.013882113474,485.161702868343">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-149.129728275405,-294.865829244954"
+              Start="0,0"
+              End="-149.129728275405,-287.365829244954">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-278.347507402541" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-278.347507402541"
+                    Point2="0,-282.347507402541"
+                    Point3="-4,-282.347507402541" />
+                  <mssgle:LineSegment
+                    End="-145.129728275405,-282.347507402541" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-145.129728275405,-282.347507402541"
+                    Point2="-149.129728275405,-282.347507402541"
+                    Point3="-149.129728275405,-286.347507402541" />
+                  <mssgle:LineSegment
+                    End="-149.129728275405,-287.365829244954" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

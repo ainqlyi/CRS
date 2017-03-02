@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>HSCRC_Insight</DataSourceReference>
+      <CommandText>declare @maxdate date
+SELECT @maxdate = MAX(DischargeDT) FROM Fact.Readmissions_RY18
+				
+SELECT        
+cast('2016-01-01' as date) as fromDate
+,case 
+	when @maxdate &lt; '2017-01-01'						
+		then @maxdate
+	else 
+		cast('2016-12-31' as date)
+end as toDate
+,case 
+	when @maxdate &lt; '2017-01-01'						
+		then cast(
+					EOMONTH(
+						DATEADD(mm,DATEDIFF(m,0,@maxdate)+1,0)
+						)		
+				as date)
+	else 
+		cast('2017-01-31' as date)
+end as cutoffDate</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="fromDate">
+        <DataField>fromDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="toDate">
+        <DataField>toDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="cutoffDate">
+        <DataField>cutoffDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

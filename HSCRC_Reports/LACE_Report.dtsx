@@ -1,0 +1,501 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/11/2014 11:02:40 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="T440P-20131227B"
+  DTS:CreatorName="INTRANET\dlucas"
+  DTS:DTSID="{CB6F0C34-63EC-4AFD-8B25-A7C066CA56D7}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3402.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LACE_Report"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{AC1BD2B1-09AA-4D02-B8A0-B4A83166C746}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Drop LACE if exists and create table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9C4D339C-5B75-4689-95C4-97D9AD012933}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop LACE if exists and create table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+          SQLTask:SqlStatementSource="IF EXISTS(&#xA;SELECT 1 FROM INFORMATION_SCHEMA.TABLES&#xA;WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'Report_LACE_Visits'&#xA;)&#xA;BEGIN&#xA;DROP TABLE Report_LACE_Visits&#xA;END&#xA;CREATE TABLE Report_LACE_Visits (&#xA;&#x9;[VisitID] [uniqueidentifier] not NULL,&#xA;&#x9;[LACE] [int] NULL,&#xA;&#x9;[L] [int] NULL,&#xA;&#x9;[A] [int] NULL,&#xA;&#x9;[C] [int] NULL,&#xA;&#x9;[E] [int] NULL,&#xA;&#x9;[LOS] [int] NULL,&#x9;-- length of stay&#xA;&#x9;[ER] [int] NULL,&#x9;-- # ER visits during previous 6 months (180 days)&#xA;&#x9;[C1] [int] NULL,&#xA;&#x9;[C2] [int] NULL,&#xA;&#x9;[C3] [int] NULL,&#xA;&#x9;[C4] [int] NULL,&#xA;&#x9;[C5] [int] NULL,&#xA;&#x9;[C6] [int] NULL,&#xA;&#x9;[C7] [int] NULL,&#xA;&#x9;[C8] [int] NULL,&#xA;&#x9;[C9] [int] NULL,&#xA;&#x9;[C10] [int] NULL,&#xA;&#x9;[C11] [int] NULL,&#xA;&#x9;[C12] [int] NULL,&#xA;&#x9;[C13] [int] NULL,&#xA;&#x9;[C14] [int] NULL,&#xA;&#x9;[C15] [int] NULL,&#xA;&#x9;[C16] [int] NULL,&#xA;&#x9;[C17] [int] NULL,&#xA;) ON [PRIMARY]&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert VisitID into table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{261082C4-501B-434B-B08D-E2DF179A0360}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert VisitID into table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+          SQLTask:SqlStatementSource="insert into Report_LACE_Visits(VisitID)&#xA;select VisitID&#xA;from Fact.IP_Visit V" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update C1-C17 columns"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F3D732D5-9750-4594-BB80-CBDDBBC50055}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update C1-C17 columns"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+          SQLTask:SqlStatementSource="update V&#xA;set C1 = &#x9;--1. Myocardial Infarction (1 point)&#xA;&#x9;&#x9;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 3) in ('410', '412'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C2 = &#x9;&#xA;&#x9;&#x9;----2. Congestive Heart Failure (1 point)&#xA;&#x9;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;&#x9;and (D.Diagnosis in ('39891', '40201', '40211', '40291', '40401', &#xA; &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  '40403', '40411', '40413', '40491', '40493')&#xA; &#x9;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('4254', '4255', '4257', '4258', '4259')&#xA; &#x9;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 3) in ('428')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C3 = &#xA;&#x9;--3. Peripheral Vascular Disease  (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;and (D.Diagnosis in ('0930', '4373', '5571', '5579', 'V434')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 3) in ('440', '441')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('4431', '4432', '4438', '4439',  '4471', '5571')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C4 = &#xA;&#x9;--4. Cerebrovascular Disease  (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;and (D.Diagnosis = '36234'&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 3) in ('430', '431', '432', '433', '434', '435', '436', '437', '438')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C5 = &#xA;&#x9;--5. Dementia  (1 point)&#xA;&#x9;(select count(*) from HSCRC_Insight.CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;and (substring(D.Diagnosis, 1, 3) = '290'&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('2941', '3312')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C6 = &#xA;&#x9;--6. COPD  (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;and (D.Diagnosis in ('4168', '4169', '5064', '5081', '5088')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 3) in ('490', '491', '492', '493', '494', '495', '496', &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;'500', '501', '502', '503', '504', '505')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C7 = &#xA;&#x9;--7. Connective Tissue Disease  (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID &#xA;&#x9;&#x9;&#x9;and (substring(D.Diagnosis, 1, 3) = '725'&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('7100', '7101', '7102', '7103', '7104', &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;'7140', '7141', '7142', '7148', '4465')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C8 = &#xA;&#x9;--8. Peptic Ulcer Disease  (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 3) in ('531', '532', '533', '534'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C9 = &#xA;&#x9;--9. Liver Disease – Mild (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and (D.Diagnosis in ('07022', '07023', '07032', '07033', '07044', '07054')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 3) in ('570', '571')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('0706', '0709', '5733', '5734', '5738', '5739', 'V427')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C10 = &#xA;&#x9;--10. Diabetes - Without complication (1 point)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 4) in ('2500', '2501', '2502', '2503', '2508', '2509'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C11 = &#xA;&#x9;--11. Diabetes Mellitus – End-Organ Damage  (2 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 4) in ('2504', '2505', '2506', '2507'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C12 = &#xA;&#x9;--12. Paraplegia and Hemiplegia (2 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and (substring(D.Diagnosis, 1, 3) in ('342', '343')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('3341', '3440', '3441', '3442', '3443', '3444', '3445', '3446', '3449')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C13 = &#xA;&#x9;--13. Renal Disease (2 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and (D.Diagnosis in ('40301', '40311', '40391', '40402', '40403', '40412', '40413', '40492', '40493')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 3) in ('582', '585', '586', 'V56')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) in ('5830', '5831', '5832', '5834', '5836', '5837', '5880', 'V420', 'V451')))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C14 = &#xA;&#x9;--14. Cancer (2 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and (substring(D.Diagnosis, 1, 3) in (&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'140', '141', '142', '143', '144', '145', '146', '147', '148', '149', &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'150', '151', '152', '153', '154', '155', '156', '157', '158', '159',&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'160', '161', '162', '163', '164', '165', &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'170', '171', '172', '174', '175', '176',                       '179',&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'180', '181', '182', '183', '184', '185', '186', '187', '188', '189',&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'190', '191', '192', '193', '194', '195',&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'200', '201', '202', '203', '204', '205', '206', '207', '208')&#xA;&#x9;&#x9;&#x9;&#x9;or substring(D.Diagnosis, 1, 4) = '2386'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C15 = &#xA;&#x9;--15. Liver Disease  - Moderate to Severe (3 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 4) in (&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'4560', '4561', '4562', '5722', '5723', '5724', '5725', '5726', '5727', '5728'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C16 = &#xA;&#x9;--16. Metastatic Carcinoma (6 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 3) in ('196', '197', '198', '199'))&#xA;from dbo.Report_LACE_Visits V&#xA;&#xA;update V&#xA;set C17 = &#xA;&#x9;--17. AIDS (6 points)&#xA;&#x9;(select count(*) from CrossRef.IP_Diagnosis D&#xA;&#x9;&#x9;where D.VisitID = V.VisitID&#xA;&#x9;&#x9;&#x9;and substring(D.Diagnosis, 1, 3) in ('042', '043', '044'))&#xA;from dbo.Report_LACE_Visits V" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update L, A, C, E, ER and LACE columns"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{00948C67-FAAE-4DAA-9151-27CB59883615}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update L, A, C, E, ER and LACE columns">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns\Update A"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{381A8775-C686-4262-AB23-D4656F9A29BF}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update A"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+              SQLTask:SqlStatementSource="update V&#x9;-- A = Acuity, visit included ER services&#xA;set A = 0&#xA;from dbo.Report_LACE_Visits V &#xA;update V&#x9;&#xA;set A = 3&#xA;from dbo.Report_LACE_Visits V &#xA;left join CrossRef.IP_RateCenter RC on RC.VisitID = V.VisitID&#xA;where RC.SequenceNo = 28 and RC.Units &gt; 0 and RC.Charges &gt; 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns\Update C"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C2A07F57-1D7B-4337-A1D2-DE0427982298}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update C"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+              SQLTask:SqlStatementSource="update V&#xA;set C = &#xA;(&#xA;SELECT C = &#xA;CASE &#xA;&#x9;WHEN C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8 + C9 + C10 + C11 + C12 + C13 + C14 + C15 + C16 + C17 &gt;= 6 &#xA;&#x9;THEN 6&#xA;&#x9;ELSE&#xA;&#x9;C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8 + C9 + C10 + C11 + C12 + C13 + C14 + C15 + C16 + C17&#xA;&#x9;END)&#xA;FROM dbo.Report_LACE_Visits V" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns\Update E"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{538DD4C7-5EFC-4DF7-B61A-9D702D30FB8A}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update E"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+              SQLTask:SqlStatementSource="update V set E = 0 from dbo.Report_LACE_Visits V where ER=0&#xA;update V set E = ER from dbo.Report_LACE_Visits V where ER between 1 and 3&#xA;update V set E = 4 from dbo.Report_LACE_Visits V where ER&gt;=4" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns\Update ER"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9B9E3357-3026-4B08-B330-AF40939EC999}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update ER"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+              SQLTask:SqlStatementSource="update V&#x9;&#xA;set ER = (select COUNT(distinct VisitID) from Fact.OP_Visit O&#xA;&#x9;&#x9;&#x9;where O.EID = I.EID &#xA;&#x9;&#x9;&#x9;&#x9;and O.DischargeDT &lt; I.AdmitDT&#x9;-- ER visits BEFORE IP visit&#xA;&#x9;&#x9;&#x9;&#x9;and DATEDIFF(DAY, I.AdmitDT, O.DischargeDT) &lt;= 180)&#xA;from dbo.Report_LACE_Visits V &#xA;INNER JOIN Fact.IP_Visit I ON V.VisitID = I.VisitID" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns\Update L"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{631E0F74-4C55-4AB3-882A-6D82B936E36B}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update L"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+              SQLTask:SqlStatementSource="update V&#x9;-- L = Length of Stay&#xA;set LOS =&#x9;DATEDIFF(day, I.AdmitDT, I.DischargeDT)&#x9;&#xA;from dbo.Report_LACE_Visits V&#xA;INNER JOIN Fact.IP_Visit I ON V.VisitID = I.VisitID&#xA;update V set L = 0 from dbo.Report_LACE_Visits V where LOS = 0&#xA;update V set L = 1 from dbo.Report_LACE_Visits V where LOS = 1&#xA;update V set L = 2 from dbo.Report_LACE_Visits V where LOS = 2&#xA;update V set L = 3 from dbo.Report_LACE_Visits V where LOS = 3&#xA;update V set L = 4 from dbo.Report_LACE_Visits V where LOS between 4 and 6&#xA;update V set L = 5 from dbo.Report_LACE_Visits V where LOS between 7 and 13&#xA;update V set L = 6 from dbo.Report_LACE_Visits V where LOS &gt;= 14" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns\Update LACE"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{5F54FAAA-C4E6-4EF7-B7D8-B43CE9CC16A8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update LACE"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{07FABE15-BBA0-48E0-AF2D-873B4116B3C9}"
+              SQLTask:SqlStatementSource="update V&#x9;-- LACE!&#xA;set LACE = L + A + C + E&#xA;from dbo.Report_LACE_Visits V " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{9C486396-8340-4BD0-B3AF-BA53F74CCBF4}"
+          DTS:From="Package\Update L, A, C, E, ER and LACE columns\Update L"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Update L, A, C, E, ER and LACE columns\Update A" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{D2B8C8E1-0A37-4527-AA4B-1FA1B626C804}"
+          DTS:From="Package\Update L, A, C, E, ER and LACE columns\Update A"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Update L, A, C, E, ER and LACE columns\Update C" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{BC46BEC9-D650-4D4D-91B6-449ED2BFEAB8}"
+          DTS:From="Package\Update L, A, C, E, ER and LACE columns\Update C"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Update L, A, C, E, ER and LACE columns\Update ER" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{2EF748B0-3767-495B-87AD-F8A8DD03FEEF}"
+          DTS:From="Package\Update L, A, C, E, ER and LACE columns\Update E"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Update L, A, C, E, ER and LACE columns\Update LACE" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{D11D554B-4DB2-46FC-8C05-62B9919BDB80}"
+          DTS:From="Package\Update L, A, C, E, ER and LACE columns\Update ER"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Update L, A, C, E, ER and LACE columns\Update E" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{70E51393-C055-4D8C-861C-D5BAB2A1649C}"
+      DTS:From="Package\Drop LACE if exists and create table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert VisitID into table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A3A914EA-0193-4B6A-87DE-801A5BD892D2}"
+      DTS:From="Package\Insert VisitID into table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update C1-C17 columns" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{389218AD-120E-48AC-9576-4E899C3C0307}"
+      DTS:From="Package\Update C1-C17 columns"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update L, A, C, E, ER and LACE columns" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="248,41.6"
+          Id="Package\Drop LACE if exists and create table"
+          TopLeft="61.7142867652738,33.6470592954167" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Insert VisitID into table"
+          TopLeft="92.5714301479106,108.282354459796" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="186.342858456592,75.2470592954167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.0352951643788"
+              Start="0,0"
+              End="0,25.5352951643788">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5352951643788" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\Update C1-C17 columns"
+          TopLeft="93.7142873102306,188.423532054334" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="188.342858729071,149.882354459796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.541177594538"
+              Start="0,0"
+              End="0,31.041177594538">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.041177594538" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns\Update L"
+          TopLeft="32.1142889451008,4.84706294181854" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns\Update A"
+          TopLeft="33.7142858115994,76.6117693818564" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns\Update C"
+          TopLeft="37.1428572985591,143.717652249584" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns\Update E"
+          TopLeft="198.285717185663,215.811770548705" />
+        <EdgeLayout
+          Id="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint]"
+          TopLeft="93.7142873783501,46.4470629418185">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.1647064400379"
+              Start="0,0"
+              End="0,22.6647064400379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6647064400379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 1]"
+          TopLeft="96.2285715550792,118.211769381856">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.5058828677274"
+              Start="0,0"
+              End="0,18.0058828677274">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0058828677274" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns\Update LACE"
+          TopLeft="195.542861862572,143.717650645167" />
+        <EdgeLayout
+          Id="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 3]"
+          TopLeft="262.114289524117,215.811770548705">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-30.4941199035377"
+              Start="0,0"
+              End="0,-22.9941199035377">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-22.9941199035377" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128,41.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns\Update ER"
+          TopLeft="29.8285733261888,216.141179928235" />
+        <EdgeLayout
+          Id="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 2]"
+          TopLeft="95.8857153123739,185.317652249584">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.8235276786514"
+              Start="0,0"
+              End="0,23.3235276786514">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.3235276786514" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Update L, A, C, E, ER and LACE columns.PrecedenceConstraints[Constraint 4]"
+          TopLeft="157.828573326189,236.77647523847">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.4571438594739,0"
+              Start="0,0"
+              End="32.9571438594739,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="32.9571438594739,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="410.4,370.4"
+          Size="410.4,413.6"
+          Id="Package\Update L, A, C, E, ER and LACE columns"
+          TopLeft="81.7142871058718,255.717650645167" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="189.714287310231,230.023532054334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="97.1999997956413,25.6941185908335"
+              Start="0,0"
+              End="97.1999997956413,18.1941185908335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.84705929541673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.84705929541673"
+                    Point2="0,12.8470592954167"
+                    Point3="4,12.8470592954167" />
+                  <mssgle:LineSegment
+                    End="93.1999997956413,12.8470592954167" />
+                  <mssgle:CubicBezierSegment
+                    Point1="93.1999997956413,12.8470592954167"
+                    Point2="97.1999997956413,12.8470592954167"
+                    Point3="97.1999997956413,16.8470592954167" />
+                  <mssgle:LineSegment
+                    End="97.1999997956413,18.1941185908335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
